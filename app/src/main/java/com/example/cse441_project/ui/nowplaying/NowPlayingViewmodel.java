@@ -1,9 +1,12 @@
 package com.example.cse441_project.ui.nowplaying;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.cse441_project.data.model.ModelResponse;
 import com.example.cse441_project.data.model.ResultsItem;
 import com.example.cse441_project.data.repository.MovieRepository;
 import com.example.cse441_project.data.repository.MovieRepositoryImp;
@@ -39,11 +42,15 @@ public class NowPlayingViewmodel extends ViewModel {
     public void loadMovies(){
 
         executor.execute(() -> {
+            Log.d("NowPlayingViewmodel", "loadMovies called");
             try {
                 Result result = movieRepository.getMovie();
                 if(result instanceof Result.Success){
-                    _movies.postValue(((Result.Success<List<ResultsItem>>) result).getData());
+                    List<ResultsItem> movies = ((Result.Success<ModelResponse>) result).getData().getResults();
+                    Log.e("NowPlayingViewmodel", "Movies loaded: " + movies.size());
+                    _movies.postValue(movies);
                 } else if (result instanceof Result.Error) {
+                    Log.e("NowPlayingViewmodel", "Movies Error");
                     _movies.postValue(null);
                 }
             } catch (Exception e) {

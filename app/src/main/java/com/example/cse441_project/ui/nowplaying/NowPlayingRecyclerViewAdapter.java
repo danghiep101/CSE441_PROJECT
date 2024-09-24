@@ -49,16 +49,17 @@ public class NowPlayingRecyclerViewAdapter extends RecyclerView.Adapter<NowPlayi
 
         public void bind(ResultsItem resultsItem) {
             binding.textName.setText(resultsItem.getTitle());
+            String imageUrl = "https://image.tmdb.org/t/p/w500" + resultsItem.getPosterPath();
             Glide.with(binding.getRoot().getContext())
-                    .load(resultsItem.getPosterPath())
+                    .load(imageUrl)
                     .into(binding.imageView);
 
         }
     }
 
     public void addMovie(List<ResultsItem> newMovies) {
-        int startPosition = movieList.size();
+        movieList.clear();
         movieList.addAll(newMovies);
-        notifyItemRangeChanged(startPosition, newMovies.size());
+        notifyDataSetChanged();
     }
 }

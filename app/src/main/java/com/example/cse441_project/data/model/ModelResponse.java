@@ -1,12 +1,14 @@
 package com.example.cse441_project.data.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
-public class Response{
+public class ModelResponse {
 	private Dates dates;
 	private int page;
 	private int totalPages;
-	private List<ResultsItem> results;
+	@SerializedName("results") private List<ResultsItem> results;
 	private int totalResults;
 
 	public void setDates(Dates dates){

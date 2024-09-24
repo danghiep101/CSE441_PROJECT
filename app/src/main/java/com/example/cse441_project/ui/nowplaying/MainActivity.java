@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
 
         setUpRecyclerView();
         observeViewModel();
+
+        viewModel.loadMovies();
     }
 
     private void observeViewModel() {
