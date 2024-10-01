@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
+    <color name="background_auth">#151515</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="background">#202427</color>
+    <color name="redirect_auth">#6da746</color>
+    <color name="background_et">#272728</color>
+    <color name="hint_color">#8a8a8c</color>
+
 </resources>

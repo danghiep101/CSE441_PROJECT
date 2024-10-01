@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "229092492190",
+    "project_id": "cse441-project",
+    "storage_bucket": "cse441-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:229092492190:android:8f99cd1df7b582e0a5cc8f",
+        "android_client_info": {
+          "package_name": "com.example.cse441_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlC-SJiO2yy6r3rGNBAJ8yWydHY7g8tiI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
