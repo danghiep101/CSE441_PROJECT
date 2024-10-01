@@ -23,9 +23,7 @@
         <activity
             android:name=".ui.profileoverlay.MyTicketActivity"
             android:exported="false" />
-        <activity
-            android:name=".ui.profileoverlay.WatchedMovieActivity"
-            android:exported="false" />
+
         <activity
             android:name=".ui.bookticket.PaymentActivity"
             android:exported="false" />
