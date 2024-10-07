@@ -8,4 +8,11 @@
     <color name="background_et">#272728</color>
     <color name="hint_color">#8a8a8c</color>
 
+    <color name="dark_theme">#202427</color>
+    <color name="button_gradiant_1">#D6C097</color>
+    <color name="button_gradiant_2">#99703E</color>
+    <color name="poster_box_shadow">#C03838</color>
+    <color name="background_controller">#2A2E31</color>
+    <color name="placeholder_controller">#6C6C6C</color>
+    <color name="red_theme">#C82C32</color>
 </resources>
