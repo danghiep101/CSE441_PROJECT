@@ -36,9 +36,9 @@
         <activity
             android:name=".ui.bookticket.ChooseSeatActivity"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".ui.bookticket.ChooseDateAndTimeActivity"-->
-<!--            android:exported="false" />-->
+        <activity
+            android:name=".ui.bookticket.ChooseDateAndTimeActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.moviedetail.MovieDetailActivity"
             android:exported="false" />
@@ -55,7 +55,7 @@
             android:name=".ui.auth.signup.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.bookticket.ChooseDateAndTimeActivity"
+            android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -70,5 +70,3 @@
     </application>
 
 </manifest>
-
-<!-- android:name=".ui.MainActivity" -->
