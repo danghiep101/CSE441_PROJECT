@@ -40,7 +40,7 @@
             android:name=".ui.bookticket.ChooseDateAndTimeActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.moviedetail.MovieDetailActivity"
+            android:name=".ui.home.moviedetail.MovieDetailActivity"
             android:exported="false" />
         <activity
             android:name=".ui.home.HomeActivity"

@@ -7,6 +7,7 @@ public class FirebaseUtils {
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
+    void getUser(){
 
-
+    }
 }

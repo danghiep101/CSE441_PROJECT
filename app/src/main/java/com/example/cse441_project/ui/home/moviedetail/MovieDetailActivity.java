@@ -1,4 +1,4 @@
-package com.example.cse441_project.ui.moviedetail;
+package com.example.cse441_project.ui.home.moviedetail;
 
 import android.os.Bundle;
 
