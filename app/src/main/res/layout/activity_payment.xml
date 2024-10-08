@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#202427">
@@ -24,7 +25,8 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="Back"
                 android:src="@drawable/baseline_arrow_back_24"
-                android:tint="#FFFFFF" />
+                android:tint="#FFFFFF"
+                tools:ignore="UseAppTint,TouchTargetSizeCheck" />
 
             <TextView
                 android:id="@+id/tvPayment"
@@ -218,7 +220,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:background="@drawable/bg_payment_method"
+
             android:orientation="vertical"
             android:padding="16dp">
 
@@ -233,7 +235,7 @@
                 <ImageView
                     android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:src="@drawable/vnpay_logo"
+
                     android:contentDescription="VNPay Logo" />
 
                 <TextView
@@ -255,7 +257,7 @@
                     android:layout_height="24dp"
                     android:contentDescription="Arrow Icon"
                     android:src="@drawable/baseline_arrow_forward_ios_24"
-                    android:tint="#FFFFFF"/>
+                    />
             </LinearLayout>
 
 
@@ -278,7 +280,7 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:contentDescription="International Payments Logo"
-                    android:src="@drawable/international_payment_logo" />
+                   />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -301,7 +303,7 @@
                     android:layout_marginStart="auto"
                     android:contentDescription="Arrow Icon"
                     android:src="@drawable/baseline_arrow_forward_ios_24"
-                    android:tint="#FFFFFF"/>
+                   />
             </LinearLayout>
         </LinearLayout>
 
