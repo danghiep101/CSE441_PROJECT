@@ -5,9 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.comingsoon.ComingSoonFragment">
 
-   <androidx.recyclerview.widget.RecyclerView
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       tools:listitem="@layout/item_showing_movie"/>
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/item_showing_movie" />
 </FrameLayout>
