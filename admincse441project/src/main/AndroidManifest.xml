@@ -9,6 +9,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CSE441_PROJECT">
         <activity
+            android:name=".ui.ticketmanagement.AddTicketFragment"
+            android:exported="false" />
+        <activity
             android:name=".ui.home.MainActivity"
             android:exported="true">
             <intent-filter>
@@ -17,6 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
