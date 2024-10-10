@@ -332,12 +332,12 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/btn_sign_in"
+                android:id="@+id/txt_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/text_sign_in"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/white"
                 android:textSize="10sp" />
 
         </LinearLayout>
