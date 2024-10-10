@@ -2,6 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="red">#FF0000</color>
+
+    <color name="background">#202427</color>
+
 
     <color name="dark_theme">#202427</color>
     <color name="button_gradiant_1">#D6C097</color>
