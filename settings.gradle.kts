@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "CSE441_PROJECT"
 include(":app")
- 
+include(":admincse441project")
