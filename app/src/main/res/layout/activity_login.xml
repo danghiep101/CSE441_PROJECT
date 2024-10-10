@@ -90,7 +90,6 @@
             android:layout_width="match_parent"
             android:layout_height="90dp"
             android:gravity="center"
-            android:paddingLeft="20dp"
             android:text="Sign in"
             android:textColor="#FFFFFF"
             android:textSize="22sp"
