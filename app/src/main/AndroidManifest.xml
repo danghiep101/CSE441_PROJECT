@@ -14,12 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CSE441_PROJECT"
         tools:targetApi="31">
-        <activity
-            android:name=".ui.admin.AdminActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.admin.account_management.AccountManagementActivity"
-            android:exported="false" />
+
         <activity
             android:name=".ui.profileoverlay.DiscountsActivity"
             android:exported="false" />
@@ -29,18 +24,11 @@
         <activity
             android:name=".ui.profileoverlay.MyTicketActivity"
             android:exported="false" />
-        <activity
-            android:name=".ui.bookticket.PaymentActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.bookticket.ChooseVoucherActivity"
-            android:exported="false" />
+
         <activity
             android:name=".ui.bookticket.ChoosePopcornAndDrink"
             android:exported="false" />
-        <activity
-            android:name=".ui.bookticket.ChooseSeatActivity"
-            android:exported="false" />
+
         <activity
             android:name=".ui.bookticket.ChooseDateAndTimeActivity"
             android:exported="false" />
@@ -49,7 +37,13 @@
             android:exported="false" />
         <activity
             android:name=".ui.home.HomeActivity"
-            android:exported="false" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.auth.passwordreset.PasswordResetActivity"
             android:exported="false" />
@@ -58,7 +52,9 @@
             android:exported="false" />
         <activity
             android:name=".ui.auth.signup.SignUpActivity"
-            android:exported="false" />
+            android:exported="false" >
+        </activity>
+
         <activity
             android:name=".ui.profileoverlay.ChangePassword"
             android:exported="false"/>
@@ -66,12 +62,6 @@
             android:name=".ui.MainActivity"
             android:exported="true">
 
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <meta-data
