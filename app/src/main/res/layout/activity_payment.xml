@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -44,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@drawable/bg_movie_info"
+            android:background="@drawable/linear_layout_custom_payment"
             android:orientation="horizontal"
             android:padding="16dp">
 
@@ -53,7 +54,7 @@
                 android:layout_height="120dp"
                 android:contentDescription="Movie Poster"
                 android:scaleType="fitXY"
-                android:src="@drawable/avengers_infinity_war" />
+                tools:srcCompat="@tools:sample/avatars" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -180,7 +181,6 @@
         </LinearLayout>
 
 
-
         <!-- Total Price Section -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -220,7 +220,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-
+            android:background="@drawable/linear_layout_custom_payment"
             android:orientation="vertical"
             android:padding="16dp">
 
@@ -257,7 +257,7 @@
                     android:layout_height="24dp"
                     android:contentDescription="Arrow Icon"
                     android:src="@drawable/baseline_arrow_forward_ios_24"
-                    />
+                    app:tint="#FFFFFF" />
             </LinearLayout>
 
 
@@ -300,10 +300,9 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center_vertical|end"
-                    android:layout_marginStart="auto"
                     android:contentDescription="Arrow Icon"
                     android:src="@drawable/baseline_arrow_forward_ios_24"
-                   />
+                    app:tint="#FFFFFF" />
             </LinearLayout>
         </LinearLayout>
 
