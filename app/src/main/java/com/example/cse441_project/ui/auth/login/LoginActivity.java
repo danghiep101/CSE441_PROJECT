@@ -1,25 +1,82 @@
 package com.example.cse441_project.ui.auth.login;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.cse441_project.R;
+import com.example.cse441_project.databinding.ActivityLoginBinding;
+import com.example.cse441_project.ui.auth.passwordreset.PasswordResetActivity;
+import com.example.cse441_project.ui.auth.signup.SignUpActivity;
+import com.example.cse441_project.ui.home.HomeActivity;
 
 public class LoginActivity extends AppCompatActivity {
+    private ActivityLoginBinding binding;
+    private LoginViewModel viewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_login);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.btn_switch_activity), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+        viewModel = new  ViewModelProvider(this).get(LoginViewModel.class);
+        setContentView(binding.getRoot());
+        onClickView();
+        observeViewModel();
+    }
+
+    private void onClickView() {
+        binding.btnSignUp.setOnClickListener( v -> {
+            Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
+        binding.btnSignIn.setOnClickListener(v -> {
+            signIn();
+        });
+        binding.btnForgotPassword.setOnClickListener(v->{
+            Intent intent = new Intent(LoginActivity.this, PasswordResetActivity.class);
+            startActivity(intent);
+            finish();
+        });
+        binding.btnBackSignup.setOnClickListener(v->{
+            finish();
+        });
+    }
+
+    private void signIn() {
+        String userEmail = binding.etEmail.getText().toString().trim();
+        String userPassword = binding.etPassword.getText().toString().trim();
+
+        if(viewModel.notEmpty(userEmail, userPassword)){
+            viewModel.login(userEmail, userPassword);
+        }else {
+            for (EditText item: new EditText[]{binding.etEmail, binding.etPassword}) {
+                item.setError(item.getHint() + " is required");
+            }
+        }
+
+    }
+
+    private void observeViewModel() {
+        viewModel.loginStatus.observe(this, isSuccess -> {
+            if (isSuccess){
+                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                startActivity(intent);
+                finish();
+                Toast.makeText(this, "Login Successfully", Toast.LENGTH_LONG).show();
+
+            }else{
+                Toast.makeText(this, "Login failed", Toast.LENGTH_LONG).show();
+            }
         });
     }
 }
