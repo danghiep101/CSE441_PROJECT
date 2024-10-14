@@ -83,7 +83,7 @@
         tools:layout_editor_absoluteY="195dp">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/img_poster"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="72dp"
@@ -104,7 +104,7 @@
             android:textColor="#fff"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/img_poster"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <TextView
@@ -118,7 +118,7 @@
             android:textColor="#fff"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/img_poster"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
         <TextView
@@ -143,7 +143,7 @@
             android:textColor="#fff"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/img_poster"
             app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
 
         <TextView
@@ -155,11 +155,11 @@
             android:textColor="#fff"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.164"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/img_poster"
             app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/txt_vote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -167,11 +167,11 @@
             android:textColor="#fff"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.172"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/img_poster"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/txt_release_date"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -179,11 +179,11 @@
             android:textColor="#fff"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/textView7"
-            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+            app:layout_constraintStart_toStartOf="@+id/txt_vote"
+            app:layout_constraintTop_toBottomOf="@+id/txt_vote" />
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/txt_genre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -191,8 +191,8 @@
             android:textColor="#fff"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+            app:layout_constraintStart_toStartOf="@+id/txt_release_date"
+            app:layout_constraintTop_toBottomOf="@+id/txt_release_date" />
 
         <TextView
             android:id="@+id/textView11"
@@ -201,8 +201,8 @@
             android:layout_marginTop="20dp"
             android:text="Cancellation fee : 12.000 "
             android:textColor="#fff"
-            app:layout_constraintStart_toStartOf="@+id/textView9"
-            app:layout_constraintTop_toBottomOf="@+id/textView9" />
+            app:layout_constraintStart_toStartOf="@+id/txt_genre"
+            app:layout_constraintTop_toBottomOf="@+id/txt_genre" />
 
         <TextView
             android:id="@+id/textView16"
@@ -215,7 +215,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/btn_bookticket"
             android:layout_width="230dp"
             android:layout_height="36dp"
             android:layout_marginTop="48dp"

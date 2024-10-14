@@ -4,131 +4,143 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class ResultsItem{
-	private String overview;
-	private String originalLanguage;
-	private String originalTitle;
-	private boolean video;
-	@SerializedName("title") private String title;
-	private List<Integer> genreIds;
-	@SerializedName("poster_path")private String posterPath;
-	private String backdropPath;
-	private String releaseDate;
-	private Object popularity;
-	private Object voteAverage;
-	private int id;
-	private boolean adult;
-	private int voteCount;
+public class ResultsItem {
+    private String overview;
+    private String originalLanguage;
+    private String originalTitle;
+    private boolean video;
+    @SerializedName("title")
+    private String title;
+    @SerializedName("genre_ids")private List<Integer> genreIds;
+    @SerializedName("poster_path")
+    private String posterPath;
+    private String backdropPath;
+    @SerializedName("release_date") private String releaseDate;
+    private Object popularity;
+    @SerializedName("vote_average")
+    private float voteAverage;
+    private int id;
+    private boolean adult;
+    private int voteCount;
+    private List<String> genreNames;
 
-	public void setOverview(String overview){
-		this.overview = overview;
-	}
+    public List<String> getGenreNames() {
+        return genreNames;
+    }
 
-	public String getOverview(){
-		return overview;
-	}
+    public void setGenreNames(List<String> genreNames) {
+        this.genreNames = genreNames;
+    }
 
-	public void setOriginalLanguage(String originalLanguage){
-		this.originalLanguage = originalLanguage;
-	}
+    public void setOverview(String overview) {
+        this.overview = overview;
+    }
 
-	public String getOriginalLanguage(){
-		return originalLanguage;
-	}
+    public String getOverview() {
+        return overview;
+    }
 
-	public void setOriginalTitle(String originalTitle){
-		this.originalTitle = originalTitle;
-	}
+    public void setOriginalLanguage(String originalLanguage) {
+        this.originalLanguage = originalLanguage;
+    }
 
-	public String getOriginalTitle(){
-		return originalTitle;
-	}
+    public String getOriginalLanguage() {
+        return originalLanguage;
+    }
 
-	public void setVideo(boolean video){
-		this.video = video;
-	}
+    public void setOriginalTitle(String originalTitle) {
+        this.originalTitle = originalTitle;
+    }
 
-	public boolean isVideo(){
-		return video;
-	}
+    public String getOriginalTitle() {
+        return originalTitle;
+    }
 
-	public void setTitle(String title){
-		this.title = title;
-	}
+    public void setVideo(boolean video) {
+        this.video = video;
+    }
 
-	public String getTitle(){
-		return title;
-	}
+    public boolean isVideo() {
+        return video;
+    }
 
-	public void setGenreIds(List<Integer> genreIds){
-		this.genreIds = genreIds;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public List<Integer> getGenreIds(){
-		return genreIds;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public void setPosterPath(String posterPath){
-		this.posterPath = posterPath;
-	}
+    public void setGenreIds(List<Integer> genreIds) {
+        this.genreIds = genreIds;
+    }
 
-	public String getPosterPath(){
-		return posterPath;
-	}
+    public List<Integer> getGenreIds() {
+        return genreIds;
+    }
 
-	public void setBackdropPath(String backdropPath){
-		this.backdropPath = backdropPath;
-	}
+    public void setPosterPath(String posterPath) {
+        this.posterPath = posterPath;
+    }
 
-	public String getBackdropPath(){
-		return backdropPath;
-	}
+    public String getPosterPath() {
+        return posterPath;
+    }
 
-	public void setReleaseDate(String releaseDate){
-		this.releaseDate = releaseDate;
-	}
+    public void setBackdropPath(String backdropPath) {
+        this.backdropPath = backdropPath;
+    }
 
-	public String getReleaseDate(){
-		return releaseDate;
-	}
+    public String getBackdropPath() {
+        return backdropPath;
+    }
 
-	public void setPopularity(Object popularity){
-		this.popularity = popularity;
-	}
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
+    }
 
-	public Object getPopularity(){
-		return popularity;
-	}
+    public String getReleaseDate() {
+        return releaseDate;
+    }
 
-	public void setVoteAverage(Object voteAverage){
-		this.voteAverage = voteAverage;
-	}
+    public void setPopularity(Object popularity) {
+        this.popularity = popularity;
+    }
 
-	public Object getVoteAverage(){
-		return voteAverage;
-	}
+    public Object getPopularity() {
+        return popularity;
+    }
 
-	public void setId(int id){
-		this.id = id;
-	}
+    public void setVoteAverage(float voteAverage) {
+        this.voteAverage = voteAverage;
+    }
 
-	public int getId(){
-		return id;
-	}
+    public float getVoteAverage() {
+        return voteAverage;
+    }
 
-	public void setAdult(boolean adult){
-		this.adult = adult;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public boolean isAdult(){
-		return adult;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setVoteCount(int voteCount){
-		this.voteCount = voteCount;
-	}
+    public void setAdult(boolean adult) {
+        this.adult = adult;
+    }
 
-	public int getVoteCount(){
-		return voteCount;
-	}
+    public boolean isAdult() {
+        return adult;
+    }
+
+    public void setVoteCount(int voteCount) {
+        this.voteCount = voteCount;
+    }
+
+    public int getVoteCount() {
+        return voteCount;
+    }
 }
