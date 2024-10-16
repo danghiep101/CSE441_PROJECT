@@ -8,5 +8,5 @@ import com.example.cse441_project.data.resource.Result;
 
 public interface MovieRepository {
     Result<NowPlayingMovie> getMovie() throws Exception;
-
+    Result<NowPlayingMovie> getUpComingMovie() throws Exception;
 }

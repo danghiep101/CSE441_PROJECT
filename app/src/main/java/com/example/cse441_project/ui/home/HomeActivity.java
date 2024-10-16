@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.cse441_project.R;
 import com.example.cse441_project.databinding.ActivityHomeBinding;
+import com.example.cse441_project.ui.home.comingsoon.ComingSoonFragment;
 import com.example.cse441_project.ui.home.nowplaying.NowPlayingFragment;
 
 public class HomeActivity extends AppCompatActivity {
@@ -23,6 +24,11 @@ public class HomeActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragmentContainerView, new NowPlayingFragment())
                         .commit();
+        });
+        binding.btnComingSoon.setOnClickListener(v->{
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContainerView, new ComingSoonFragment())
+                    .commit();
         });
 
 

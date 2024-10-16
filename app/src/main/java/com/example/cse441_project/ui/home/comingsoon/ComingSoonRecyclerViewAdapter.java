@@ -1,26 +1,27 @@
-package com.example.cse441_project.ui.home.nowplaying;
+package com.example.cse441_project.ui.home.comingsoon;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
-
-
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.cse441_project.data.model.ResultsItem;
+import com.example.cse441_project.databinding.ItemComingSoonMovieBinding;
 import com.example.cse441_project.databinding.ItemShowingMovieBinding;
+import com.example.cse441_project.ui.home.nowplaying.MovieRecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecyclerViewAdapter.ViewHolder> {
+public class ComingSoonRecyclerViewAdapter extends RecyclerView.Adapter<ComingSoonRecyclerViewAdapter.ViewHolder> {
     private final ArrayList<ResultsItem> movieList;
-    private final OnItemClickListener listener;
+    private final ComingSoonRecyclerViewAdapter.OnItemClickListener listener;
 
-    public MovieRecyclerViewAdapter(ArrayList<ResultsItem> movieList, OnItemClickListener listener) {
+    public ComingSoonRecyclerViewAdapter(ArrayList<ResultsItem> movieList, ComingSoonRecyclerViewAdapter.OnItemClickListener listener) {
         this.movieList = movieList;
         this.listener = listener;
 
@@ -28,13 +29,13 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
 
     @NonNull
     @Override
-    public MovieRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemShowingMovieBinding binding = ItemShowingMovieBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        return new ViewHolder(binding);
+    public ComingSoonRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        ItemComingSoonMovieBinding binding = ItemComingSoonMovieBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new ComingSoonRecyclerViewAdapter.ViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MovieRecyclerViewAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ComingSoonRecyclerViewAdapter.ViewHolder holder, int position) {
         holder.bindData(movieList.get(position));
         holder.itemView.setOnClickListener(v -> {
             listener.onItemClick(movieList.get(position));
@@ -53,8 +54,8 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private final ItemShowingMovieBinding binding;
-        public ViewHolder(ItemShowingMovieBinding binding) {
+        private final ItemComingSoonMovieBinding binding;
+        public ViewHolder(ItemComingSoonMovieBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }

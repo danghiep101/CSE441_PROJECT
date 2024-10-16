@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,13 +9,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CSE441_PROJECT">
         <activity
-            android:name=".ui.auth.ForgotPasswordActivity"
+            android:name=".ui.auth.forgotpassword.ForgotPasswordActivity"
             android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".ui.auth.SignUpActivity"-->
+<!--            android:exported="false" />-->
         <activity
-            android:name=".ui.auth.SignUpActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.auth.SignInActivity"
+            android:name=".ui.auth.signin.SignInActivity"
             android:exported="false" />
         <activity
             android:name=".ui.showtimemaganement.EditShowtimeActivity"
@@ -29,15 +29,14 @@
         <activity
             android:name=".ui.popcornmanagement.AddPopcornAndDrinkActivity"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".ui.home.MainActivity"-->
-<!--            android:exported="false" />-->
         <activity
             android:name=".ui.home.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.auth.signup.SignUpActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

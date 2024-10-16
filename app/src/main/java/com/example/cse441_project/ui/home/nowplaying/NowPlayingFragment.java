@@ -3,7 +3,6 @@ package com.example.cse441_project.ui.home.nowplaying;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.cse441_project.R;
 import com.example.cse441_project.data.model.ResultsItem;
 import com.example.cse441_project.data.repository.MovieRepository;
 import com.example.cse441_project.data.repository.MovieRepositoryImp;
