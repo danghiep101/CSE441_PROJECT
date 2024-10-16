@@ -35,7 +35,7 @@
                 app:cardCornerRadius="10dp">
 
                 <ImageView
-                    android:id="@+id/img_popcorn_and_drink"
+                    android:id="@+id/img_voucher"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     tools:srcCompat="@tools:sample/avatars" />
@@ -56,7 +56,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter_bold"
-                    android:text="Popcorn and drink combo name"
+                    android:text="Voucher name"
                     android:textColor="#FFFFFF"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -70,9 +70,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter_medium"
-                    android:text="Price: 200.000 vnd"
-                    android:textColor="#FFFFFF"
-                    android:textSize="10sp" />
+                    android:text="Expries: ....."
+                    android:textColor="#FCC434"
+                    android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
