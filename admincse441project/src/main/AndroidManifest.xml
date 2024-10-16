@@ -9,6 +9,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CSE441_PROJECT">
         <activity
+            android:name=".ui.auth.ForgotPasswordActivity"
+            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".ui.auth.SignUpActivity"-->
+<!--            android:exported="false" />-->
+        <activity
+            android:name=".ui.auth.SignInActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.showtimemaganement.EditShowtimeActivity"
             android:exported="false" />
         <activity
@@ -22,6 +31,9 @@
             android:exported="false" />
         <activity
             android:name=".ui.home.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.auth.SignUpActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
