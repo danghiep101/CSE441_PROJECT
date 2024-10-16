@@ -9,6 +9,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.admincse441project.R;
+import com.example.admincse441project.ui.ticketmanagement.AddTicketFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,5 +23,12 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+//        if (savedInstanceState == null) {
+//            // Gọi FragmentA làm fragment mặc định
+//            getSupportFragmentManager().beginTransaction()
+//                .replace(R.id.fragment_add_ticket, new AddTicketFragment()) // R.id.fragment_container là ID của FrameLayout
+//                .commit();
+//        }
     }
 }
