@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CSE441_PROJECT"
         tools:targetApi="31">
-
+        <activity
+            android:name=".ui.bookticket.PaymentActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.profileoverlay.DiscountsActivity"
             android:exported="false" />
@@ -24,11 +26,9 @@
         <activity
             android:name=".ui.profileoverlay.MyTicketActivity"
             android:exported="false" />
-
         <activity
             android:name=".ui.bookticket.ChoosePopcornAndDrink"
             android:exported="false" />
-
         <activity
             android:name=".ui.bookticket.ChooseDateAndTimeActivity"
             android:exported="false" />
@@ -52,17 +52,13 @@
             android:exported="false" />
         <activity
             android:name=".ui.auth.signup.SignUpActivity"
-            android:exported="false" >
-        </activity>
-
+            android:exported="false"></activity>
         <activity
             android:name=".ui.profileoverlay.ChangePassword"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".ui.MainActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
