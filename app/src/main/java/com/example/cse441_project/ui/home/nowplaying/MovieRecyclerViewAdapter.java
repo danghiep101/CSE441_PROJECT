@@ -2,7 +2,6 @@ package com.example.cse441_project.ui.home.nowplaying;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 
@@ -83,7 +82,7 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
         }
 
     }
-    interface OnItemClickListener{
+    public interface OnItemClickListener{
         void onItemClick(ResultsItem movie);
     }
 }

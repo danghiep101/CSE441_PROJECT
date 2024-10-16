@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#202427"
     tools:context=".ui.popcornmanagement.AddPopcornAndDrinkActivity">
-    <?xml version="1.0" encoding="utf-8"?>
+
 
     <TextView
             android:id="@+id/textView2"
