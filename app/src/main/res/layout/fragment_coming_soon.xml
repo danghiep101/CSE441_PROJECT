@@ -6,7 +6,8 @@
     tools:context=".ui.home.comingsoon.ComingSoonFragment">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_showing_movie" />
+        tools:listitem="@layout/item_coming_soon_movie" />
 </FrameLayout>

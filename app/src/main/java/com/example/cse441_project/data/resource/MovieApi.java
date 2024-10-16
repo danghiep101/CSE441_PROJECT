@@ -12,4 +12,7 @@ public interface MovieApi {
 
     @GET("3/genre/movie/list?api_key=ed5fb4eff85f0e634388e9c3f7a86f5a")
     Call<GenreMovie> getGenres();
+
+    @GET("3/movie/upcoming?api_key=ed5fb4eff85f0e634388e9c3f7a86f5a")
+    Call<NowPlayingMovie> getUpComingMovie();
 }
