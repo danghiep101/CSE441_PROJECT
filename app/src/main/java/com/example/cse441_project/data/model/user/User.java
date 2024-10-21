@@ -1,6 +1,4 @@
-package com.example.cse441_project.data.model;
-
-import java.util.Date;
+package com.example.cse441_project.data.model.user;
 
 public class User {
     private String uid;

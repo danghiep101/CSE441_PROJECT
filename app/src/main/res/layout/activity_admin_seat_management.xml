@@ -22,7 +22,7 @@
         app:titleTextColor="#000" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/txt_total_vote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
@@ -38,7 +38,7 @@
         app:layout_constraintVertical_bias="0.029" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/txt_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
@@ -175,21 +175,21 @@
             android:layout_height="40dp">
 
             <TextView
-                android:id="@+id/textView19"
+                android:id="@+id/txt_date"
                 android:layout_width="46dp"
                 android:layout_height="match_parent"
                 android:text="STT"
                 android:textColor="#fff" />
 
             <TextView
-                android:id="@+id/textView20"
+                android:id="@+id/txt_age"
                 android:layout_width="256dp"
                 android:layout_height="wrap_content"
                 android:text="Seat"
                 android:textColor="#fff" />
 
             <TextView
-                android:id="@+id/textView21"
+                android:id="@+id/txt_duration"
                 android:layout_width="202dp"
                 android:layout_height="wrap_content"
                 android:text="Time"
