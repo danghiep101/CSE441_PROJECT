@@ -13,16 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.cse441_project.R;
-import com.example.cse441_project.data.model.ResultsItem;
+import com.example.cse441_project.data.model.movie.ResultsItem;
 import com.example.cse441_project.data.repository.MovieRepository;
 import com.example.cse441_project.data.repository.MovieRepositoryImp;
 import com.example.cse441_project.databinding.FragmentComingSoonBinding;
-import com.example.cse441_project.databinding.FragmentNowPlayingBinding;
 import com.example.cse441_project.ui.home.moviedetail.MovieDetailActivity;
-import com.example.cse441_project.ui.home.nowplaying.MovieRecyclerViewAdapter;
-import com.example.cse441_project.ui.home.nowplaying.NowPlayingMovieViewModel;
-import com.example.cse441_project.ui.home.nowplaying.NowPlayingViewModelFactory;
 
 import java.util.ArrayList;
 

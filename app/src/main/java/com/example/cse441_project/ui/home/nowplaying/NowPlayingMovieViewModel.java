@@ -4,15 +4,13 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.cse441_project.data.model.NowPlayingMovie;
-import com.example.cse441_project.data.model.ResultsItem;
+import com.example.cse441_project.data.model.movie.NowPlayingMovie;
+import com.example.cse441_project.data.model.movie.ResultsItem;
 import com.example.cse441_project.data.repository.MovieRepository;
 import com.example.cse441_project.data.repository.MovieRepositoryImp;
 import com.example.cse441_project.data.resource.Result;
 
 import java.util.List;
-
-import kotlinx.coroutines.CoroutineScope;
 
 public class NowPlayingMovieViewModel extends ViewModel {
     private final MovieRepository movieRepository;

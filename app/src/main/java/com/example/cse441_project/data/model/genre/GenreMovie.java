@@ -1,4 +1,4 @@
-package com.example.cse441_project.data.model;
+package com.example.cse441_project.data.model.genre;
 
 import java.util.List;
 
