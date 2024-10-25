@@ -10,5 +10,5 @@ public interface MovieRepository {
     Result<NowPlayingMovie> getMovie() throws Exception;
     Result<NowPlayingMovie> getUpComingMovie() throws Exception;
     Result<MovieDetail> getDetailMovie(int id) throws  Exception;
-    Result<MovieTrailer> getTrailerMovie(int id) throws Exception;
+    Result<MovieTrailerItem> getTrailerMovie(int id) throws Exception;
 }

@@ -2,17 +2,14 @@ package com.example.cse441_project.ui.home.comingsoon;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.cse441_project.data.model.ResultsItem;
+import com.example.cse441_project.data.model.movie.ResultsItem;
 import com.example.cse441_project.databinding.ItemComingSoonMovieBinding;
-import com.example.cse441_project.databinding.ItemShowingMovieBinding;
-import com.example.cse441_project.ui.home.nowplaying.MovieRecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

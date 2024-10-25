@@ -4,9 +4,8 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import com.example.cse441_project.data.model.User;
+import com.example.cse441_project.data.model.user.User;
 import com.example.cse441_project.utils.FirebaseUtils;
-import com.google.firebase.auth.FirebaseUser;
 
 public class SignUpViewModel extends ViewModel {
     private MutableLiveData<Boolean> _signUpStatus = new MutableLiveData<>();
