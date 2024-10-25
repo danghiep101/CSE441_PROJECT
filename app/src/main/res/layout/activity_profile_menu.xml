@@ -74,7 +74,7 @@
         android:background="@drawable/border_radius_button"
         android:text="My Ticket"
         android:textColor="#6C6C6C"
-        android:drawableLeft="@drawable/PNR_Code"
+        android:drawableLeft="@drawable/pnr_code"
         android:gravity="center_vertical"
         android:padding="15dp"
         android:drawablePadding="8dp"
