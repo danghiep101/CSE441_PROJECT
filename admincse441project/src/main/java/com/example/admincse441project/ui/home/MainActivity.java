@@ -33,6 +33,5 @@ public class MainActivity extends AppCompatActivity {
 
         rcvManagementList.setAdapter(adapter);
         rcvManagementList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-
     }
 }
