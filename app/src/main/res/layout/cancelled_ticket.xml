@@ -60,7 +60,7 @@
                 android:layout_width="230dp"
                 android:layout_height="36dp"
                 android:layout_marginTop="28dp"
-                android:background="@drawable/button_change_pasword"
+                android:background="@drawable/button_change_password"
                 android:padding="10dp"
                 android:paddingStart="20dp"
                 android:paddingLeft="60dp"
