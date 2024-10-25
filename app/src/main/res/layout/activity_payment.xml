@@ -233,10 +233,11 @@
                 android:gravity="center_vertical">
 
                 <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-
-                    android:contentDescription="VNPay Logo" />
+                    android:layout_width="91dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_corner_payment_method"
+                    android:contentDescription="VNPay Logo"
+                    android:src="@drawable/vnpay_id_svsmjm2_1" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -277,10 +278,10 @@
                 android:gravity="center_vertical">
 
                 <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:contentDescription="International Payments Logo"
-                   />
+                    android:layout_width="91dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/rounded_corner_payment_method"
+                    android:contentDescription="International Payments Logo" />
 
                 <TextView
                     android:layout_width="wrap_content"
