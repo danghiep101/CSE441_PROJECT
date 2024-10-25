@@ -11,9 +11,6 @@
         <activity
             android:name=".ui.auth.forgotpassword.ForgotPasswordActivity"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".ui.auth.SignUpActivity"-->
-<!--            android:exported="false" />-->
         <activity
             android:name=".ui.auth.signin.SignInActivity"
             android:exported="false" />
@@ -29,11 +26,11 @@
         <activity
             android:name=".ui.popcornmanagement.AddPopcornAndDrinkActivity"
             android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".ui.home.MainActivity"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".ui.home.MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.auth.signup.SignUpActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
