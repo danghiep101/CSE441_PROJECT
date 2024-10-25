@@ -1,4 +1,4 @@
-package com.example.admincse441project.ui.home;
+package com.example.admincse441project.ui.discountmanagement.edit;
 
 import android.os.Bundle;
 
@@ -9,14 +9,15 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.admincse441project.R;
+import com.example.admincse441project.databinding.ActivityEditDiscountBinding;
 
-public class MainActivity extends AppCompatActivity {
-
+public class EditDiscountActivity extends AppCompatActivity {
+    private ActivityEditDiscountBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        binding = ActivityEditDiscountBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
     }
 }
