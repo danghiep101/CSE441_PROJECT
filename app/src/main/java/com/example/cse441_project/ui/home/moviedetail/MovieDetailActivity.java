@@ -35,7 +35,6 @@ public class MovieDetailActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         Intent intent = getIntent();
         id = intent.getIntExtra("MOVIE_ID", -1);
-
         if(id != -1){
             observeViewModel();
             viewModel.loadMovie(id);
@@ -52,6 +51,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                 bindData(detailMovie);
             }
         });
+
         viewModel.movieTrailer.observe(this, movieTrailers -> {
             if (movieTrailers != null && !movieTrailers.isEmpty()) {
                 MovieTrailerItem firstTrailer = movieTrailers.get(0);
@@ -60,6 +60,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                 Toast.makeText(this, "No trailer available", Toast.LENGTH_SHORT).show();
             }
         });
+
         viewModel.error.observe(this, error ->{
             if(error != null){
                 Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
@@ -96,6 +97,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             }
         });
     }
+
     private void hideSystemUI() {
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
