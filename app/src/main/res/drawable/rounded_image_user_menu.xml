@@ -1,0 +1,4 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="500sp"/> <!-- Bo tròn toàn bộ ảnh -->
+    <solid android:color="#FFFFFF"/> <!-- Màu nền nếu ảnh không phủ kín -->
+</shape>
