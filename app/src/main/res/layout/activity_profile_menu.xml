@@ -63,7 +63,8 @@
         android:background="#987851"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="106dp" />
+        tools:layout_editor_absoluteY="106dp"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/btnMyTicket"
