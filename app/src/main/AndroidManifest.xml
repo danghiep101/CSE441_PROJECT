@@ -15,6 +15,12 @@
         android:theme="@style/Theme.CSE441_PROJECT"
         tools:targetApi="31">
         <activity
+            android:name=".ui.profileoverlay.DeleteAccount"
+            android:exported="false" />
+        <activity
+            android:name=".ui.profileoverlay.ProfileMenuActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.bookticket.PaymentActivity"
             android:exported="false" />
         <activity
@@ -52,13 +58,13 @@
             android:exported="false" />
         <activity
             android:name=".ui.auth.signup.SignUpActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".ui.profileoverlay.ChangePassword"
             android:exported="false" />
         <activity
             android:name=".ui.MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
 
         <meta-data
             android:name="preloaded_fonts"
