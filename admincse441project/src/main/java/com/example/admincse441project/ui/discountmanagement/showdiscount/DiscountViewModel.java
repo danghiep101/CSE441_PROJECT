@@ -13,46 +13,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DiscountViewModel  extends ViewModel {
-    private final MutableLiveData<List<Discount>> discounts = new MutableLiveData<>();
-
+    private final MutableLiveData<List<Discount>> _discounts = new MutableLiveData<>();
+    public LiveData<List<Discount>> discounts = _discounts;
     public DiscountViewModel() {
         loadDiscounts();
     }
-
-    public LiveData<List<Discount>> getDiscounts() {
-        return discounts;
-    }
-
-    private void loadDiscounts() {
+    void loadDiscounts() {
         FirebaseUtils.getDiscountsCollection().get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 List<Discount> discountList = new ArrayList<>();
                 QuerySnapshot querySnapshot = task.getResult();
                 if (querySnapshot != null) {
-                    for (DocumentSnapshot document : querySnapshot) {
+                    for (DocumentSnapshot document : querySnapshot.getDocuments()) {
                         Discount discount = document.toObject(Discount.class);
                         if (discount != null) {
                             discountList.add(discount);
                         }
                     }
-                    discounts.setValue(discountList);
+                    _discounts.setValue(discountList);
+
                 }
             }
         });
-    }
-    private MutableLiveData<Discount> discountLiveData = new MutableLiveData<>();
-    public LiveData<Discount> getDiscount(String discountId) {
-
-        FirebaseUtils.getDiscountsCollection().document(discountId)
-                .get().addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        if (document.exists()) {
-                            Discount discount = document.toObject(Discount.class);
-                            discountLiveData.setValue(discount);
-                        }
-                    }
-                });
-        return discountLiveData;
     }
 }
