@@ -65,7 +65,7 @@ public class AddDiscountActivity extends AppCompatActivity {
 
     private void validateIntegerInput(String input, EditText editText, String fieldName) {
         if (!input.matches("\\d+")) {
-            editText.setError(fieldName + " must be a integer.");
+            editText.setError(fieldName + " Must be a integer.");
         } else {
             editText.setError(null);
         }

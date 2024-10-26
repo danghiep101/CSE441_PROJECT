@@ -1,7 +1,13 @@
 package com.example.admincse441project.ui.discountmanagement.edit;
 
+import static com.example.admincse441project.utils.FirebaseUtils.deleteDiscount;
+
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -29,16 +35,65 @@ public class EditDiscountActivity extends AppCompatActivity {
         String discountId = intent.getStringExtra("DISCOUNT_ID");
 
         fetchDiscount(discountId);
+        setupValidation();
         onViewClickListeners();
 
-
     }
+
+    private void setupValidation() {
+        binding.edtEditDiscountQuantity.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+            @Override
+            public void afterTextChanged(Editable input) {
+                validateIntegerInput(input.toString(), binding.edtEditDiscountQuantity, "Quantity");
+            }
+        });
+
+        binding.edtEditDiscountValue.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+            @Override
+            public void afterTextChanged(Editable input) {
+                validateIntegerInput(input.toString(), binding.edtEditDiscountValue, "Value");
+            }
+        });
+    }
+
+    private void validateIntegerInput(String input, EditText editText, String fieldName) {
+        if (!input.matches("\\d+")) {
+            editText.setError(fieldName + " must be a integer.");
+        } else {
+            editText.setError(null);
+        }
+    }
+
 
     private void onViewClickListeners() {
         Intent intent = getIntent();
         String discountId = intent.getStringExtra("DISCOUNT_ID");
         binding.btnBack.setOnClickListener(v -> finish());
         binding.btnSave.setOnClickListener(v -> saveDiscount(discountId));
+        binding.btnDelete.setOnClickListener(v -> {
+            new AlertDialog.Builder(this)
+                    .setTitle("Confirm delete")
+                    .setMessage("Are you sure you want to delete this discount?")
+                    .setPositiveButton("Delete", (dialog, which) -> {
+                        deleteDiscount(discountId);
+                        Toast.makeText(this, "Discount deleted", Toast.LENGTH_SHORT).show();
+                        finish();
+                    })
+                    .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
+                    .show();
+        });
     }
 
     private void saveDiscount(String discountId) {
