@@ -30,8 +30,5 @@ public class HomeActivity extends AppCompatActivity {
                     .replace(R.id.fragmentContainerView, new ComingSoonFragment())
                     .commit();
         });
-
-
-
     }
 }
