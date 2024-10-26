@@ -30,10 +30,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="24dp"
-
         android:text="Movie name"
-        android:textSize="29sp"
-        android:textStyle="bold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline4" />
@@ -54,8 +52,8 @@
         android:id="@+id/txt_total_vote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="30dp"
         android:text="300 votes"
         android:textColor="#FFFBFB"
         app:layout_constraintEnd_toEndOf="parent"
@@ -110,14 +108,13 @@
 
     <TextView
         android:id="@+id/txt_description"
-        android:layout_width="370dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginEnd="20dp"
         android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. "
         android:textColor="#FFFBFB"
-        app:layout_constraintEnd_toEndOf="@+id/textView17"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline5" />
 
@@ -126,7 +123,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="427dp" />
+        app:layout_constraintGuide_begin="415dp" />
 
     <Button
         android:id="@+id/btn_book_ticket"

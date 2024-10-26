@@ -66,7 +66,9 @@ public class ComingSoonFragment extends Fragment implements ComingSoonRecyclerVi
 
     @Override
     public void onItemClick(ResultsItem movie) {
+        Log.d("ComingSoonFragment", "Movie ID: " + movie.getId());
         Intent intent = new Intent(requireContext(), MovieDetailActivity.class);
+        intent.putExtra("MOVIE_ID", movie.getId());
         startActivity(intent);
     }
 }

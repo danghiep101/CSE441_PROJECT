@@ -12,8 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.lifecycle.ViewModelProvider;
-import androidx.media3.common.MediaItem;
-import androidx.media3.exoplayer.ExoPlayer;
+
 import com.example.cse441_project.data.model.moviedetail.MovieDetail;
 
 import com.example.cse441_project.data.model.movietrailer.MovieTrailerItem;
@@ -40,7 +39,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             observeViewModel();
             viewModel.loadMovie(id);
         } else {
-            Toast.makeText(this, "movieId is null", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Movie is not available", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -54,7 +53,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         });
         viewModel.movieTrailer.observe(this, movieTrailers -> {
             if (movieTrailers != null && !movieTrailers.isEmpty()) {
-                MovieTrailerItem firstTrailer = movieTrailers.get(0);
+                MovieTrailerItem firstTrailer = movieTrailers.get(3);
                 setupPlayer(firstTrailer);
             } else {
                 Toast.makeText(this, "No trailer available", Toast.LENGTH_SHORT).show();
@@ -71,7 +70,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     private void bindData(MovieDetail movieDetail) {
         binding.txtName.setText(movieDetail.getTitle());
-        binding.txtVoteAvarage.setText(String.valueOf(movieDetail.getVoteAverage()));
+        binding.txtVoteAvarage.setText("Vote average: "+ String.valueOf(movieDetail.getVoteAverage()));
         binding.txtTotalVote.setText(String.valueOf(movieDetail.getVoteCount()));
         binding.txtDate.setText(String.valueOf(movieDetail.getReleaseDate()));
         int age = movieDetail.isAdult() ? 18 : 13;
@@ -95,13 +94,6 @@ public class MovieDetailActivity extends AppCompatActivity {
                 youTubePlayer.loadVideo(videoId, 0);
             }
         });
-    }
-    private void hideSystemUI() {
-        getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                        | View.SYSTEM_UI_FLAG_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-        );
     }
 
 }

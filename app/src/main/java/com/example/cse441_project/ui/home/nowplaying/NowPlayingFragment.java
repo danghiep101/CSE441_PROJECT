@@ -11,12 +11,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.cse441_project.R;
 import com.example.cse441_project.data.model.movie.ResultsItem;
 import com.example.cse441_project.data.repository.MovieRepository;
 import com.example.cse441_project.data.repository.MovieRepositoryImp;
 import com.example.cse441_project.databinding.FragmentNowPlayingBinding;
+import com.example.cse441_project.ui.bookticket.ChooseDateAndTimeActivity;
 import com.example.cse441_project.ui.home.moviedetail.MovieDetailActivity;
 
 import java.util.ArrayList;
@@ -39,7 +42,6 @@ public class NowPlayingFragment extends Fragment implements MovieRecyclerViewAda
         binding = FragmentNowPlayingBinding.inflate(inflater, container, false);
         setupRecyclerView();
         observeViewModel();
-
         return binding.getRoot();
     }
 
@@ -48,6 +50,7 @@ public class NowPlayingFragment extends Fragment implements MovieRecyclerViewAda
         binding.recyclerViewMovie.setAdapter(moviesAdapter);
         binding.recyclerViewMovie.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
         viewModel.loadMovies();
+
     }
 
     private void observeViewModel() {
