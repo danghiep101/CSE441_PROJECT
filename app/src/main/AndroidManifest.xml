@@ -27,9 +27,6 @@
             android:name=".ui.profileoverlay.MyTicketActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.bookticket.ChoosePopcornAndDrink"
-            android:exported="false" />
-        <activity
             android:name=".ui.bookticket.ChooseDateAndTimeActivity"
             android:exported="false" />
         <activity
