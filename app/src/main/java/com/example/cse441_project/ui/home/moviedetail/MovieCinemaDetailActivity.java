@@ -4,7 +4,7 @@ import android.content.Intent;
 
 import android.os.Bundle;
 
-import android.view.View;
+
 import android.widget.Toast;
 
 
@@ -17,12 +17,12 @@ import com.example.cse441_project.data.model.moviedetail.MovieDetail;
 
 import com.example.cse441_project.data.model.movietrailer.MovieTrailerItem;
 import com.example.cse441_project.databinding.ActivityMovieDetailBinding;
-import com.example.cse441_project.ui.bookticket.ChooseDateAndTimeActivity;
+import com.example.cse441_project.ui.bookticket.showscreen.ChooseDateAndTimeActivity;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
-public class MovieDetailActivity extends AppCompatActivity {
+public class MovieCinemaDetailActivity extends AppCompatActivity {
     private ActivityMovieDetailBinding binding;
     private DetailMovieViewModel viewModel;
     private int id;
@@ -53,7 +53,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         });
         viewModel.movieTrailer.observe(this, movieTrailers -> {
             if (movieTrailers != null && !movieTrailers.isEmpty()) {
-                MovieTrailerItem firstTrailer = movieTrailers.get(3);
+                MovieTrailerItem firstTrailer = movieTrailers.get(0);
                 setupPlayer(firstTrailer);
             } else {
                 Toast.makeText(this, "No trailer available", Toast.LENGTH_SHORT).show();
@@ -71,7 +71,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     private void bindData(MovieDetail movieDetail) {
         binding.txtName.setText(movieDetail.getTitle());
         binding.txtVoteAvarage.setText("Vote average: "+ String.valueOf(movieDetail.getVoteAverage()));
-        binding.txtTotalVote.setText(String.valueOf(movieDetail.getVoteCount()));
+        binding.txtTotalVote.setText(String.valueOf(movieDetail.getVoteCount()) +" votes");
         binding.txtDate.setText(String.valueOf(movieDetail.getReleaseDate()));
         int age = movieDetail.isAdult() ? 18 : 13;
         binding.txtAge.setText(String.valueOf(age));
@@ -79,6 +79,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         binding.txtDescription.setText(movieDetail.getOverview());
         binding.btnBookTicket.setOnClickListener(v -> {
             Intent intent = new Intent(this, ChooseDateAndTimeActivity.class);
+            intent.putExtra("MOVIE_ID", id);
             startActivity(intent);
         });
 

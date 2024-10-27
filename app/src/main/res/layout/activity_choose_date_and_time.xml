@@ -5,7 +5,7 @@
     android:id="@+id/activity_choose_date_and_time"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.bookticket.ChooseDateAndTimeActivity">
+    tools:context=".ui.bookticket.showscreen.ChooseDateAndTimeActivity">
 
     <View
         android:id="@+id/view4"
@@ -79,7 +79,7 @@
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcv_date_and_time"
+        android:id="@+id/rcv_date"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -106,7 +106,7 @@
         android:paddingBottom="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rcv_date_and_time">
+        app:layout_constraintTop_toBottomOf="@+id/rcv_date">
 
         <androidx.cardview.widget.CardView
             android:layout_width="40dp"
@@ -145,11 +145,15 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="30dp"
-        android:paddingLeft="10dp"
+        android:paddingLeft="30dp"
         android:paddingRight="10dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
         app:layout_constraintBottom_toBottomOf="@+id/view4"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
+        app:layout_constraintVertical_bias="1.0"
         tools:listitem="@layout/item_time_and_screen" />
 </androidx.constraintlayout.widget.ConstraintLayout>
