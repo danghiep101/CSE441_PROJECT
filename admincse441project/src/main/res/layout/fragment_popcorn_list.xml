@@ -127,7 +127,7 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="44dp" />
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/rcv_management_list"
         tools:listitem="@layout/item_popcorn_and_drink"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_width="0dp"

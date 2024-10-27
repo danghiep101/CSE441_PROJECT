@@ -6,6 +6,7 @@
     <color name="dark_theme">#202427</color>
     <color name="button_gradiant_1">#D6C097</color>
     <color name="button_gradiant_2">#99703E</color>
+    <color name="opacity_button_gradiant_2">#33987851</color>
     <color name="poster_box_shadow">#C03838</color>
     <color name="background_controller">#2A2E31</color>
     <color name="placeholder_controller">#6C6C6C</color>

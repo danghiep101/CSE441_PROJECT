@@ -3,7 +3,6 @@ package com.example.cse441_project.ui.home.nowplaying;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,13 +11,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.cse441_project.R;
-import com.example.cse441_project.data.model.ResultsItem;
+import com.example.cse441_project.data.model.movie.ResultsItem;
 import com.example.cse441_project.data.repository.MovieRepository;
 import com.example.cse441_project.data.repository.MovieRepositoryImp;
 import com.example.cse441_project.databinding.FragmentNowPlayingBinding;
+import com.example.cse441_project.ui.bookticket.ChooseDateAndTimeActivity;
 import com.example.cse441_project.ui.home.moviedetail.MovieDetailActivity;
 
 import java.util.ArrayList;
@@ -49,6 +50,7 @@ public class NowPlayingFragment extends Fragment implements MovieRecyclerViewAda
         binding.recyclerViewMovie.setAdapter(moviesAdapter);
         binding.recyclerViewMovie.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
         viewModel.loadMovies();
+
     }
 
     private void observeViewModel() {
@@ -71,7 +73,9 @@ public class NowPlayingFragment extends Fragment implements MovieRecyclerViewAda
 
     @Override
     public void onItemClick(ResultsItem movie) {
+        Log.d("NowPlayingFragment", "Movie ID: " + movie.getId());
         Intent intent = new Intent(requireContext(), MovieDetailActivity.class);
+        intent.putExtra("MOVIE_ID", movie.getId());
         startActivity(intent);
     }
 }

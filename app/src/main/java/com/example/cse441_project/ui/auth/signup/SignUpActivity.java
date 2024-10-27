@@ -35,7 +35,7 @@ public class SignUpActivity extends AppCompatActivity {
                 String userEmail = binding.etEmail.getText().toString().trim();
                 String userName = binding.etUsername.getText().toString().trim();
                 String phoneNumber = binding.etPhoneNumber.getText().toString().trim();
-                String dateOfBirth = binding.etDateOfBirth.getText().toString().trim(); // Sửa ở đây
+                String dateOfBirth = binding.etDateOfBirth.getText().toString().trim();
                 viewModel.saveUserDetail(userName, userEmail, dateOfBirth, phoneNumber);
             } else {
                 Toast.makeText(this, "Cannot Sign Up", Toast.LENGTH_LONG).show();
