@@ -20,6 +20,7 @@ public class DetailMovieViewModel extends ViewModel {
 
     private MutableLiveData<MovieDetail> _movieDetail = new MutableLiveData<>();
     public LiveData<MovieDetail> movieDetail = _movieDetail;
+
     private MutableLiveData<List<MovieTrailerItem>> _movieTrailer = new MutableLiveData<>();
     public LiveData<List<MovieTrailerItem>> movieTrailer = _movieTrailer;
 
@@ -45,6 +46,7 @@ public class DetailMovieViewModel extends ViewModel {
             }
 
         }).start();
+
         new Thread(() -> {
             try {
                 Result<MovieTrailer> movieTrailerResult = movieRepository.getTrailerMovie(id);

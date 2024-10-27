@@ -17,7 +17,7 @@ import com.example.cse441_project.data.model.movie.ResultsItem;
 import com.example.cse441_project.data.repository.MovieRepository;
 import com.example.cse441_project.data.repository.MovieRepositoryImp;
 import com.example.cse441_project.databinding.FragmentNowPlayingBinding;
-import com.example.cse441_project.ui.home.moviedetail.MovieDetailActivity;
+import com.example.cse441_project.ui.home.moviedetail.MovieCinemaDetailActivity;
 
 import java.util.ArrayList;
 
@@ -39,7 +39,6 @@ public class NowPlayingFragment extends Fragment implements MovieRecyclerViewAda
         binding = FragmentNowPlayingBinding.inflate(inflater, container, false);
         setupRecyclerView();
         observeViewModel();
-
         return binding.getRoot();
     }
 
@@ -48,6 +47,7 @@ public class NowPlayingFragment extends Fragment implements MovieRecyclerViewAda
         binding.recyclerViewMovie.setAdapter(moviesAdapter);
         binding.recyclerViewMovie.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
         viewModel.loadMovies();
+
     }
 
     private void observeViewModel() {
@@ -71,7 +71,7 @@ public class NowPlayingFragment extends Fragment implements MovieRecyclerViewAda
     @Override
     public void onItemClick(ResultsItem movie) {
         Log.d("NowPlayingFragment", "Movie ID: " + movie.getId());
-        Intent intent = new Intent(requireContext(), MovieDetailActivity.class);
+        Intent intent = new Intent(requireContext(), MovieCinemaDetailActivity.class);
         intent.putExtra("MOVIE_ID", movie.getId());
         startActivity(intent);
     }

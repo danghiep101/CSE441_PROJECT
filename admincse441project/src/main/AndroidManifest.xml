@@ -9,33 +9,36 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CSE441_PROJECT">
         <activity
-            android:name=".ui.auth.forgotpassword.ForgotPasswordActivity"
+            android:name=".ui.discountmanagement.edit.EditDiscountActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.discountmanagement.add.AddDiscountActivity"
             android:exported="false" />
         <activity
             android:name=".ui.auth.signin.SignInActivity"
-            android:exported="false" />
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".ui.showtimemaganement.EditShowtimeActivity"
             android:exported="false" />
         <activity
             android:name=".ui.showtimemaganement.AddShowtimeActivity"
             android:exported="false" />
-        <activity
-            android:name=".ui.popcornmanagement.EditPopcornAndDrinkActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.popcornmanagement.AddPopcornAndDrinkActivity"
-            android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".ui.home.MainActivity"-->
-<!--            android:exported="false" />-->
+
         <activity
             android:name=".ui.home.MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
+        </activity>
+        <activity
+            android:name=".ui.auth.signup.SignUpActivity"
+            android:exported="true" >
+
         </activity>
 
         <meta-data

@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter_semibold"
-            android:text="Screen's number"
+            android:text="Screen's name"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textSize="14sp" />

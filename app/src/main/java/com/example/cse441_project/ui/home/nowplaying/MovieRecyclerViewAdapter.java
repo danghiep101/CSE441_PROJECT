@@ -85,4 +85,5 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
     public interface OnItemClickListener{
         void onItemClick(ResultsItem movie);
     }
+
 }
