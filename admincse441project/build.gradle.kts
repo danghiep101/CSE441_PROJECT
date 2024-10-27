@@ -41,6 +41,9 @@ dependencies {
     implementation ("com.google.firebase:firebase-auth:21.3.0")
     implementation ("com.google.firebase:firebase-firestore:24.8.1")
 
+    implementation(libs.gson)
+    implementation(libs.converter.gson)
+    implementation(libs.retrofit)
     implementation(libs.github.glide)
     implementation(libs.appcompat)
     implementation(libs.material)
