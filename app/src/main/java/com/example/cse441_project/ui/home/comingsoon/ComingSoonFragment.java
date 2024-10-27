@@ -17,7 +17,7 @@ import com.example.cse441_project.data.model.movie.ResultsItem;
 import com.example.cse441_project.data.repository.MovieRepository;
 import com.example.cse441_project.data.repository.MovieRepositoryImp;
 import com.example.cse441_project.databinding.FragmentComingSoonBinding;
-import com.example.cse441_project.ui.home.moviedetail.MovieDetailActivity;
+import com.example.cse441_project.ui.home.moviedetail.MovieCinemaDetailActivity;
 
 import java.util.ArrayList;
 
@@ -67,7 +67,7 @@ public class ComingSoonFragment extends Fragment implements ComingSoonRecyclerVi
     @Override
     public void onItemClick(ResultsItem movie) {
         Log.d("ComingSoonFragment", "Movie ID: " + movie.getId());
-        Intent intent = new Intent(requireContext(), MovieDetailActivity.class);
+        Intent intent = new Intent(requireContext(), MovieCinemaDetailActivity.class);
         intent.putExtra("MOVIE_ID", movie.getId());
         startActivity(intent);
     }
