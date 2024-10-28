@@ -31,7 +31,6 @@ public class ShowTimeViewModel extends ViewModel {
                         }
                     }
                     _showtimes.setValue(showTimeList);
-
                 }
             }
         });
