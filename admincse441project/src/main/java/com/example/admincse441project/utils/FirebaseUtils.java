@@ -3,6 +3,7 @@ package com.example.admincse441project.utils;
 import com.example.admincse441project.data.model.discount.Discount;
 import com.example.admincse441project.data.model.ticket.Ticket;
 import com.example.admincse441project.data.model.discount.Discount;
+import com.example.admincse441project.data.model.account.Account;
 import com.google.android.gms.tasks.Task;
 import com.example.admincse441project.data.model.showtime.ShowTime;
 import com.google.android.gms.tasks.Task;
@@ -83,5 +84,21 @@ public class FirebaseUtils {
 
     public static Task<DocumentSnapshot> getTicketById(String ticketId) {
         return getTicketsCollection().document(ticketId).get();
+    }
+
+    public static CollectionReference getAccountsCollection() {
+        return FirebaseFirestore.getInstance().collection("accounts");
+    }
+
+    public static Task<DocumentReference> addAccount(Account account) {
+        return getAccountsCollection().add(account);
+    }
+
+    public static Task<Void> updateAccount(Account account) {
+        return getAccountsCollection().document(account.getId()).set(account);
+    }
+
+    public static Task<Void> deleteAccount(String accountId) {
+        return getAccountsCollection().document(accountId).delete();
     }
 }
