@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 
+import android.view.View;
 import android.widget.Toast;
 
 
@@ -34,10 +35,16 @@ public class MovieCinemaDetailActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         Intent intent = getIntent();
         id = intent.getIntExtra("MOVIE_ID", -1);
+        String source = intent.getStringExtra("SOURCE");
 
         if(id != -1){
             observeViewModel();
             viewModel.loadMovie(id);
+            if ("NowPlayingMovieFragment".equals(source)) {
+                binding.btnBookTicket.setVisibility(View.VISIBLE);
+            } else {
+                binding.btnBookTicket.setVisibility(View.GONE);
+            }
         } else {
             Toast.makeText(this, "Movie is not available", Toast.LENGTH_SHORT).show();
         }

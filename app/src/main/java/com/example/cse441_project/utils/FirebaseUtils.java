@@ -5,6 +5,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 public class FirebaseUtils {
@@ -29,7 +30,8 @@ public class FirebaseUtils {
         }
     }
 
-    public static void getShowtimeData(String collection, OnCompleteListener<QuerySnapshot> onCompleteListener) {
-        firestore.collection(collection).get().addOnCompleteListener(onCompleteListener);
+    public static void getShowtimeDataByMovieId(String collection, String movieId, OnCompleteListener<QuerySnapshot> onCompleteListener) {
+        Query query = firestore.collection(collection).whereEqualTo("movieId", movieId);
+        query.get().addOnCompleteListener(onCompleteListener);
     }
 }
