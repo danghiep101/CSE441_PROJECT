@@ -1,8 +1,10 @@
 package com.example.cse441_project.utils;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -30,8 +32,12 @@ public class FirebaseUtils {
         }
     }
 
-    public static void getShowtimeDataByMovieId(String collection, String movieId, OnCompleteListener<QuerySnapshot> onCompleteListener) {
-        Query query = firestore.collection(collection).whereEqualTo("movieId", movieId);
-        query.get().addOnCompleteListener(onCompleteListener);
+    public static CollectionReference getShowtimeCollection(String movieId) {
+        return FirebaseFirestore.getInstance().collection("showtimes");
+    }
+
+
+    public static Query getShowtimeIdmovie(String idMovie) {
+        return FirebaseFirestore.getInstance().collection("showtimes").whereEqualTo("idMovie", idMovie);
     }
 }

@@ -9,7 +9,7 @@ public class ShowTime {
     private String endTime;
     private String date;
     private String idMovie;
-    private String nameMovie;
+    private String nameCinema;
 
     public ShowTime() {
     }
@@ -25,12 +25,12 @@ public class ShowTime {
         this.idMovie = idMovie;
     }
 
-    public String getNameMovie() {
-        return nameMovie;
+    public String getNameCinema() {
+        return nameCinema;
     }
 
-    public void setNameMovie(String nameMovie) {
-        this.nameMovie = nameMovie;
+    public void getNameCinema(String nameMovie) {
+        this.nameCinema = nameMovie;
     }
     public String getId() {
         return id;

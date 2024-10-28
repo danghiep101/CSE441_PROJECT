@@ -1,27 +1,27 @@
 package com.example.cse441_project.ui.bookticket.showscreen;
 
-import android.annotation.SuppressLint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cse441_project.data.model.showtime.ShowTime;
-
 import com.example.cse441_project.databinding.ItemTimeAndScreenBinding;
 
-public class ChooseScreenTimeAdapter extends ListAdapter<ShowTime, ChooseScreenTimeAdapter.ShowTimeViewHolder> {
+import java.util.ArrayList;
+import java.util.List;
+
+public class ChooseScreenTimeAdapter extends RecyclerView.Adapter<ChooseScreenTimeAdapter.ShowTimeViewHolder> {
+    private List<ShowTime> showTimeList = new ArrayList<>();
     private final OnShowTimeClickListener onShowTimeClickListener;
 
     public interface OnShowTimeClickListener {
         void onShowTimeClick(ShowTime showTime);
     }
 
-    protected ChooseScreenTimeAdapter(OnShowTimeClickListener onShowTimeClickListener) {
-        super(DIFF_CALLBACK);
+    public ChooseScreenTimeAdapter(OnShowTimeClickListener onShowTimeClickListener) {
         this.onShowTimeClickListener = onShowTimeClickListener;
     }
 
@@ -34,8 +34,19 @@ public class ChooseScreenTimeAdapter extends ListAdapter<ShowTime, ChooseScreenT
 
     @Override
     public void onBindViewHolder(@NonNull ShowTimeViewHolder holder, int position) {
-        ShowTime showTime = getItem(position);
+        ShowTime showTime = showTimeList.get(position);
         holder.bind(showTime);
+    }
+
+    @Override
+    public int getItemCount() {
+        return showTimeList.size();
+    }
+
+    public void submitList(List<ShowTime> newList) {
+        this.showTimeList = newList;
+        Log.d("ChooseScreenTimeAdapter", "Dữ liệu trong submitList: " + newList);
+        notifyDataSetChanged();
     }
 
     class ShowTimeViewHolder extends RecyclerView.ViewHolder {
@@ -46,23 +57,10 @@ public class ChooseScreenTimeAdapter extends ListAdapter<ShowTime, ChooseScreenT
             this.binding = binding;
         }
 
-        public void bind(ShowTime showTime) {
-            binding.txtPlayTime.setText(showTime.getStartTime() + "-" + showTime.getEndTime());
-            binding.txtScreen.setText(showTime.getName());
+        public void bind(ShowTime showTime) {;
+            binding.txtPlayTime.setText(showTime.getStartTime() + " - " + showTime.getEndTime());
+            binding.txtScreen.setText(showTime.getNameCinema());
             binding.getRoot().setOnClickListener(v -> onShowTimeClickListener.onShowTimeClick(showTime));
         }
     }
-
-    private static final DiffUtil.ItemCallback<ShowTime> DIFF_CALLBACK = new DiffUtil.ItemCallback<ShowTime>() {
-        @Override
-        public boolean areItemsTheSame(@NonNull ShowTime oldItem, @NonNull ShowTime newItem) {
-            return oldItem.getId().equals(newItem.getId());
-        }
-
-        @SuppressLint("DiffUtilEquals")
-        @Override
-        public boolean areContentsTheSame(@NonNull ShowTime oldItem, @NonNull ShowTime newItem) {
-            return oldItem.equals(newItem);
-        }
-    };
 }

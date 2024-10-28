@@ -1,5 +1,7 @@
 package com.example.cse441_project.ui.bookticket.showscreen;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -8,69 +10,46 @@ import androidx.lifecycle.ViewModel;
 import com.example.cse441_project.data.model.showtime.ShowTime;
 import com.example.cse441_project.utils.FirebaseUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ChooseDateAndTimeViewModel extends ViewModel {
 
-    private final MutableLiveData<List<String>> dateList = new MutableLiveData<>();
-    private final MutableLiveData<List<ShowTime>> showTimeList = new MutableLiveData<>();
+    private final MutableLiveData<List<ShowTime>> _showTimeList = new MutableLiveData<>();
+    public LiveData<List<ShowTime>> showTimeList = _showTimeList;
+    public final MutableLiveData<Exception> error = new MutableLiveData<>();
 
-    public LiveData<List<String>> getDateList() {
-        return dateList;
-    }
+    void loadShowtime(String movieId) {
+        if (movieId == null || movieId.isEmpty()) {
+            error.setValue(new Exception("Invalid Movie ID"));
+            return;
+        }
 
-    public LiveData<List<ShowTime>> getShowTimeList() {
-        return showTimeList;
-    }
+        FirebaseUtils.getShowtimeCollection(movieId).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                List<ShowTime> showtimeList = new ArrayList<>();
+                QuerySnapshot querySnapshot = task.getResult();
+                Log.e("ChooseDateAndTimeViewModel", "Showtime List Size: " + (querySnapshot != null ? querySnapshot.size() : 0));
 
-    // Phương thức này sẽ lấy danh sách ngày từ Firestore
-    public void loadDateList(String collectionName, String movieid) {
-        FirebaseUtils.getShowtimeDataByMovieId(collectionName, movieid, new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful() && task.getResult() != null) {
-                    List<String> dates = new ArrayList<>();
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        String date = document.getString("date");
-                        if (date != null && !dates.contains(date)) {
-                            dates.add(date); // Thêm ngày vào danh sách nếu chưa có
+                if (querySnapshot != null) {
+                    for (DocumentSnapshot document : querySnapshot.getDocuments()) {
+                        ShowTime showTime = document.toObject(ShowTime.class);
+                        if (showTime != null) {
+                            showtimeList.add(showTime);
+                        } else {
+                            Log.e("ChooseDateAndTimeViewModel", "Showtime is null for document: " + document.getId());
                         }
                     }
-                    dateList.setValue(dates);
-                } else {
-                    // Xử lý khi có lỗi
-                    dateList.setValue(new ArrayList<>());
+                    _showTimeList.setValue(showtimeList);
                 }
-            }
-        });
-    }
-
-    // Phương thức này sẽ lấy danh sách ShowTime từ Firestore dựa trên MOVIE_ID
-    public void loadShowtimeList(String collectionName, String movieId) {
-        FirebaseUtils.getShowtimeDataByMovieId(collectionName, movieId, new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful() && task.getResult() != null) {
-                    List<ShowTime> showtimes = new ArrayList<>();
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        ShowTime showTime = new ShowTime();
-                        showTime.setId(document.getString("id"));
-                        showTime.setName(document.getString("name"));
-                        showTime.setStartTime(document.getString("startTime"));
-                        showTime.setEndTime(document.getString("endTime"));
-                        showTime.setDate(document.getString("date"));
-
-                        showtimes.add(showTime);
-                    }
-                    showTimeList.setValue(showtimes);
-                } else {
-                    showTimeList.setValue(new ArrayList<>());
-                }
+            } else {
+                error.setValue(task.getException());
+                Log.e("ChooseDateAndTimeViewModel", "Error getting showtimes: ", task.getException());
             }
         });
     }

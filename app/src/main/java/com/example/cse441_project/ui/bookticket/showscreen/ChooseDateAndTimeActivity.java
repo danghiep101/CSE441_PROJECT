@@ -1,75 +1,123 @@
 package com.example.cse441_project.ui.bookticket.showscreen;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cse441_project.R;
 import com.example.cse441_project.data.model.showtime.ShowTime;
 import com.example.cse441_project.databinding.ActivityChooseDateAndTimeBinding;
+import com.example.cse441_project.utils.FirebaseUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ChooseDateAndTimeActivity extends AppCompatActivity {
+
     private ActivityChooseDateAndTimeBinding binding;
     private ChooseDateAndTimeViewModel viewModel;
-    private ChooseDateAdapter dateAdapter;
-    private ChooseScreenTimeAdapter timeAdapter;
-    private int id;
+    private ChooseDateAdapter chooseDateAdapter;
+    private ChooseScreenTimeAdapter chooseScreenTimeAdapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityChooseDateAndTimeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         viewModel = new ViewModelProvider(this).get(ChooseDateAndTimeViewModel.class);
-
         Intent intent = getIntent();
-        id = intent.getIntExtra("MOVIE_ID", -1);
+        int movieId = intent.getIntExtra("MOVIE_ID", -1);
+        binding.txtNameMovie.setText(intent.getStringExtra("MOVIE_NAME"));
+        if (movieId != -1) {
+            FirebaseUtils.getShowtimeIdmovie(String.valueOf(movieId)).get().addOnCompleteListener(task -> {
+                if (task.isSuccessful() && task.getResult() != null && !task.getResult().isEmpty()) {
+                    viewModel.loadShowtime(String.valueOf(movieId));
+                } else {
+                    Toast.makeText(this, "Movie is not available", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            Toast.makeText(this, "Invalid Movie ID", Toast.LENGTH_SHORT).show();
+        }
 
-        setupRecyclerViewDate();
-        setupRecyclerViewScreenTime();
-
+        setupRecyclerViews();
         observeViewModel();
-
-        // Load dữ liệu từ Firestore
-        viewModel.loadDateList("showtimes", String.valueOf(id));
-        viewModel.loadShowtimeList("showtimes", String.valueOf(id));
     }
 
-    private void setupRecyclerViewDate() {
-        dateAdapter = new ChooseDateAdapter(date -> {
-            // Xử lý sự kiện khi chọn một ngày
-            Intent intent = getIntent();
-            id = intent.getIntExtra("MOVIE_ID", -1);
-            viewModel.loadShowtimeList("showtimes", String.valueOf(id));
-        });
-        binding.rcvTimeAndScreen.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
-        binding.rcvDate.setAdapter(dateAdapter);
-    }
+    private void setupRecyclerViews() {
 
-    private void setupRecyclerViewScreenTime() {
-        timeAdapter = new ChooseScreenTimeAdapter(showTime -> {
-            // Xử lý sự kiện khi chọn giờ chiếu
-        });
-        binding.rcvTimeAndScreen.setLayoutManager(new LinearLayoutManager(this));
-        binding.rcvTimeAndScreen.setAdapter(timeAdapter);
+
+        chooseDateAdapter = new ChooseDateAdapter(this::onDateClick);
+        binding.rcvDate.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+        binding.rcvDate.setAdapter(chooseDateAdapter);
+
+
+        chooseScreenTimeAdapter = new ChooseScreenTimeAdapter(this::onShowTimeClick);
+        binding.rcvTimeAndScreen.setLayoutManager(new GridLayoutManager(this, 2));
+        binding.rcvTimeAndScreen.setAdapter(chooseScreenTimeAdapter);
     }
 
     private void observeViewModel() {
-        // Quan sát danh sách ngày
-        viewModel.getDateList().observe(this, dates -> {
-            dateAdapter.submitList(dates);
+        viewModel.showTimeList.observe(this, showTimeList -> {
+            Log.d("ChooseDateAndTimeActivity", "Showtime List Observed: " + showTimeList);
+            chooseScreenTimeAdapter.submitList(showTimeList);
+            chooseDateAdapter.submitList(showTimeList);
         });
+    }
 
-        // Quan sát danh sách giờ chiếu
-        viewModel.getShowTimeList().observe(this, showTimes -> {
-            timeAdapter.submitList(showTimes);
-        });
+
+    private void onDateClick(String date) {
+
+        Toast.makeText(this, "Ngày đã chọn: " + date, Toast.LENGTH_SHORT).show();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date selectedDate;
+        try {
+            selectedDate = dateFormat.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        if (viewModel.showTimeList.getValue() != null) {
+            List<ShowTime> filteredShowTimes = new ArrayList<>();
+            for (ShowTime showTime : viewModel.showTimeList.getValue()) {
+                Log.d("FilteringShowTimes", "ShowTime Date: " + showTime.getDate());
+                try {
+                    Date showTimeDate = dateFormat.parse(showTime.getDate());
+                    if (showTimeDate != null && showTimeDate.equals(selectedDate)) {
+
+                        filteredShowTimes.add(showTime);
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            Log.d("FilteredShowTimes", "Filtered ShowTimes: " + filteredShowTimes);
+            chooseScreenTimeAdapter.submitList(filteredShowTimes);
+        } else {
+            Log.d("ShowTimeList", "showTimeList is null or empty");
+        }
+    }
+
+
+    private void onShowTimeClick(ShowTime showTime) {
+        Toast.makeText(this, "Thời gian chiếu đã chọn: " + showTime.getStartTime(), Toast.LENGTH_SHORT).show();
+
     }
 }
