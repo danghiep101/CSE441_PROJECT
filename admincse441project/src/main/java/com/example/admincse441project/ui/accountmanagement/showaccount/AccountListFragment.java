@@ -1,66 +1,123 @@
 package com.example.admincse441project.ui.accountmanagement.showaccount;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.admincse441project.R;
+import com.example.admincse441project.data.model.account.Account;
+import com.example.admincse441project.ui.accountmanagement.edit.EditAccountActivity;
+import com.example.admincse441project.utils.FirebaseUtils;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link AccountListFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class AccountListFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private RecyclerView recyclerView;
+    private AccountAdapter accountAdapter;
+    private List<Account> accountList;
+    private EditText edtSearchAccount;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private static final int EDIT_ACCOUNT_REQUEST_CODE = 1;
 
-    public AccountListFragment() {
-        // Required empty public constructor
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_account_list, container, false);
+
+        recyclerView = view.findViewById(R.id.recyclerView);
+        edtSearchAccount = view.findViewById(R.id.edt_search_account2);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        accountList = new ArrayList<>();
+        accountAdapter = new AccountAdapter(accountList);
+        recyclerView.setAdapter(accountAdapter);
+
+        loadAccounts("");
+
+        edtSearchAccount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                loadAccounts(s.toString().trim());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+
+        accountAdapter.setOnItemClickListener(account -> {
+            Intent intent = new Intent(getContext(), EditAccountActivity.class);
+            intent.putExtra("ACCOUNT_ID", account.getId()); // Truyền ID thực sự từ Firestore
+            Log.d("AccountListFragment", "Sending ACCOUNT_ID: " + account.getId()); // In log để kiểm tra ID
+            startActivityForResult(intent, EDIT_ACCOUNT_REQUEST_CODE); // Sử dụng startActivityForResult
+        });
+
+        return view;
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AccountListFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AccountListFragment newInstance(String param1, String param2) {
-        AccountListFragment fragment = new AccountListFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    private void loadAccounts(String query) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        accountList.clear();
+
+        // Truy vấn collection "admin"
+        db.collection("admin").get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                for (DocumentSnapshot document : task.getResult()) {
+                    Account account = document.toObject(Account.class);
+                    if (account != null) {
+                        account.setId(document.getId()); // Gán ID Firestore vào trường id của Account
+                        account.setAdmin(true); // Thiết lập role là Admin
+                        accountList.add(account);
+                    }
+                }
+                accountAdapter.notifyDataSetChanged();
+            }
+        });
+
+        // Truy vấn tiếp collection "users" sau khi đã lấy xong "admin"
+        db.collection("users").get().addOnCompleteListener(userTask -> {
+            if (userTask.isSuccessful() && userTask.getResult() != null) {
+                for (DocumentSnapshot document : userTask.getResult()) {
+                    Account account = document.toObject(Account.class);
+                    if (account != null) {
+                        account.setId(document.getId()); // Sử dụng ID của Firestore làm ID của account
+                        account.setAdmin(false); // Thiết lập role là User
+                        accountList.add(account);
+                    }
+                }
+                accountAdapter.notifyDataSetChanged(); // Cập nhật RecyclerView sau khi có đủ dữ liệu
+            }
+        });
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Kiểm tra nếu là yêu cầu từ EditAccountActivity và có kết quả thành công
+        if (requestCode == EDIT_ACCOUNT_REQUEST_CODE && resultCode == AppCompatActivity.RESULT_OK) {
+            loadAccounts(""); // Tải lại danh sách tài khoản sau khi cập nhật
         }
     }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_account_list, container, false);
-    }
 }
+
