@@ -4,7 +4,7 @@ import android.content.Intent;
 
 import android.os.Bundle;
 
-
+import android.view.View;
 import android.widget.Toast;
 
 
@@ -12,17 +12,18 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.lifecycle.ViewModelProvider;
-
+import androidx.media3.common.MediaItem;
+import androidx.media3.exoplayer.ExoPlayer;
 import com.example.cse441_project.data.model.moviedetail.MovieDetail;
 
 import com.example.cse441_project.data.model.movietrailer.MovieTrailerItem;
 import com.example.cse441_project.databinding.ActivityMovieDetailBinding;
-import com.example.cse441_project.ui.bookticket.showscreen.ChooseDateAndTimeActivity;
+import com.example.cse441_project.ui.bookticket.ChooseDateAndTimeActivity;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
-public class MovieCinemaDetailActivity extends AppCompatActivity {
+public class MovieDetailActivity extends AppCompatActivity {
     private ActivityMovieDetailBinding binding;
     private DetailMovieViewModel viewModel;
     private int id;
@@ -34,12 +35,11 @@ public class MovieCinemaDetailActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         Intent intent = getIntent();
         id = intent.getIntExtra("MOVIE_ID", -1);
-
         if(id != -1){
             observeViewModel();
             viewModel.loadMovie(id);
         } else {
-            Toast.makeText(this, "Movie is not available", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "movieId is null", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -51,6 +51,7 @@ public class MovieCinemaDetailActivity extends AppCompatActivity {
                 bindData(detailMovie);
             }
         });
+
         viewModel.movieTrailer.observe(this, movieTrailers -> {
             if (movieTrailers != null && !movieTrailers.isEmpty()) {
                 MovieTrailerItem firstTrailer = movieTrailers.get(0);
@@ -59,6 +60,7 @@ public class MovieCinemaDetailActivity extends AppCompatActivity {
                 Toast.makeText(this, "No trailer available", Toast.LENGTH_SHORT).show();
             }
         });
+
         viewModel.error.observe(this, error ->{
             if(error != null){
                 Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
@@ -70,8 +72,8 @@ public class MovieCinemaDetailActivity extends AppCompatActivity {
 
     private void bindData(MovieDetail movieDetail) {
         binding.txtName.setText(movieDetail.getTitle());
-        binding.txtVoteAvarage.setText("Vote average: "+ String.valueOf(movieDetail.getVoteAverage()));
-        binding.txtTotalVote.setText(String.valueOf(movieDetail.getVoteCount()) +" votes");
+        binding.txtVoteAvarage.setText(String.valueOf(movieDetail.getVoteAverage()));
+        binding.txtTotalVote.setText(String.valueOf(movieDetail.getVoteCount()));
         binding.txtDate.setText(String.valueOf(movieDetail.getReleaseDate()));
         int age = movieDetail.isAdult() ? 18 : 13;
         binding.txtAge.setText(String.valueOf(age));
@@ -79,7 +81,6 @@ public class MovieCinemaDetailActivity extends AppCompatActivity {
         binding.txtDescription.setText(movieDetail.getOverview());
         binding.btnBookTicket.setOnClickListener(v -> {
             Intent intent = new Intent(this, ChooseDateAndTimeActivity.class);
-            intent.putExtra("MOVIE_ID", id);
             startActivity(intent);
         });
 
@@ -95,6 +96,14 @@ public class MovieCinemaDetailActivity extends AppCompatActivity {
                 youTubePlayer.loadVideo(videoId, 0);
             }
         });
+    }
+
+    private void hideSystemUI() {
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+        );
     }
 
 }
