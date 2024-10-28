@@ -9,12 +9,13 @@ public class ShowTime {
     private String endTime;   // Thay đổi thành String
     private String date;      // Thêm trường date
     private String idMovie;   // Thêm trường idMovie
+    private String nameCinema;
 
     // Constructor rỗng cần thiết cho Firebase
     public ShowTime() {
     }
 
-    public ShowTime(String id, String name, String availableSeat, String unavailableSeat, String startTime, String endTime, String date, String idMovie) {
+    public ShowTime(String id, String name, String availableSeat, String unavailableSeat, String startTime, String endTime, String date, String idMovie,String nameCinema) {
         this.id = id;
         this.name = name;
         this.availableSeat = availableSeat;
@@ -23,11 +24,18 @@ public class ShowTime {
         this.endTime = endTime;
         this.date = date; // Khởi tạo trường date
         this.idMovie = idMovie; // Khởi tạo trường idMovie
+        this.nameCinema=nameCinema;
     }
 
     // Getter và Setter cho mỗi thuộc tính
     public String getId() {
         return id;
+    }
+    public String getNameCinema() {
+        return nameCinema;
+    }
+    public void setNameCinema(String nameCinema) {
+        this.nameCinema = nameCinema;
     }
 
     public void setId(String id) {
