@@ -1,48 +1,79 @@
 package com.example.admincse441project.ui.ticketmanagement.list;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 
 import com.example.admincse441project.R;
+import com.example.admincse441project.databinding.FragmentTicketListBinding;
 import com.example.admincse441project.ui.ticketmanagement.add.TicketAddFragment;
+import com.example.admincse441project.ui.ticketmanagement.edit.TicketEditFragment;
 
 public class TicketListFragment extends Fragment {
-    private ImageButton img_btn_add_ticket_fragment;
-
-
-    public TicketListFragment() {
-        // Required empty public constructor
-    }
-
-    public static TicketListFragment newInstance() {
-        return new TicketListFragment();
-    }
+    private FragmentTicketListBinding binding;
+    private TicketViewModel viewModel;
+    private TicketAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_ticket_list, container, false);
+        binding = FragmentTicketListBinding.inflate(inflater, container, false);
+        viewModel = new ViewModelProvider(this).get(TicketViewModel.class);
 
-        img_btn_add_ticket_fragment =  view.findViewById(R.id.img_btn_add_ticket_fragment);
-        img_btn_add_ticket_fragment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                TicketAddFragment ticketAddFragment = new TicketAddFragment();
+        setupRecyclerView();
+        setupObservers();
+        onViewClickListeners();
 
-                requireActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragmentContainerView, ticketAddFragment)
-                        .addToBackStack(null)
-                        .commit();
-            }
+        return binding.getRoot();
+    }
+
+    private void setupRecyclerView() {
+        adapter = new TicketAdapter(null, ticket -> {
+            TicketEditFragment ticketEditFragment = new TicketEditFragment();
+
+            Bundle bundle = new Bundle();
+            bundle.putString("TICKET_ID", ticket.getId());
+
+            // Gán Bundle vào Fragment
+            ticketEditFragment.setArguments(bundle);
+
+            // Chuyển sang Fragment khác
+            getParentFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContainerView, ticketEditFragment)
+                    .addToBackStack(null)  // Thêm vào backstack nếu muốn quay lại
+                    .commit();
         });
+        binding.rcvTicketList.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.rcvTicketList.setAdapter(adapter);
+    }
 
-        return view;
+    private void setupObservers() {
+        viewModel.tickets.observe(getViewLifecycleOwner(), tickets -> {
+            adapter.setTicketList(tickets);
+        });
+    }
+
+    private void onViewClickListeners() {
+        binding.btnSwitchAddTicket.setOnClickListener(view -> {
+            TicketAddFragment ticketAddFragment = new TicketAddFragment();
+
+            FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragmentContainerView, ticketAddFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        viewModel.loadTickets();
     }
 }

@@ -1,38 +1,52 @@
 package com.example.admincse441project.ui.ticketmanagement.add;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.admincse441project.R;
+import com.example.admincse441project.data.model.ticket.Ticket;
 import com.example.admincse441project.data.repository.MovieRepositoryImp;
 import com.example.admincse441project.ui.ticketmanagement.NowPlayingMovieViewModel;
 import com.example.admincse441project.ui.ticketmanagement.NowPlayingViewModelFactory;
+import com.example.admincse441project.ui.ticketmanagement.list.TicketListFragment;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class TicketAddFragment extends Fragment {
     private View view;
-    private DatePickerDialog datePickerDialog;
 
+    private AddTicketViewModel addTicketViewModel;
+    private NowPlayingMovieViewModel viewModel;
+
+    private DatePickerDialog datePickerDialog;
     private Spinner spnMovie;
     private Spinner spnScreen;
-    private Spinner spnSeat;
     private Button btnDate;
-    private NowPlayingMovieViewModel viewModel;
+    private Button btnTime;
+    private Button btnAddTicket;
+    private ImageView btnBack;
+
+    private int hour, minute;
 
     public TicketAddFragment() {
     }
@@ -43,23 +57,64 @@ public class TicketAddFragment extends Fragment {
 
         spnMovie = view.findViewById(R.id.spn_movie);
         spnScreen = view.findViewById(R.id.spn_screen);
-        spnSeat = view.findViewById(R.id.spn_seat);
         btnDate = view.findViewById(R.id.btn_date);
+        btnTime = view.findViewById(R.id.btn_time);
+        btnAddTicket = view.findViewById(R.id.btn_add_ticket);
+        btnBack = view.findViewById(R.id.btn_back_add_ticket);
 
+        // Handle btnDate
         btnDate.setText(getTodaysDate());
         initDatePicker();
         btnDate.setOnClickListener(v -> openDatePicker(v));
 
+        // hanlde btnTime
+        btnTime.setOnClickListener(v -> popTimePicker(v));
+
+        // Call api and load movie title into spinner
         NowPlayingViewModelFactory factory = new NowPlayingViewModelFactory(new MovieRepositoryImp());
         viewModel = new ViewModelProvider(this, factory).get(NowPlayingMovieViewModel.class);
-
         viewModel.loadMovies();
         observeMovies();
 
-        setupScreenSpinner();
-        setupSeatSpinner();
+        addTicketViewModel = new ViewModelProvider(this).get(AddTicketViewModel.class);
 
+        // handle fixed data spinner
+        setupScreenSpinner();
+
+        OnClickView();
         return view;
+    }
+
+    private void OnClickView() {
+        btnBack.setOnClickListener(v -> {
+            Fragment newFragment = new TicketListFragment();
+            FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragmentContainerView, newFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        });
+
+        btnAddTicket.setOnClickListener(v -> {
+            if (btnDate.getText() == "" || btnTime.getText() == "") {
+                Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            String movieName = spnMovie.getSelectedItem().toString();
+            String screen = spnScreen.getSelectedItem().toString();
+            String date = btnDate.getText().toString();
+            String time = btnTime.getText().toString();
+            String status = "Active";
+
+            Ticket newTicket = new Ticket(null, movieName, screen, "", date, time, status);
+
+            addTicketViewModel.addTicket(newTicket).addOnSuccessListener(documentReference -> {
+                Toast.makeText(requireContext(), "Successfully added ticket", Toast.LENGTH_SHORT).show();
+            }).addOnFailureListener(e -> {
+                Log.e("TicketAddFragment", "Error adding ticket", e);
+                Toast.makeText(requireContext(), "Add ticket failed", Toast.LENGTH_SHORT).show();
+            });
+        });
     }
 
     private void observeMovies() {
@@ -97,13 +152,6 @@ public class TicketAddFragment extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), R.layout.item_spinner, screens);
         adapter.setDropDownViewResource(R.layout.item_spinner_dropdown);
         spnScreen.setAdapter(adapter);
-    }
-
-    private void setupSeatSpinner() {
-        List<String> seats = List.of("A1", "A2", "A3", "B1", "B2", "B3");
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), R.layout.item_spinner, seats);
-        adapter.setDropDownViewResource(R.layout.item_spinner_dropdown);
-        spnSeat.setAdapter(adapter);
     }
 
     private void initDatePicker()
@@ -176,5 +224,19 @@ public class TicketAddFragment extends Fragment {
     public void openDatePicker(View view)
     {
         datePickerDialog.show();
+    }
+
+    private void popTimePicker(View view) {
+        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int selectedHour, int selectedMinute) {
+                hour = selectedHour;
+                minute = selectedMinute;
+                btnTime.setText(String.format(Locale.getDefault(), "%02d:%02d", hour, minute));
+            }
+        };
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(requireContext(), onTimeSetListener, hour, minute, true);
+        timePickerDialog.show();
     }
 }
