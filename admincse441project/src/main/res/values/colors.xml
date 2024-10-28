@@ -11,4 +11,6 @@
     <color name="background_controller">#2A2E31</color>
     <color name="placeholder_controller">#6C6C6C</color>
     <color name="red_theme">#C82C32</color>
+    <color name="green_theme">#5cb85c</color>
+    <color name="yellow_theme">#F29339</color>
 </resources>

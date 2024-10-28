@@ -75,6 +75,8 @@ public class ManagementListRecyclerViewAdapter extends RecyclerView.Adapter<Mana
                 return new DiscountsListFragment();
             case 3:
                 return new TicketListFragment();
+            case 4:
+                return new ShowTimeListFragment();
             default:
                 return null;
         }
