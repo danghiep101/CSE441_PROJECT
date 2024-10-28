@@ -52,8 +52,7 @@ public class ShowTimeAdapter extends RecyclerView.Adapter<ShowTimeAdapter.ViewHo
 
         public void bind(ShowTime showTime) {
             binding.textView23.setText(String.valueOf(showTime.getName()));
-            binding.textView33.setText(String.valueOf(showTime.getAvailableSeat()));
-            binding.textView12.setText(String.valueOf(showTime.getUnavailableSeat()));
+            binding.textView33.setText(String.valueOf(showTime.getNameCinema()));
             binding.textView14.setText(String.valueOf(showTime.getStartTime() + " - " + showTime.getEndTime()));
             binding.txtDate.setText(String.valueOf(showTime.getDate()));
         }
