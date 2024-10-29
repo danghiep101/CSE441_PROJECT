@@ -27,7 +27,7 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/tvPhonenumber"
+        android:id="@+id/txtTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
@@ -47,10 +47,10 @@
         android:layout_marginTop="15dp"
         android:text="Vote: "
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/tvPhonenumber"
+        app:layout_constraintEnd_toEndOf="@+id/txtTitle"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tvPhonenumber"
-        app:layout_constraintTop_toBottomOf="@+id/tvPhonenumber" />
+        app:layout_constraintStart_toStartOf="@+id/txtTitle"
+        app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
 
     <TextView
         android:id="@+id/textView5"
