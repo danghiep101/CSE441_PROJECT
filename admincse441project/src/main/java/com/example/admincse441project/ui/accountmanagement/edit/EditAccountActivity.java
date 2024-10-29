@@ -29,12 +29,10 @@ import java.util.Map;
 public class EditAccountActivity extends AppCompatActivity{
 
     private EditText edtPhoneNumber, edtEmail, edtUsername, edtDateOfBirth, edtAddress;
-    private Switch switchAdmin;
     private Button btnSave;
     private String accountId;
     private String currentCollection;
     private RadioGroup radioGroupGender;
-    private boolean originalAdminStatus; // Trạng thái ban đầu của switch
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +45,6 @@ public class EditAccountActivity extends AppCompatActivity{
         edtDateOfBirth = findViewById(R.id.edtDateOfBirth);
         edtAddress = findViewById(R.id.edtAddress);
         radioGroupGender = findViewById(R.id.radioGroupGender);
-        switchAdmin = findViewById(R.id.switchAdmin);
         btnSave = findViewById(R.id.btnSave);
 
         accountId = getIntent().getStringExtra("ACCOUNT_ID");
@@ -75,20 +72,18 @@ public class EditAccountActivity extends AppCompatActivity{
                         Account account = documentSnapshot.toObject(Account.class);
                         if (account != null) {
                             populateFields(account);
-                            switchAdmin.setChecked(true);
-                            originalAdminStatus = true; // Ghi nhận trạng thái ban đầu
                             currentCollection = "admin";
                         }
                     } else {
+                        // Nếu không tìm thấy trong "admin", kiểm tra trong "users"
                         db.collection("users").document(accountId).get()
                                 .addOnSuccessListener(userDoc -> {
                                     if (userDoc.exists()) {
                                         Account account = userDoc.toObject(Account.class);
                                         if (account != null) {
                                             populateFields(account);
-                                            switchAdmin.setChecked(false);
-                                            originalAdminStatus = false;
                                             currentCollection = "users";
+                                            disableEditing(); // Vô hiệu hóa chỉnh sửa cho User
                                         }
                                     } else {
                                         Toast.makeText(this, "Account not found", Toast.LENGTH_SHORT).show();
@@ -101,6 +96,18 @@ public class EditAccountActivity extends AppCompatActivity{
                     Log.e("EditAccountActivity", "Error fetching account", e);
                 });
     }
+
+    // Hàm để vô hiệu hóa chỉnh sửa nếu là User
+    private void disableEditing() {
+        edtPhoneNumber.setEnabled(false);
+        edtEmail.setEnabled(false);
+        edtUsername.setEnabled(false);
+        edtDateOfBirth.setEnabled(false);
+        edtAddress.setEnabled(false);
+        radioGroupGender.setEnabled(false);
+        btnSave.setVisibility(View.GONE); // Ẩn nút Save
+    }
+
 
     private void populateFields(Account account) {
         edtPhoneNumber.setText(account.getPhoneNumber());
@@ -124,7 +131,6 @@ public class EditAccountActivity extends AppCompatActivity{
         String username = edtUsername.getText().toString();
         String dateOfBirth = edtDateOfBirth.getText().toString();
         String address = edtAddress.getText().toString();
-        boolean isAdmin = switchAdmin.isChecked();
 
         String gender;
         int selectedGenderId = radioGroupGender.getCheckedRadioButtonId();
@@ -154,36 +160,19 @@ public class EditAccountActivity extends AppCompatActivity{
                 accountData.put("address", address);
                 accountData.put("gender", gender);
 
-                String targetCollection = isAdmin ? "admin" : "users";
-
-                if (originalAdminStatus != isAdmin) {
-                    db.collection(currentCollection).document(accountId)
-                            .delete()
-                            .addOnSuccessListener(aVoid -> {
-                                db.collection(targetCollection).document(accountId)
-                                        .set(accountData)
-                                        .addOnSuccessListener(aVoid1 -> {
-                                            Toast.makeText(this, "Account updated successfully", Toast.LENGTH_SHORT).show();
-                                            setResult(RESULT_OK);
-                                            finish();
-                                        })
-                                        .addOnFailureListener(e -> Toast.makeText(this, "Failed to update account", Toast.LENGTH_SHORT).show());
-                            })
-                            .addOnFailureListener(e -> Toast.makeText(this, "Failed to delete old account data", Toast.LENGTH_SHORT).show());
-                } else {
-                    db.collection(currentCollection).document(accountId)
-                            .set(accountData)
-                            .addOnSuccessListener(aVoid -> {
-                                Toast.makeText(this, "Account updated successfully", Toast.LENGTH_SHORT).show();
-                                setResult(RESULT_OK);
-                                finish();
-                            })
-                            .addOnFailureListener(e -> Toast.makeText(this, "Failed to update account", Toast.LENGTH_SHORT).show());
-                }
+                db.collection(currentCollection).document(accountId)
+                        .set(accountData)
+                        .addOnSuccessListener(aVoid -> {
+                            Toast.makeText(this, "Account updated successfully", Toast.LENGTH_SHORT).show();
+                            setResult(RESULT_OK);
+                            finish();
+                        })
+                        .addOnFailureListener(e -> Toast.makeText(this, "Failed to update account", Toast.LENGTH_SHORT).show());
             } else {
                 Toast.makeText(this, "Account data not found", Toast.LENGTH_SHORT).show();
             }
         }).addOnFailureListener(e -> Toast.makeText(this, "Failed to fetch account data", Toast.LENGTH_SHORT).show());
     }
+
 }
 

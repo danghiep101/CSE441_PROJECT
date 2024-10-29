@@ -20,7 +20,6 @@ import com.example.admincse441project.ui.auth.signin.SignInActivity;
 public class SignUpActivity extends AppCompatActivity {
     private ActivitySignUpBinding binding;
     private SignUpViewModel viewModel;
-    private String gender;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,16 +31,6 @@ public class SignUpActivity extends AppCompatActivity {
 
         onClickView();
         observeViewModel();
-
-        binding.radioGroupGender.setOnCheckedChangeListener((group, checkedId) -> {
-            if (checkedId == R.id.rbMale) {
-                gender = "Male";
-            } else if (checkedId == R.id.rbFemale) {
-                gender = "Female";
-            } else if (checkedId == R.id.rbOther) {
-                gender = "Other";
-            }
-        });
     }
 
     private void observeViewModel() {
@@ -51,8 +40,7 @@ public class SignUpActivity extends AppCompatActivity {
                 String adminName = binding.etFullname.getText().toString().trim();
                 String phoneNumber = binding.etPhoneNumber.getText().toString().trim();
                 String dateOfBirth = binding.etDateOfBirth.getText().toString().trim();
-                String address = binding.etAddress.getText().toString().trim();
-                viewModel.saveUserDetail(adminName, adminEmail, dateOfBirth, phoneNumber, address, gender);
+                viewModel.saveUserDetail(adminName, adminEmail, dateOfBirth, phoneNumber);
             } else {
                 Toast.makeText(this, "Cannot Sign Up", Toast.LENGTH_LONG).show();
             }
@@ -71,7 +59,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void onClickView() {
-        binding.btnBack.setOnClickListener(new View.OnClickListener() {
+        binding.txtSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SignUpActivity.this, SignInActivity.class);
@@ -90,28 +78,15 @@ public class SignUpActivity extends AppCompatActivity {
         String userName = binding.etFullname.getText().toString().trim();
         String dateOfBirth = binding.etDateOfBirth.getText().toString().trim();
         String phoneNumber = binding.etPhoneNumber.getText().toString().trim();
-        String address = binding.etAddress.getText().toString().trim();
 
-        String gender = "";
-        if (binding.rbMale.isChecked()) {
-            gender = "Male";
-        } else if (binding.rbFemale.isChecked()) {
-            gender = "Female";
-        } else if (binding.rbOther.isChecked()) {
-            gender = "Other";
-        }
-
-        if (viewModel.notEmpty(userEmail, userName, userPassword, dateOfBirth, phoneNumber, address, gender)) {
+        if (viewModel.notEmpty(userEmail, userName, userPassword, dateOfBirth, phoneNumber)) {
             viewModel.signUp(userEmail, userPassword);
         } else {
             for (EditText item : new EditText[]{
-                    binding.etEmail, binding.etFullname, binding.etPassword, binding.etDateOfBirth, binding.etPhoneNumber, binding.etAddress
+                    binding.etEmail, binding.etFullname, binding.etPassword, binding.etDateOfBirth, binding.etPhoneNumber
             }) {
                 if (item != null) {
                     item.setError(item.getHint() + " is required");
-                }
-                if (gender == null || gender.isEmpty()) {
-                    Toast.makeText(this, "Gender is required", Toast.LENGTH_SHORT).show();
                 }
             }
         }

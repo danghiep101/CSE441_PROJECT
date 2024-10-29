@@ -10,9 +10,6 @@
     tools:layout_editor_absoluteX="-32dp"
     tools:layout_editor_absoluteY="0dp">
 
-    <!-- ImageView cho ảnh đại diện -->
-
-    <!-- TextView cho lời chào "Hi!" -->
 
     <ImageView
         android:id="@+id/imageView4"

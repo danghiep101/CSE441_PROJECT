@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -66,10 +67,16 @@ public class AccountListFragment extends Fragment {
         });
 
         accountAdapter.setOnItemClickListener(account -> {
-            Intent intent = new Intent(getContext(), EditAccountActivity.class);
-            intent.putExtra("ACCOUNT_ID", account.getUid()); // Truyền ID thực sự từ Firestore
-            Log.d("AccountListFragment", "Sending ACCOUNT_ID: " + account.getUid()); // In log để kiểm tra ID
-            startActivityForResult(intent, EDIT_ACCOUNT_REQUEST_CODE); // Sử dụng startActivityForResult
+            if (!account.isAdmin()) {
+                // Nếu tài khoản là User, hiện Toast thông báo không có quyền chỉnh sửa
+                Toast.makeText(getContext(), "This account does not have permission to edit", Toast.LENGTH_SHORT).show();
+            } else {
+                // Nếu tài khoản là Admin, mở EditAccountActivity
+                Intent intent = new Intent(getContext(), EditAccountActivity.class);
+                intent.putExtra("ACCOUNT_ID", account.getUid()); // Truyền ID thực sự từ Firestore
+                Log.d("AccountListFragment", "Sending ACCOUNT_ID: " + account.getUid()); // In log để kiểm tra ID
+                startActivityForResult(intent, EDIT_ACCOUNT_REQUEST_CODE); // Sử dụng startActivityForResult
+            }
         });
 
         return view;

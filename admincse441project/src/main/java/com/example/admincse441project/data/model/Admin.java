@@ -7,16 +7,6 @@ public class Admin {
     private String phoneNumber;
     private String password;
     private String dateOfBirth;
-    private String gender;
-    private String address;
-
-    public String getGender() { return gender; }
-
-    public void setGender(String gender) { this.gender = gender; }
-
-    public String getAddress() { return address; }
-
-    public void setAddress(String address) { this.address = address; }
 
     public String getUid() {
         return uid;
@@ -69,14 +59,12 @@ public class Admin {
     public Admin() {
     }
 
-    public Admin(String uid, String email, String username, String phoneNumber, String password, String dateOfBirth, String address, String gender) {
+    public Admin(String uid, String email, String username, String phoneNumber, String password, String dateOfBirth) {
         this.uid = uid;
         this.email = email;
         this.username = username;
         this.phoneNumber = phoneNumber;
         this.password = password;
         this.dateOfBirth = dateOfBirth;
-        this.address = address;
-        this.gender = gender;
     }
 }
