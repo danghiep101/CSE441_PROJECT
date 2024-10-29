@@ -1,5 +1,6 @@
 package com.example.cse441_project.ui.bookticket.showscreen;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.cse441_project.R;
 import com.example.cse441_project.data.model.showtime.ShowTime;
 import com.example.cse441_project.databinding.ActivityChooseDateAndTimeBinding;
+import com.example.cse441_project.ui.bookticket.ChooseSeatActivity;
 import com.example.cse441_project.utils.FirebaseUtils;
 
 import java.text.ParseException;
@@ -56,6 +58,13 @@ public class ChooseDateAndTimeActivity extends AppCompatActivity {
 
         setupRecyclerViews();
         observeViewModel();
+        onClickView();
+    }
+
+    private void onClickView() {
+        binding.imgPoster.setOnClickListener(v -> {
+            finish();
+        });
     }
 
     private void setupRecyclerViews() {
@@ -117,7 +126,18 @@ public class ChooseDateAndTimeActivity extends AppCompatActivity {
 
 
     private void onShowTimeClick(ShowTime showTime) {
-        Toast.makeText(this, "Thời gian chiếu đã chọn: " + showTime.getStartTime(), Toast.LENGTH_SHORT).show();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirm");
+        builder.setMessage("Are you sure want to choose this showtime? " + showTime.getStartTime() +
+                " - " + showTime.getEndTime() + " \nday " + showTime.getDate() + " \n " + showTime.getNameCinema());
+        builder.setPositiveButton("Ok", (dialog, which) -> {
+            Intent intent = new Intent(this, ChooseSeatActivity.class);
+            startActivity(intent);
+            setResult(RESULT_OK, intent);
+            finish();
+        });
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
+        builder.show();
 
     }
 }
