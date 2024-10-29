@@ -28,11 +28,11 @@ public class SignUpViewModel extends ViewModel {
                 });
     }
 
-    void saveUserDetail(String adminName, String adminEmail, String dateOfBirth, String phoneNumber) {
+    void saveUserDetail(String adminName, String adminEmail, String dateOfBirth, String phoneNumber, String address, String gender) {
         String userId = FirebaseUtils.currentUserId();
 
         if (userId != null) {
-            Admin admin = new Admin(userId, adminEmail, adminName, phoneNumber, "null", dateOfBirth);
+            Admin admin = new Admin(userId, adminEmail, adminName, phoneNumber, "null", dateOfBirth, address, gender);
             FirebaseUtils.currentUserDetail().set(admin).addOnCompleteListener(task -> {
                 _saveAdminDetailStatus.postValue(task.isSuccessful());
             });
@@ -41,7 +41,7 @@ public class SignUpViewModel extends ViewModel {
         }
     }
 
-    Boolean notEmpty(String adminEmail, String adminName, String userPassword, String dateOfBirth, String phoneNumber) {
-        return !adminEmail.isEmpty() && !adminName.isEmpty() && !userPassword.isEmpty() && !dateOfBirth.isEmpty() && !phoneNumber.isEmpty();
+    Boolean notEmpty(String adminEmail, String adminName, String userPassword, String dateOfBirth, String phoneNumber, String address, String gender) {
+        return !adminEmail.isEmpty() && !adminName.isEmpty() && !userPassword.isEmpty() && !dateOfBirth.isEmpty() && !phoneNumber.isEmpty() && !address.isEmpty() && !gender.isEmpty();
     }
 }

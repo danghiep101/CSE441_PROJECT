@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -27,11 +28,12 @@ import java.util.Map;
 
 public class EditAccountActivity extends AppCompatActivity{
 
-    private EditText edtPhoneNumber, edtEmail, edtUsername, edtDateOfBirth;
+    private EditText edtPhoneNumber, edtEmail, edtUsername, edtDateOfBirth, edtAddress;
     private Switch switchAdmin;
     private Button btnSave;
     private String accountId;
     private String currentCollection;
+    private RadioGroup radioGroupGender;
     private boolean originalAdminStatus; // Trạng thái ban đầu của switch
 
     @Override
@@ -43,6 +45,8 @@ public class EditAccountActivity extends AppCompatActivity{
         edtEmail = findViewById(R.id.edtEmail);
         edtUsername = findViewById(R.id.edtUsername);
         edtDateOfBirth = findViewById(R.id.edtDateOfBirth);
+        edtAddress = findViewById(R.id.edtAddress);
+        radioGroupGender = findViewById(R.id.radioGroupGender);
         switchAdmin = findViewById(R.id.switchAdmin);
         btnSave = findViewById(R.id.btnSave);
 
@@ -103,6 +107,15 @@ public class EditAccountActivity extends AppCompatActivity{
         edtEmail.setText(account.getEmail());
         edtUsername.setText(account.getUsername());
         edtDateOfBirth.setText(account.getDateOfBirth());
+        edtAddress.setText(account.getAddress());
+
+        if ("Male".equals(account.getGender())) {
+            radioGroupGender.check(R.id.rbMale);
+        } else if ("Female".equals(account.getGender())) {
+            radioGroupGender.check(R.id.rbFemale);
+        } else {
+            radioGroupGender.check(R.id.rbOther);
+        }
     }
 
     private void updateAccountInfo() {
@@ -110,7 +123,18 @@ public class EditAccountActivity extends AppCompatActivity{
         String email = edtEmail.getText().toString();
         String username = edtUsername.getText().toString();
         String dateOfBirth = edtDateOfBirth.getText().toString();
+        String address = edtAddress.getText().toString();
         boolean isAdmin = switchAdmin.isChecked();
+
+        String gender;
+        int selectedGenderId = radioGroupGender.getCheckedRadioButtonId();
+        if (selectedGenderId == R.id.rbMale) {
+            gender = "Male";
+        } else if (selectedGenderId == R.id.rbFemale) {
+            gender = "Female";
+        } else {
+            gender = "Other";
+        }
 
         if (TextUtils.isEmpty(phoneNumber) || TextUtils.isEmpty(email) || TextUtils.isEmpty(username) || TextUtils.isEmpty(dateOfBirth)) {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
@@ -127,6 +151,8 @@ public class EditAccountActivity extends AppCompatActivity{
                 accountData.put("email", email);
                 accountData.put("username", username);
                 accountData.put("dateOfBirth", dateOfBirth);
+                accountData.put("address", address);
+                accountData.put("gender", gender);
 
                 String targetCollection = isAdmin ? "admin" : "users";
 

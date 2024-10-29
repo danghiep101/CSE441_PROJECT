@@ -68,7 +68,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Phone number"
+                android:text="Username"
                 android:textColor="#FFFFFF"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -78,14 +78,14 @@
                 android:layout_height="10dp" />
 
             <EditText
-                android:id="@+id/edtPhoneNumber"
+                android:id="@+id/edtUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/input_custom"
                 android:ems="10"
                 android:fontFamily="@font/inter_medium"
-                android:hint="Enter phone number"
-                android:inputType="phone"
+                android:hint="Enter username"
+                android:inputType="textPersonName"
                 android:paddingLeft="20dp"
                 android:paddingTop="12dp"
                 android:paddingRight="20dp"
@@ -148,7 +148,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Username"
+                android:text="Phone number"
                 android:textColor="#FFFFFF"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -158,13 +158,53 @@
                 android:layout_height="10dp" />
 
             <EditText
-                android:id="@+id/edtUsername"
+                android:id="@+id/edtPhoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/input_custom"
                 android:ems="10"
                 android:fontFamily="@font/inter_medium"
-                android:hint="Enter username"
+                android:hint="Enter phone number"
+                android:inputType="phone"
+                android:paddingLeft="20dp"
+                android:paddingTop="12dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="12dp"
+                android:textColor="#E7E7E7"
+                android:textColorHint="@color/placeholder_controller"
+                android:textSize="11sp" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Address"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <EditText
+                android:id="@+id/edtAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/input_custom"
+                android:ems="10"
+                android:fontFamily="@font/inter_medium"
+                android:hint="Enter address"
                 android:inputType="textPersonName"
                 android:paddingLeft="20dp"
                 android:paddingTop="12dp"
@@ -206,7 +246,7 @@
                 android:ems="10"
                 android:fontFamily="@font/inter_medium"
                 android:hint="Enter date of birth"
-                android:inputType=""
+                android:inputType="text"
                 android:paddingLeft="20dp"
                 android:paddingTop="12dp"
                 android:paddingRight="20dp"
@@ -215,6 +255,69 @@
                 android:textColorHint="@color/placeholder_controller"
                 android:textSize="11sp" />
 
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Gender"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/radioGroupGender"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.59"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvGender">
+
+                <RadioButton
+                    android:id="@+id/rbMale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="#fff"
+                    android:text="Male"
+                    android:textColor="#fff"
+                    android:textSize="12sp"
+                    android:textStyle="bold"/>
+
+                <RadioButton
+                    android:id="@+id/rbFemale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="#fff"
+                    android:text="Female"
+                    android:textColor="#fff"
+                    android:textSize="12sp"
+                    android:textStyle="bold"/>
+
+                <RadioButton
+                    android:id="@+id/rbOther"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="#fff"
+                    android:text="Other"
+                    android:textColor="#fff"
+                    android:textSize="12sp"
+                    android:textStyle="bold"/>
+            </RadioGroup>
         </LinearLayout>
 
         <Space
@@ -245,7 +348,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="50dp"
             android:layout_weight="1" />
 
         <LinearLayout

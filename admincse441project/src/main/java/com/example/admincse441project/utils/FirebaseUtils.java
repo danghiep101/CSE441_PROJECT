@@ -54,7 +54,7 @@ public class FirebaseUtils {
     }
 
     public static Task<Void> updateAccount(Account account) {
-        return getAccountsCollection().document(account.getId()).set(account);
+        return getAccountsCollection().document(account.getUid()).set(account);
     }
 
     public static Task<Void> deleteAccount(String accountId) {

@@ -67,8 +67,8 @@ public class AccountListFragment extends Fragment {
 
         accountAdapter.setOnItemClickListener(account -> {
             Intent intent = new Intent(getContext(), EditAccountActivity.class);
-            intent.putExtra("ACCOUNT_ID", account.getId()); // Truyền ID thực sự từ Firestore
-            Log.d("AccountListFragment", "Sending ACCOUNT_ID: " + account.getId()); // In log để kiểm tra ID
+            intent.putExtra("ACCOUNT_ID", account.getUid()); // Truyền ID thực sự từ Firestore
+            Log.d("AccountListFragment", "Sending ACCOUNT_ID: " + account.getUid()); // In log để kiểm tra ID
             startActivityForResult(intent, EDIT_ACCOUNT_REQUEST_CODE); // Sử dụng startActivityForResult
         });
 
@@ -85,7 +85,7 @@ public class AccountListFragment extends Fragment {
                 for (DocumentSnapshot document : task.getResult()) {
                     Account account = document.toObject(Account.class);
                     if (account != null) {
-                        account.setId(document.getId()); // Gán ID Firestore vào trường id của Account
+                        account.setUid(document.getId()); // Gán ID Firestore vào trường id của Account
                         account.setAdmin(true); // Thiết lập role là Admin
                         accountList.add(account);
                     }
@@ -100,7 +100,7 @@ public class AccountListFragment extends Fragment {
                 for (DocumentSnapshot document : userTask.getResult()) {
                     Account account = document.toObject(Account.class);
                     if (account != null) {
-                        account.setId(document.getId()); // Sử dụng ID của Firestore làm ID của account
+                        account.setUid(document.getId()); // Sử dụng ID của Firestore làm ID của account
                         account.setAdmin(false); // Thiết lập role là User
                         accountList.add(account);
                     }
