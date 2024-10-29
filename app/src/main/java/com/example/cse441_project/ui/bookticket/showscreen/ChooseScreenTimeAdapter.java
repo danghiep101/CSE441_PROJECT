@@ -1,55 +1,66 @@
 package com.example.cse441_project.ui.bookticket.showscreen;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.cse441_project.data.showscreen.ShowScreen;
+import com.example.cse441_project.data.model.showtime.ShowTime;
 import com.example.cse441_project.databinding.ItemTimeAndScreenBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChooseScreenTimeAdapter extends RecyclerView.Adapter<ChooseScreenTimeAdapter.ViewHolder> {
-    private List<ShowScreen> showScreenList = new ArrayList<>();
+public class ChooseScreenTimeAdapter extends RecyclerView.Adapter<ChooseScreenTimeAdapter.ShowTimeViewHolder> {
+    private List<ShowTime> showTimeList = new ArrayList<>();
+    private final OnShowTimeClickListener onShowTimeClickListener;
 
-    public void setShowScreenList(List<ShowScreen> screens) {
-        this.showScreenList = screens;
-        notifyDataSetChanged();
+    public interface OnShowTimeClickListener {
+        void onShowTimeClick(ShowTime showTime);
+    }
+
+    public ChooseScreenTimeAdapter(OnShowTimeClickListener onShowTimeClickListener) {
+        this.onShowTimeClickListener = onShowTimeClickListener;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemTimeAndScreenBinding binding = ItemTimeAndScreenBinding.inflate(
-                LayoutInflater.from(parent.getContext()), parent, false);
-        return new ViewHolder(binding);
+    public ShowTimeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        ItemTimeAndScreenBinding binding = ItemTimeAndScreenBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new ShowTimeViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ShowScreen screen = showScreenList.get(position);
-        holder.bind(screen);
+    public void onBindViewHolder(@NonNull ShowTimeViewHolder holder, int position) {
+        ShowTime showTime = showTimeList.get(position);
+        holder.bind(showTime);
     }
 
     @Override
     public int getItemCount() {
-        return showScreenList.size();
+        return showTimeList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public void submitList(List<ShowTime> newList) {
+        this.showTimeList = newList;
+        Log.d("ChooseScreenTimeAdapter", "Dữ liệu trong submitList: " + newList);
+        notifyDataSetChanged();
+    }
+
+    class ShowTimeViewHolder extends RecyclerView.ViewHolder {
         private final ItemTimeAndScreenBinding binding;
 
-        public ViewHolder(ItemTimeAndScreenBinding binding) {
+        public ShowTimeViewHolder(ItemTimeAndScreenBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
 
-        public void bind(ShowScreen screen) {
-            binding.txtPlayTime.setText(screen.getName());
-            binding.txtScreen.setText(screen.getStartTime().toString() + " - " + screen.getEndTime().toString());
+        public void bind(ShowTime showTime) {;
+            binding.txtPlayTime.setText(showTime.getStartTime() + " - " + showTime.getEndTime());
+            binding.txtScreen.setText(showTime.getNameCinema());
+            binding.getRoot().setOnClickListener(v -> onShowTimeClickListener.onShowTimeClick(showTime));
         }
     }
 }

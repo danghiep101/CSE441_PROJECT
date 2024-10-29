@@ -117,7 +117,7 @@
             app:cardCornerRadius="999dp">
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/txt_age"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/inter_medium"
@@ -132,6 +132,7 @@
             android:layout_height="wrap_content" />
 
         <TextView
+            android:id="@+id/txt_name_movie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
