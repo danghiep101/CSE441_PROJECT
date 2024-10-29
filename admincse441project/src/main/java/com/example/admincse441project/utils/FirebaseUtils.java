@@ -48,6 +48,10 @@ public class FirebaseUtils {
         return getShowtimesCollection().document(showId).delete();
     }
 
+    public static Task<DocumentSnapshot> getShowtimeById(String showtimeId) {
+        return getShowtimesCollection().document(showtimeId).get();
+    }
+
     public static CollectionReference getDiscountsCollection() {
         return FirebaseFirestore.getInstance().collection("discounts");
     }

@@ -37,13 +37,6 @@ tools:context=".ui.ticketmanagement.list.TicketListFragment">
         android:textSize="18dp"
         android:textStyle="bold" />
 
-    <ImageButton
-        android:id="@+id/btn_switch_add_ticket"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        android:background="@color/dark_theme"
-        android:src="@drawable/ic_add" />
 </LinearLayout>
 
     <EditText
@@ -86,8 +79,7 @@ tools:context=".ui.ticketmanagement.list.TicketListFragment">
     app:layout_constraintTop_toBottomOf="@+id/edt_search_account2">
 
     <TextView
-        android:id="@+id/textView8"
-        android:layout_width="70dp"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:fontFamily="@font/inter_semibold"
@@ -95,26 +87,13 @@ tools:context=".ui.ticketmanagement.list.TicketListFragment">
         android:paddingTop="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
-        android:text="Screen"
-        android:textColor="#99703E"
-        android:textSize="10dp" />
-
-    <TextView
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:fontFamily="@font/inter_semibold"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        android:text="Seat"
+        android:text="Ticket id"
         android:textColor="#99703E"
         android:textSize="10dp" />
 
     <TextView
         android:id="@+id/textView14"
-        android:layout_width="160dp"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:fontFamily="@font/inter_semibold"
@@ -122,7 +101,7 @@ tools:context=".ui.ticketmanagement.list.TicketListFragment">
         android:paddingTop="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
-        android:text="Movie"
+        android:text="Showtime id"
         android:textColor="#99703E"
         android:textSize="10dp" />
 
@@ -149,6 +128,6 @@ tools:context=".ui.ticketmanagement.list.TicketListFragment">
         app:layout_constraintEnd_toEndOf="@+id/linearLayout7"
         app:layout_constraintStart_toStartOf="@+id/linearLayout7"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout7"
-        tools:listitem="@layout/item_ticket_row" />
+        tools:listitem="@layout/item_ticket_row"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

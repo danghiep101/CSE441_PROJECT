@@ -49,10 +49,9 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
         }
 
         public void bind(Ticket ticket) {
-            binding.txtTicketScreen.setText(String.valueOf(ticket.getScreen()));
-            binding.txtTicketSeat.setText(String.valueOf(ticket.getSeat()));
-            binding.txtTicketMovie.setText(String.valueOf(ticket.getMovie_name()));
-            binding.txtTicketStatus.setText(String.valueOf(ticket.getStatus()));
+            binding.txtTicketId.setText(String.valueOf(ticket.getId()));
+            binding.txtTicketSeat.setText(String.valueOf(ticket.getShowtimeId()));
+            binding.txtShowtimeId.setText(String.valueOf(ticket.getStatus()));
         }
     }
 

@@ -100,6 +100,10 @@ public class AddShowtimeActivity extends AppCompatActivity {
         });
     }
 
+    private void addTicket() {
+
+    }
+
     private void addShowtime() {
         // Lấy dữ liệu từ các EditText và Spinner
         String name = (String) spinnerMovie.getSelectedItem(); // Lấy tên phim từ spinner
