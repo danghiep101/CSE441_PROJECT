@@ -129,7 +129,6 @@ public class ChooseDateAndTimeActivity extends AppCompatActivity {
         builder.setPositiveButton("Ok", (dialog, which) -> {
             Intent intent = new Intent(this, ChooseSeatActivity.class);
             //todo: truyền dữ liệu qua intent qua bước này, để phần choose seat lấy được dữ liệu
-            intent.putExtra("MOVIE_NAME", binding.txtNameMovie.getText().toString());
             startActivity(intent);
             setResult(RESULT_OK, intent);
 
