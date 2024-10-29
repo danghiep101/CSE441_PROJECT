@@ -68,12 +68,9 @@ public class ChooseDateAndTimeActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerViews() {
-
-
         chooseDateAdapter = new ChooseDateAdapter(this::onDateClick);
         binding.rcvDate.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         binding.rcvDate.setAdapter(chooseDateAdapter);
-
 
         chooseScreenTimeAdapter = new ChooseScreenTimeAdapter(this::onShowTimeClick);
         binding.rcvTimeAndScreen.setLayoutManager(new GridLayoutManager(this, 2));
@@ -92,7 +89,6 @@ public class ChooseDateAndTimeActivity extends AppCompatActivity {
     private void onDateClick(String date) {
 
         Toast.makeText(this, "Ngày đã chọn: " + date, Toast.LENGTH_SHORT).show();
-
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date selectedDate;
         try {
@@ -132,8 +128,10 @@ public class ChooseDateAndTimeActivity extends AppCompatActivity {
                 " - " + showTime.getEndTime() + " \nday " + showTime.getDate() + " \n " + showTime.getNameCinema());
         builder.setPositiveButton("Ok", (dialog, which) -> {
             Intent intent = new Intent(this, ChooseSeatActivity.class);
+            //todo: truyền dữ liệu qua intent qua bước này, để phần choose seat lấy được dữ liệu
             startActivity(intent);
             setResult(RESULT_OK, intent);
+
             finish();
         });
         builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
