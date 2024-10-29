@@ -32,7 +32,7 @@ import java.util.Locale;
 
 public class EditShowtimeActivity extends AppCompatActivity {
     private Spinner nameSpinner;
-    private EditText startTimeEditText, endTimeEditText, availableSeatEditText, unavailableSeatEditText, dateEditText;
+    private EditText startTimeEditText, endTimeEditText, availableSeatEditText, unavailableSeatEditText, dateEditText,nameCinema;
     private Button saveButton;
     private ImageView deleteButton;
     private EditShowTimeViewModel viewModel;
@@ -72,6 +72,7 @@ public class EditShowtimeActivity extends AppCompatActivity {
         availableSeatEditText = findViewById(R.id.editTextText4);
         unavailableSeatEditText = findViewById(R.id.editTextText8);
         saveButton = findViewById(R.id.button);
+        nameCinema=findViewById(R.id.editTextText10);
         deleteButton = findViewById(R.id.imageButton3);
     }
 
@@ -89,6 +90,7 @@ public class EditShowtimeActivity extends AppCompatActivity {
             startTimeEditText.setText(showTime.getStartTime());
             endTimeEditText.setText(showTime.getEndTime());
             availableSeatEditText.setText(showTime.getAvailableSeat());
+            nameCinema.setText(showTime.getNameCinema());
             unavailableSeatEditText.setText(showTime.getUnavailableSeat());
             dateEditText.setText(showTime.getDate());
         });
@@ -105,9 +107,10 @@ public class EditShowtimeActivity extends AppCompatActivity {
         String endTimeStr = endTimeEditText.getText().toString().trim();
         String availableSeat = availableSeatEditText.getText().toString().trim();
         String unavailableSeat = unavailableSeatEditText.getText().toString().trim();
+        String Cinema=nameCinema.getText().toString().trim();
         String date = dateEditText.getText().toString().trim();
 
-        if (selectedName.isEmpty() || startTimeStr.isEmpty() || endTimeStr.isEmpty() || availableSeat.isEmpty() || unavailableSeat.isEmpty() || date.isEmpty()) {
+        if (selectedName.isEmpty() || startTimeStr.isEmpty() || endTimeStr.isEmpty() || availableSeat.isEmpty() || unavailableSeat.isEmpty() || date.isEmpty() || Cinema.isEmpty()) {
             Toast.makeText(this, "Vui lòng điền đầy đủ thông tin.", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -118,7 +121,7 @@ public class EditShowtimeActivity extends AppCompatActivity {
         }
 
         String idMovie = movieIdMap.get(selectedName); // Lấy idMovie tương ứng
-        ShowTime showTime = new ShowTime(id, selectedName, availableSeat, unavailableSeat, startTimeStr, endTimeStr, date, idMovie);
+        ShowTime showTime = new ShowTime(id, selectedName, availableSeat, unavailableSeat, startTimeStr, endTimeStr, date, idMovie,Cinema);
 
         viewModel.updateShowTime(showTime, task -> {
             if (task.isSuccessful()) {

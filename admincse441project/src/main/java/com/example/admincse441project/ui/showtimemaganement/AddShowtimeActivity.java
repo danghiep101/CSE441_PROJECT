@@ -32,7 +32,7 @@ import java.util.Locale;
 
 public class AddShowtimeActivity extends AppCompatActivity {
     private Spinner spinnerMovie;
-    private EditText editTextAvailableSeat, editTextUnavailableSeat, editTextStartTime, editTextEndTime, editTextDate;
+    private EditText editTextAvailableSeat, editTextUnavailableSeat, editTextStartTime, editTextEndTime, editTextDate,editNameCinema;
     private Button button;
     private AddShowTimeVIewModel viewModel;
     private NowPlayingMovieViewModel movieViewModel;
@@ -52,6 +52,7 @@ public class AddShowtimeActivity extends AppCompatActivity {
         editTextStartTime = findViewById(R.id.editTextText);
         editTextEndTime = findViewById(R.id.editTextText2);
         editTextDate = findViewById(R.id.editTextText12);
+        editNameCinema=findViewById(R.id.editTextText9);
         button = findViewById(R.id.buttonAdd);
 
         // Khởi tạo HashMap
@@ -106,6 +107,7 @@ public class AddShowtimeActivity extends AppCompatActivity {
         String unavailableSeat = editTextUnavailableSeat.getText().toString().trim();
         String startTimeStr = editTextStartTime.getText().toString().trim();
         String endTimeStr = editTextEndTime.getText().toString().trim();
+        String nameCinema=editNameCinema.getText().toString().trim();
         String dateStr = editTextDate.getText().toString().trim();
 
         // Kiểm tra xem tất cả các trường đã được điền hay chưa
@@ -115,7 +117,7 @@ public class AddShowtimeActivity extends AppCompatActivity {
             String idMovie = movieIdMap.get(name); // Lấy idMovie tương ứng
 
             // Tạo đối tượng ShowTime
-            ShowTime showTime = new ShowTime(null, name, availableSeat, unavailableSeat, startTimeStr, endTimeStr, dateStr, idMovie);
+            ShowTime showTime = new ShowTime(null, name, availableSeat, unavailableSeat, startTimeStr, endTimeStr, dateStr, idMovie,nameCinema);
 
             // Gọi ViewModel để thêm showtime
             viewModel.addShowTime(showTime).addOnSuccessListener(documentReference -> {

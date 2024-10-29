@@ -59,10 +59,8 @@
     <LinearLayout
         android:id="@+id/linearLayout7"
         android:layout_width="411dp"
-        android:layout_height="69dp"
-        android:layout_marginStart="20dp"
+        android:layout_height="50dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
         android:background="@drawable/top_left_right_radius"
         android:backgroundTint="#33987851"
         android:orientation="horizontal"
@@ -88,7 +86,7 @@
             android:layout_weight="5"
             android:fontFamily="@font/inter_semibold"
             android:padding="10dp"
-            android:text="Name"
+            android:text="Name Movie"
             android:textColor="#99703E"
             android:textSize="10sp" />
 
@@ -96,21 +94,11 @@
             android:id="@+id/textView15"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="3
+"
             android:fontFamily="@font/inter_semibold"
             android:padding="10dp"
-            android:text="Available seat"
-            android:textColor="#99703E"
-            android:textSize="10sp" />
-
-        <TextView
-            android:id="@+id/textView17"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:fontFamily="@font/inter_semibold"
-            android:padding="10dp"
-            android:text="Unavailable seat"
+            android:text="Name cinema"
             android:textColor="#99703E"
             android:textSize="10sp" />
 
