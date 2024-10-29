@@ -34,7 +34,6 @@ public class FirebaseUtils {
             throw new IllegalStateException("Admin is not authenticated. Cannot access Firestore.");
         }
     }
-
     public static CollectionReference getShowtimesCollection() {
         return FirebaseFirestore.getInstance().collection("showtimes");
     }
@@ -49,10 +48,6 @@ public class FirebaseUtils {
 
     public static Task<Void> deleteShowTime(String showId) {
         return getShowtimesCollection().document(showId).delete();
-    }
-
-    public static Task<DocumentSnapshot> getShowtimeById(String showtimeId) {
-        return getShowtimesCollection().document(showtimeId).get();
     }
 
 
@@ -71,7 +66,6 @@ public class FirebaseUtils {
     public static Task<Void> deleteDiscount(String discountId) {
         return getDiscountsCollection().document(discountId).delete();
     }
-
     public static CollectionReference getTicketsCollection() {
         return FirebaseFirestore.getInstance().collection("tickets");
     }

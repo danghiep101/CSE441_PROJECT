@@ -120,4 +120,3 @@ public class AccountListFragment extends Fragment {
         }
     }
 }
-
