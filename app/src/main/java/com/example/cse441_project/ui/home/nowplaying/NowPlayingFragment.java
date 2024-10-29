@@ -73,6 +73,7 @@ public class NowPlayingFragment extends Fragment implements MovieRecyclerViewAda
         Log.d("NowPlayingFragment", "Movie ID: " + movie.getId());
         Intent intent = new Intent(requireContext(), MovieCinemaDetailActivity.class);
         intent.putExtra("MOVIE_ID", movie.getId());
+        intent.putExtra("SOURCE", "NowPlayingMovieFragment");
         startActivity(intent);
     }
 }

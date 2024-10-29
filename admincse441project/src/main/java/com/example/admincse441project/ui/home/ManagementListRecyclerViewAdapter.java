@@ -15,7 +15,9 @@ import com.example.admincse441project.R;
 import com.example.admincse441project.data.model.Management;
 import com.example.admincse441project.ui.accountmanagement.showaccount.AccountListFragment;
 import com.example.admincse441project.ui.discountmanagement.showdiscount.DiscountsListFragment;
-import com.example.admincse441project.ui.ticketmanagement.TicketListFragment;
+import com.example.admincse441project.ui.showtimemaganement.ShowTimeListFragment;
+import com.example.admincse441project.ui.ticketmanagement.list.TicketListFragment;
+
 
 import java.util.List;
 
@@ -74,6 +76,8 @@ public class ManagementListRecyclerViewAdapter extends RecyclerView.Adapter<Mana
                 return new DiscountsListFragment();
             case 3:
                 return new TicketListFragment();
+            case 4:
+                return new ShowTimeListFragment();
             default:
                 return null;
         }
