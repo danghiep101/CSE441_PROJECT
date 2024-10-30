@@ -33,6 +33,8 @@ public class ChooseSeatActivity extends Activity {
     private TextView txtPrice;
     private TextView txtNumberSeats;
     private Button btnContinue;
+    private TextView txtNameMovie;
+    private TextView txtTime;
 
     SeatAdapter adapter;
     private List<String> unavailableSeatList = new ArrayList<>();
@@ -47,6 +49,8 @@ public class ChooseSeatActivity extends Activity {
         txtPrice = findViewById(R.id.txt_choose_seat_price);
         txtNumberSeats = findViewById(R.id.txt_choose_seat_number);
         btnContinue = findViewById(R.id.btn_choose_seat_continue);
+        txtNameMovie = findViewById(R.id.txt_choose_seat_movie_name);
+        txtTime = findViewById(R.id.txt_choose_seat_time);
 
         // Lấy dữ liệu bên Activity khác
         showtimeId = getIntent().getStringExtra("SHOWTIME_ID");
@@ -96,6 +100,8 @@ public class ChooseSeatActivity extends Activity {
         });
 
         btnContinue.setOnClickListener(v -> continueProcess());
+        txtNameMovie.setText(getIntent().getStringExtra("SHOWTIME_MOVIE"));
+        txtTime.setText(getIntent().getStringExtra("SHOWTIME_START") + " - " + getIntent().getStringExtra("SHOWTIME_END"));
     }
 
     private void continueProcess() {

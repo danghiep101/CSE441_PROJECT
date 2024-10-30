@@ -125,6 +125,9 @@ public class ChooseDateAndTimeActivity extends AppCompatActivity {
             Intent intent = new Intent(this, ChooseSeatActivity.class);
             intent.putExtra("SHOWTIME_ID", showTime.getId());
             intent.putExtra("SHOWTIME_AVAILABLE_SEAT", showTime.getAvailableSeat());
+            intent.putExtra("SHOWTIME_MOVIE", showTime.getName());
+            intent.putExtra("SHOWTIME_START", showTime.getStartTime());
+            intent.putExtra("SHOWTIME_END", showTime.getEndTime());
 
             startActivity(intent);
             setResult(RESULT_OK, intent);
