@@ -60,6 +60,8 @@
             android:name=".ui.MainActivity"
             android:exported="true" />
         <activity android:name=".ui.profileoverlay.ProfileMenuActivity" />
+        <activity android:name=".ui.profileoverlay.DeleteAccountActivity" />
+        <activity android:name=".ui.profileoverlay.AcceptDeleteAccountActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

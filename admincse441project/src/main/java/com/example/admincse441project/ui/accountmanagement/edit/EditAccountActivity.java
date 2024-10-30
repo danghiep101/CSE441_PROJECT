@@ -65,7 +65,6 @@ public class EditAccountActivity extends AppCompatActivity{
     private void displayAccountInfo(String accountId) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        // Kiểm tra trong collection "admin"
         db.collection("admin").document(accountId).get()
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
@@ -75,7 +74,6 @@ public class EditAccountActivity extends AppCompatActivity{
                             currentCollection = "admin";
                         }
                     } else {
-                        // Nếu không tìm thấy trong "admin", kiểm tra trong "users"
                         db.collection("users").document(accountId).get()
                                 .addOnSuccessListener(userDoc -> {
                                     if (userDoc.exists()) {
@@ -83,7 +81,7 @@ public class EditAccountActivity extends AppCompatActivity{
                                         if (account != null) {
                                             populateFields(account);
                                             currentCollection = "users";
-                                            disableEditing(); // Vô hiệu hóa chỉnh sửa cho User
+                                            disableEditing();
                                         }
                                     } else {
                                         Toast.makeText(this, "Account not found", Toast.LENGTH_SHORT).show();
@@ -97,7 +95,6 @@ public class EditAccountActivity extends AppCompatActivity{
                 });
     }
 
-    // Hàm để vô hiệu hóa chỉnh sửa nếu là User
     private void disableEditing() {
         edtPhoneNumber.setEnabled(false);
         edtEmail.setEnabled(false);
@@ -105,7 +102,7 @@ public class EditAccountActivity extends AppCompatActivity{
         edtDateOfBirth.setEnabled(false);
         edtAddress.setEnabled(false);
         radioGroupGender.setEnabled(false);
-        btnSave.setVisibility(View.GONE); // Ẩn nút Save
+        btnSave.setVisibility(View.GONE);
     }
 
 

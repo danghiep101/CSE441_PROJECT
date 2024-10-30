@@ -68,14 +68,12 @@ public class AccountListFragment extends Fragment {
 
         accountAdapter.setOnItemClickListener(account -> {
             if (!account.isAdmin()) {
-                // Nếu tài khoản là User, hiện Toast thông báo không có quyền chỉnh sửa
                 Toast.makeText(getContext(), "This account does not have permission to edit", Toast.LENGTH_SHORT).show();
             } else {
-                // Nếu tài khoản là Admin, mở EditAccountActivity
                 Intent intent = new Intent(getContext(), EditAccountActivity.class);
-                intent.putExtra("ACCOUNT_ID", account.getUid()); // Truyền ID thực sự từ Firestore
-                Log.d("AccountListFragment", "Sending ACCOUNT_ID: " + account.getUid()); // In log để kiểm tra ID
-                startActivityForResult(intent, EDIT_ACCOUNT_REQUEST_CODE); // Sử dụng startActivityForResult
+                intent.putExtra("ACCOUNT_ID", account.getUid());
+                Log.d("AccountListFragment", "Sending ACCOUNT_ID: " + account.getUid());
+                startActivityForResult(intent, EDIT_ACCOUNT_REQUEST_CODE);
             }
         });
 
@@ -86,14 +84,13 @@ public class AccountListFragment extends Fragment {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         accountList.clear();
 
-        // Truy vấn collection "admin"
         db.collection("admin").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 for (DocumentSnapshot document : task.getResult()) {
                     Account account = document.toObject(Account.class);
                     if (account != null) {
-                        account.setUid(document.getId()); // Gán ID Firestore vào trường id của Account
-                        account.setAdmin(true); // Thiết lập role là Admin
+                        account.setUid(document.getId());
+                        account.setAdmin(true);
                         accountList.add(account);
                     }
                 }
@@ -101,18 +98,17 @@ public class AccountListFragment extends Fragment {
             }
         });
 
-        // Truy vấn tiếp collection "users" sau khi đã lấy xong "admin"
         db.collection("users").get().addOnCompleteListener(userTask -> {
             if (userTask.isSuccessful() && userTask.getResult() != null) {
                 for (DocumentSnapshot document : userTask.getResult()) {
                     Account account = document.toObject(Account.class);
                     if (account != null) {
-                        account.setUid(document.getId()); // Sử dụng ID của Firestore làm ID của account
-                        account.setAdmin(false); // Thiết lập role là User
+                        account.setUid(document.getId());
+                        account.setAdmin(false);
                         accountList.add(account);
                     }
                 }
-                accountAdapter.notifyDataSetChanged(); // Cập nhật RecyclerView sau khi có đủ dữ liệu
+                accountAdapter.notifyDataSetChanged();
             }
         });
     }
@@ -121,9 +117,8 @@ public class AccountListFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // Kiểm tra nếu là yêu cầu từ EditAccountActivity và có kết quả thành công
         if (requestCode == EDIT_ACCOUNT_REQUEST_CODE && resultCode == AppCompatActivity.RESULT_OK) {
-            loadAccounts(""); // Tải lại danh sách tài khoản sau khi cập nhật
+            loadAccounts("");
         }
     }
 }
