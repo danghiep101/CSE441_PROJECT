@@ -52,6 +52,14 @@ public class AcceptDeleteAccountActivity extends AppCompatActivity {
     }
 
     private void deleteAccount() {
+        String password = edtPassword.getText().toString().trim();
+
+        if (TextUtils.isEmpty(password)) {
+            edtPassword.setError("Password is required");
+            Toast.makeText(this, "Please enter your password", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         FirebaseUser user = mAuth.getCurrentUser();
         if (user == null) {
             Log.e("DeleteAccount", "No user logged in");
