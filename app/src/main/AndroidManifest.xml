@@ -54,7 +54,7 @@
             android:name=".ui.auth.signup.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.profileoverlay.ChangePassword"
+            android:name=".ui.profileoverlay.ChangePasswordActivity"
             android:exported="false" />
         <activity
             android:name=".ui.MainActivity"

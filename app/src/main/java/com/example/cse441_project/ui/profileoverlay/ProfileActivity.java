@@ -11,20 +11,13 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.cse441_project.R;
 import com.example.cse441_project.data.model.user.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -33,7 +26,7 @@ public class ProfileActivity extends AppCompatActivity {
     private EditText edtUsername, edtEmail, edtPhoneNumber, edtAddress, edtDateOfBirth;
     private RadioGroup radioGroupGender;
     private RadioButton rbMale, rbFemale, rbOther;
-    private Button btnSave, btnDelete;
+    private Button btnSave, btnDelete, btnChangePassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +46,8 @@ public class ProfileActivity extends AppCompatActivity {
         rbFemale = findViewById(R.id.rbFemale);
         rbOther = findViewById(R.id.rbOther);
         btnSave = findViewById(R.id.btnSave);
-        btnDelete = findViewById(R.id.btnChangePassword3);
+        btnDelete = findViewById(R.id.btnDeleteAccount);
+        btnChangePassword = findViewById(R.id.btnChangePassword);
 
         loadUserData();
 
@@ -65,6 +59,11 @@ public class ProfileActivity extends AppCompatActivity {
 
         btnDelete.setOnClickListener(v -> {
             Intent intent = new Intent(ProfileActivity.this, DeleteAccountActivity.class);
+            startActivity(intent);
+        });
+
+        btnChangePassword.setOnClickListener(v -> {
+            Intent intent = new Intent(ProfileActivity.this, ChangePasswordActivity.class);
             startActivity(intent);
         });
 
