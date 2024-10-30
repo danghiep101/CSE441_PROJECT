@@ -68,6 +68,10 @@ public class ChangePasswordActivity extends AppCompatActivity {
             etConfirmPassword.setError("Passwords do not match");
             return;
         }
+        if (newPassword.equals(currentPassword)) {
+            etNewPassword.setError("New password cannot be the same as the current password");
+            return;
+        }
 
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null && user.getEmail() != null) {
