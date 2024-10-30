@@ -1,8 +1,11 @@
 package com.example.cse441_project.ui.profileoverlay.myticket;
 
+import android.content.Intent;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -12,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cse441_project.R;
 import com.example.cse441_project.data.model.ticket.Ticket;
+import com.example.cse441_project.ui.profileoverlay.ProfileMenuActivity;
 import com.example.cse441_project.utils.FirebaseUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -23,6 +27,7 @@ import java.util.List;
 
 public class MyTicketActivity extends AppCompatActivity {
     private RecyclerView rcv;
+    private ImageView btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +36,8 @@ public class MyTicketActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_ticket);
 
         rcv = findViewById(R.id.rcv_my_ticket_list);
+        btnBack = findViewById(R.id.btn_back_my_ticket);
+
         List<Ticket> list = new ArrayList<>();
 
         if (FirebaseUtils.currentUserId() != null) {
@@ -58,5 +65,11 @@ public class MyTicketActivity extends AppCompatActivity {
 
             Log.d("Hehe", FirebaseUtils.currentUserId());
         }
+
+        btnBack.setOnClickListener(v -> {
+            Intent intent = new Intent(MyTicketActivity.this, ProfileMenuActivity.class);
+            startActivity(intent);
+            finish();
+        });
     }
 }

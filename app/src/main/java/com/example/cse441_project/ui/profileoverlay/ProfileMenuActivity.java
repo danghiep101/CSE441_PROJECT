@@ -15,6 +15,7 @@ import com.example.cse441_project.R;
 import com.example.cse441_project.ui.home.HomeActivity;
 import com.example.cse441_project.ui.profileoverlay.ProfileActivity;
 import com.example.cse441_project.ui.auth.login.LoginActivity;
+import com.example.cse441_project.ui.profileoverlay.myticket.MyTicketActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -26,7 +27,7 @@ public class ProfileMenuActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private TextView tvHi, tvName;
-    private Button btnProfile, btnSignOut;
+    private Button btnProfile, btnSignOut, btnMyTicket;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,7 @@ public class ProfileMenuActivity extends AppCompatActivity {
         tvName = findViewById(R.id.tvName);
         btnProfile = findViewById(R.id.btnProfile);
         btnSignOut = findViewById(R.id.btnSignOut);
+        btnMyTicket = findViewById(R.id.btnMyTicket);
 
         fetchUsername();
 
@@ -54,6 +56,12 @@ public class ProfileMenuActivity extends AppCompatActivity {
         btnSignOut.setOnClickListener(v -> {
             mAuth.signOut();
             Intent intent = new Intent(ProfileMenuActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
+        btnMyTicket.setOnClickListener(v -> {
+            Intent intent = new Intent(ProfileMenuActivity.this, MyTicketActivity.class);
             startActivity(intent);
             finish();
         });

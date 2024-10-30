@@ -8,6 +8,7 @@ import android.util.TypedValue;
 import android.graphics.Rect;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,7 +19,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.cse441_project.R;
 import com.example.cse441_project.data.model.seat.Seat;
 import com.example.cse441_project.data.model.ticket.Ticket;
+import com.example.cse441_project.data.showscreen.ShowScreen;
 import com.example.cse441_project.ui.bookticket.ChooseVoucherActivity;
+import com.example.cse441_project.ui.bookticket.showscreen.ChooseDateAndTimeActivity;
 import com.example.cse441_project.utils.FirebaseUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -38,6 +41,7 @@ public class ChooseSeatActivity extends Activity {
 
     SeatAdapter adapter;
     private List<String> unavailableSeatList = new ArrayList<>();
+    private List<Ticket> listTickets = new ArrayList<>();
     private String showtimeId;
 
     @Override
@@ -75,9 +79,27 @@ public class ChooseSeatActivity extends Activity {
                             unavailableSeatList.add(seat);
                         }
 
-                        // Xử lý RecyclerView
-                        adapter = new SeatAdapter(list, unavailableSeatList, ChooseSeatActivity.this, txtPrice, txtNumberSeats);
-                        rcvListSeat.setAdapter(adapter);
+                        FirebaseUtils.getTicketsByShowtime(showtimeId)
+                                .get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(Task<QuerySnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            for (DocumentSnapshot document : task.getResult()) {
+                                                Ticket ticket = document.toObject(Ticket.class);
+                                                if (ticket != null) {
+                                                    listTickets.add(ticket);
+                                                }
+                                            }
+
+                                            // Xử lý RecyclerView
+                                            adapter = new SeatAdapter(list, unavailableSeatList, ChooseSeatActivity.this, txtPrice, txtNumberSeats, listTickets);
+                                            rcvListSeat.setAdapter(adapter);
+                                        } else {
+                                            System.err.println("Error getting tickets: " + task.getException());
+                                        }
+                                    }
+                                });
                     } else {
                         System.err.println("Error getting tickets: " + task.getException());
                     }
@@ -108,7 +130,7 @@ public class ChooseSeatActivity extends Activity {
         List<String> choosedSeats = adapter.getSelectedSeatList();
         String totalPrice = adapter.getTotalPrice();
 
-        if (choosedSeats.size() > 0) {
+        if (choosedSeats.size() > 0 && listTickets.size() > 0) {
             Intent intent = new Intent(this, ChooseVoucherActivity.class);
 
             ArrayList<String> selectedSeatsList = new ArrayList<>(choosedSeats);

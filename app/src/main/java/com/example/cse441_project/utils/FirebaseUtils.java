@@ -47,6 +47,13 @@ public class FirebaseUtils {
         return firestore.collection("showtimes").document(showtimeId);
     }
 
+    public static Query getTicketsByShowtime(String showtimeId) {
+        return FirebaseFirestore.getInstance()
+                .collection("tickets")
+                .whereEqualTo("showtimeId", showtimeId)
+                .whereEqualTo("seat", "");
+    }
+
     public static Query getTicketsByShowtimeAndSeat(String showtimeId) {
         return FirebaseFirestore.getInstance()
                 .collection("tickets")
@@ -57,6 +64,6 @@ public class FirebaseUtils {
     public static Query getTicketByUserId(String user_id) {
         return FirebaseFirestore.getInstance()
                 .collection("tickets")
-                .whereEqualTo("user_id", user_id);
+                .whereEqualTo("userId", user_id);
     }
 }

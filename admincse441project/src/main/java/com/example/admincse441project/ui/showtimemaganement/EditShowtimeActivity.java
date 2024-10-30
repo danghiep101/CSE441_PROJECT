@@ -142,7 +142,7 @@ public class EditShowtimeActivity extends AppCompatActivity {
     }
 
     private void addTicket(String showtimeId) {
-        for(int i = 0; i < Integer.parseInt(availableSeatEditText.getText().toString().trim()); i++) {
+        for(int i = 0; i < 42; i++) {
             Ticket ticket = new Ticket(null, showtimeId, "", "", "Available");
 
             if (i == 0) {
@@ -153,7 +153,7 @@ public class EditShowtimeActivity extends AppCompatActivity {
                     Toast.makeText(this, "Add ticket failed!", Toast.LENGTH_SHORT).show();
                 });
             }
-            else if (i == Integer.parseInt(availableSeatEditText.getText().toString().trim()) - 1) {
+            else if (i == 41) {
                 addTicketViewModel.addTicket(ticket).addOnSuccessListener(documentReference -> {
                     Toast.makeText(this, "Successfully added ticket!", Toast.LENGTH_SHORT).show();
                 }).addOnFailureListener(e -> {
@@ -161,12 +161,13 @@ public class EditShowtimeActivity extends AppCompatActivity {
                     Toast.makeText(this, "Add ticket failed!", Toast.LENGTH_SHORT).show();
                 });
             }
-
-            addTicketViewModel.addTicket(ticket).addOnSuccessListener(documentReference -> {
-            }).addOnFailureListener(e -> {
-                Log.e("TicketAddFragment", "Error adding ticket!", e);
-                Toast.makeText(this, "Add ticket failed!", Toast.LENGTH_SHORT).show();
-            });
+            else {
+                addTicketViewModel.addTicket(ticket).addOnSuccessListener(documentReference -> {
+                }).addOnFailureListener(e -> {
+                    Log.e("TicketAddFragment", "Error adding ticket!", e);
+                    Toast.makeText(this, "Add ticket failed!", Toast.LENGTH_SHORT).show();
+                });
+            }
         }
     }
 
