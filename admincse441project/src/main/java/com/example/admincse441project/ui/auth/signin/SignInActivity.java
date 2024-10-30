@@ -47,9 +47,6 @@ public class SignInActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
-        binding.btnBack.setOnClickListener(v->{
-            finish();
-        });
     }
 
     private void signIn() {

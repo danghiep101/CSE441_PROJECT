@@ -86,19 +86,4 @@ public class FirebaseUtils {
         return getTicketsCollection().document(ticketId).get();
     }
 
-    public static CollectionReference getAccountsCollection() {
-        return FirebaseFirestore.getInstance().collection("accounts");
-    }
-
-    public static Task<DocumentReference> addAccount(Account account) {
-        return getAccountsCollection().add(account);
-    }
-
-    public static Task<Void> updateAccount(Account account) {
-        return getAccountsCollection().document(account.getId()).set(account);
-    }
-
-    public static Task<Void> deleteAccount(String accountId) {
-        return getAccountsCollection().document(accountId).delete();
-    }
 }

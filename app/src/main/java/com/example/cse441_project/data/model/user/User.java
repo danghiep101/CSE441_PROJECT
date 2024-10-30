@@ -6,6 +6,17 @@ public class User {
     private String username;
     private String phoneNumber;
 
+    public String getGender() { return gender; }
+
+    public void setGender(String gender) { this.gender = gender; }
+
+    public String getAddress() { return address; }
+
+    public void setAddress(String address) { this.address = address; }
+
+    private String address;
+    private String gender;
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
