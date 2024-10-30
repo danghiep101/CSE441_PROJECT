@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.cse441_project.R;
 import com.example.cse441_project.data.model.showtime.ShowTime;
 import com.example.cse441_project.databinding.ActivityChooseDateAndTimeBinding;
-import com.example.cse441_project.ui.bookticket.ChooseSeatActivity;
+import com.example.cse441_project.ui.bookticket.chooseseat.ChooseSeatActivity;
 import com.example.cse441_project.utils.FirebaseUtils;
 
 import java.text.ParseException;
@@ -128,8 +128,12 @@ public class ChooseDateAndTimeActivity extends AppCompatActivity {
                 " - " + showTime.getEndTime() + " \nday " + showTime.getDate() + " \n " + showTime.getNameCinema());
         builder.setPositiveButton("Ok", (dialog, which) -> {
             Intent intent = new Intent(this, ChooseSeatActivity.class);
-            //todo: truyền dữ liệu qua intent qua bước này, để phần choose seat lấy được dữ liệu
-            intent.putExtra("MOVIE_NAME", binding.txtNameMovie.getText().toString());
+            intent.putExtra("SHOWTIME_ID", showTime.getId());
+            intent.putExtra("SHOWTIME_AVAILABLE_SEAT", showTime.getAvailableSeat());
+            intent.putExtra("SHOWTIME_MOVIE", showTime.getName());
+            intent.putExtra("SHOWTIME_START", showTime.getStartTime());
+            intent.putExtra("SHOWTIME_END", showTime.getEndTime());
+
             startActivity(intent);
             setResult(RESULT_OK, intent);
 

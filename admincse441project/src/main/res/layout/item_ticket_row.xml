@@ -16,22 +16,8 @@
         android:gravity="center">
 
         <TextView
-            android:id="@+id/txt_ticket_screen"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:fontFamily="@font/inter_medium"
-            android:paddingLeft="10dp"
-            android:paddingTop="10dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="10dp"
-            android:text="01"
-            android:textColor="#ADADAD"
-            android:textSize="10dp" />
-
-        <TextView
-            android:id="@+id/txt_ticket_seat"
-            android:layout_width="60dp"
+            android:id="@+id/txt_ticket_id"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:fontFamily="@font/inter_medium"
@@ -44,8 +30,8 @@
             android:textSize="10dp" />
 
         <TextView
-            android:id="@+id/txt_ticket_movie"
-            android:layout_width="160dp"
+            android:id="@+id/txt_ticket_seat"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:fontFamily="@font/inter_medium"
@@ -58,7 +44,7 @@
             android:textSize="10dp" />
 
         <TextView
-            android:id="@+id/txt_ticket_status"
+            android:id="@+id/txt_showtime_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter_medium"

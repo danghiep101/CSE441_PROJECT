@@ -19,9 +19,11 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.admincse441project.R;
 import com.example.admincse441project.data.model.showtime.ShowTime;
 import com.example.admincse441project.data.model.movie.ResultsItem; // Thêm import này
+import com.example.admincse441project.data.model.ticket.Ticket;
 import com.example.admincse441project.data.repository.MovieRepositoryImp; // Thêm import này
 import com.example.admincse441project.ui.showtimemaganement.NowPlayingMovieViewModel; // Thêm import này
 import com.example.admincse441project.ui.showtimemaganement.NowPlayingViewModelFactory; // Thêm import này
+import com.example.admincse441project.ui.ticketmanagement.add.AddTicketViewModel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,11 +35,14 @@ import java.util.Locale;
 public class EditShowtimeActivity extends AppCompatActivity {
     private Spinner nameSpinner;
     private EditText startTimeEditText, endTimeEditText, availableSeatEditText, unavailableSeatEditText, dateEditText,nameCinema;
-    private Button saveButton;
+    private Button saveButton, addTicketButton;
     private ImageView deleteButton;
     private EditShowTimeViewModel viewModel;
+    private AddTicketViewModel addTicketViewModel;
     private NowPlayingMovieViewModel movieViewModel;
     private HashMap<String, String> movieIdMap; // Thêm biến này để lưu idMovie
+
+    private String showTimeId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,16 +50,18 @@ public class EditShowtimeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_showtime);
 
         viewModel = new ViewModelProvider(this).get(EditShowTimeViewModel.class);
+        addTicketViewModel = new ViewModelProvider(this).get(AddTicketViewModel.class);
         movieIdMap = new HashMap<>(); // Khởi tạo HashMap để lưu idMovie
 
         initializeViews();
         setupSpinner();
 
         Intent intent = getIntent();
-        String showTimeId = intent.getStringExtra("SHOWTIME_ID");
+        showTimeId = intent.getStringExtra("SHOWTIME_ID");
         fetchShowTime(showTimeId);
 
         saveButton.setOnClickListener(v -> saveShowtime(showTimeId));
+        addTicketButton.setOnClickListener(v -> addTicket(showTimeId));
         setupClickListeners();
 
         // Khởi tạo ViewModel cho Movie
@@ -74,6 +81,7 @@ public class EditShowtimeActivity extends AppCompatActivity {
         saveButton = findViewById(R.id.button);
         nameCinema=findViewById(R.id.editTextText10);
         deleteButton = findViewById(R.id.imageButton3);
+        addTicketButton = findViewById(R.id.btn_showtime_add_ticket);
     }
 
     private void setupSpinner() {
@@ -131,6 +139,35 @@ public class EditShowtimeActivity extends AppCompatActivity {
             }
             finish();
         });
+    }
+
+    private void addTicket(String showtimeId) {
+        for(int i = 0; i < Integer.parseInt(availableSeatEditText.getText().toString().trim()); i++) {
+            Ticket ticket = new Ticket(null, showtimeId, "", "", "Available");
+
+            if (i == 0) {
+                addTicketViewModel.addTicket(ticket).addOnSuccessListener(documentReference -> {
+                    Toast.makeText(this, "Adding ticket...", Toast.LENGTH_SHORT).show();
+                }).addOnFailureListener(e -> {
+                    Log.e("TicketAddFragment", "Error adding ticket!", e);
+                    Toast.makeText(this, "Add ticket failed!", Toast.LENGTH_SHORT).show();
+                });
+            }
+            else if (i == Integer.parseInt(availableSeatEditText.getText().toString().trim()) - 1) {
+                addTicketViewModel.addTicket(ticket).addOnSuccessListener(documentReference -> {
+                    Toast.makeText(this, "Successfully added ticket!", Toast.LENGTH_SHORT).show();
+                }).addOnFailureListener(e -> {
+                    Log.e("TicketAddFragment", "Error adding ticket!", e);
+                    Toast.makeText(this, "Add ticket failed!", Toast.LENGTH_SHORT).show();
+                });
+            }
+
+            addTicketViewModel.addTicket(ticket).addOnSuccessListener(documentReference -> {
+            }).addOnFailureListener(e -> {
+                Log.e("TicketAddFragment", "Error adding ticket!", e);
+                Toast.makeText(this, "Add ticket failed!", Toast.LENGTH_SHORT).show();
+            });
+        }
     }
 
     private boolean isValidTimeFormat(String timeStr) {

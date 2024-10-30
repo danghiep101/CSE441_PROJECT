@@ -69,31 +69,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/txt_edit_title_movie"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:text="Title movie"
-                    android:textColor="#FFFFFF"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <Spinner
-                    android:id="@+id/spn_edit_movie"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/custom_spinner"
-                    android:spinnerMode="dialog" />
-            </LinearLayout>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="20dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -101,22 +76,31 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/txt_edit_screen"
+                    android:id="@+id/txt_edit_ticket_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:text="Screen"
+                    android:text="Ticket id"
                     android:textColor="#FFFFFF"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
-                <Spinner
-                    android:id="@+id/spn_edit_screen"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/custom_spinner"
-                    android:spinnerMode="dialog" />
             </LinearLayout>
+
+            <EditText
+                android:id="@+id/edt_edit_ticket_id"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/input_custom"
+                android:fontFamily="@font/inter_semibold"
+                android:gravity="start|center"
+                android:hint="Ticket id"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:textAllCaps="false"
+                android:textColor="@color/placeholder_controller"
+                android:textColorHint="@color/placeholder_controller"
+                android:textSize="12sp" />
 
             <Space
                 android:layout_width="match_parent"
@@ -124,7 +108,43 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txt_edit_showtime_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="Showtime id"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/edt_edit_showtime_id"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/input_custom"
+                android:fontFamily="@font/inter_semibold"
+                android:gravity="start|center"
+                android:hint="Showtime id"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:textAllCaps="false"
+                android:textColor="@color/placeholder_controller"
+                android:textColorHint="@color/placeholder_controller"
+                android:textSize="12sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <TextView
@@ -137,48 +157,20 @@
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
-                <Spinner
-                    android:id="@+id/spn_edit_seat"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/custom_spinner"
-                    android:spinnerMode="dialog" />
-            </LinearLayout>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="20dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/txt_edit_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:text="Date"
-                    android:textColor="#FFFFFF"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/btn_edit_date"
+                <EditText
+                    android:id="@+id/edt_edit_seat"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="@drawable/input_custom"
                     android:fontFamily="@font/inter_semibold"
                     android:gravity="start|center"
-                    android:hint="Choose date"
+                    android:hint="Seat"
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp"
                     android:textAllCaps="false"
                     android:textColor="@color/placeholder_controller"
                     android:textColorHint="@color/placeholder_controller"
                     android:textSize="12sp" />
-
             </LinearLayout>
 
             <Space
@@ -191,23 +183,23 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/txt_edit_time"
+                    android:id="@+id/txt_edit_status"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:text="Time"
+                    android:text="Status"
                     android:textColor="#FFFFFF"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
-                <Button
-                    android:id="@+id/btn_edit_time"
+                <EditText
+                    android:id="@+id/edt_edit_status"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="@drawable/input_custom"
                     android:fontFamily="@font/inter_semibold"
                     android:gravity="start|center"
-                    android:hint="Choose time"
+                    android:hint="Status"
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp"
                     android:textAllCaps="false"
@@ -216,27 +208,11 @@
                     android:textSize="12sp" />
             </LinearLayout>
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
         </LinearLayout>
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/btn_edit_ticket"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="30dp"
-            android:background="@drawable/button_auth"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:text="Edit"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:textSize="12sp"
-            android:textStyle="bold" />
-        </LinearLayout>
+    </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,8 +36,14 @@ public class FirebaseUtils {
         return FirebaseFirestore.getInstance().collection("showtimes");
     }
 
-
     public static Query getShowtimeIdmovie(String idMovie) {
         return FirebaseFirestore.getInstance().collection("showtimes").whereEqualTo("idMovie", idMovie);
+    }
+
+    public static Query getTicketsByShowtimeAndSeat(String showtimeId) {
+        return FirebaseFirestore.getInstance()
+                .collection("tickets")
+                .whereEqualTo("showtimeId", showtimeId)
+                .whereNotEqualTo("seat", "");
     }
 }

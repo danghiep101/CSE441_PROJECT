@@ -5,360 +5,146 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#202427"
-    tools:context=".ui.bookticket.ChooseSeatActivity">
+    tools:context=".ui.bookticket.chooseseat.ChooseSeatActivity">
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:src="@drawable/line_1"
-        tools:layout_editor_absoluteX="61dp"
-        tools:layout_editor_absoluteY="108dp" />
-
-    <ImageButton
-        android:id="@+id/btnBack"
-        android:layout_width="34dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="24dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="Back"
-        android:src="@drawable/baseline_arrow_back_24"
-        app:layout_constraintEnd_toStartOf="@+id/tvMovieTitle"
-        app:layout_constraintHorizontal_bias="0.313"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="#FFFFFF" />
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout3" />
 
-    <TextView
-        android:id="@+id/tvMovieTitle"
-        android:layout_width="wrap_content"
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout3"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Movie Name"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/tvMovieTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="11:00-13:00"
-        android:textColor="#CCCCCC"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvMovieTitle" />
-
-    <GridLayout
-        android:id="@+id/glSeat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="90dp"
-        android:columnCount="6"
-        android:rowCount="6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvMovieTime">
-
-        <!-- Standard Seats (A1 - A6, B1 - B6, C1 - C6) -->
-        <Button
-            android:id="@+id/seatA1"
-            style="@style/SeatButtonStandard"
-            android:text="A1" />
-
-        <Button
-            android:id="@+id/seatA2"
-            style="@style/SeatButtonStandard"
-            android:text="A2" />
-
-        <Button
-            android:id="@+id/seatA3"
-            style="@style/SeatButtonStandard"
-            android:text="A3" />
-
-        <Button
-            android:id="@+id/seatA4"
-            style="@style/SeatButtonStandard"
-            android:text="A4" />
-
-        <Button
-            android:id="@+id/seatA5"
-            style="@style/SeatButtonStandard"
-            android:text="A5" />
-
-        <Button
-            android:id="@+id/seatA6"
-            style="@style/SeatButtonStandard"
-            android:text="A6" />
-
-        <Button
-            android:id="@+id/seatB1"
-            style="@style/SeatButtonStandard"
-            android:text="B1" />
-
-        <Button
-            android:id="@+id/seatB2"
-            style="@style/SeatButtonStandard"
-            android:text="B2" />
-
-        <Button
-            android:id="@+id/seatB3"
-            style="@style/SeatButtonStandard"
-            android:text="B3" />
-
-        <Button
-            android:id="@+id/seatB4"
-            style="@style/SeatButtonStandard"
-            android:text="B4" />
-
-        <Button
-            android:id="@+id/seatB5"
-            style="@style/SeatButtonStandard"
-            android:text="B5" />
-
-        <Button
-            android:id="@+id/seatB6"
-            style="@style/SeatButtonStandard"
-            android:text="B6" />
-
-        <Button
-            android:id="@+id/seatC1"
-            style="@style/SeatButtonStandard"
-            android:text="C1" />
-
-        <Button
-            android:id="@+id/seatC2"
-            style="@style/SeatButtonStandard"
-            android:text="C2" />
-
-        <Button
-            android:id="@+id/seatC3"
-            style="@style/SeatButtonStandard"
-            android:text="C3" />
-
-        <Button
-            android:id="@+id/seatC4"
-            style="@style/SeatButtonStandard"
-            android:text="C4" />
-
-        <Button
-            android:id="@+id/seatC5"
-            style="@style/SeatButtonStandard"
-            android:text="C5" />
-
-        <Button
-            android:id="@+id/seatC6"
-            style="@style/SeatButtonStandard"
-            android:text="C6" />
-
-        <!-- VIP Seats (D1 - D6, E1 - E6, F1 - F6) -->
-        <Button
-            android:id="@+id/seatD1"
-            style="@style/SeatButtonVIP"
-            android:text="D1" />
-
-        <Button
-            android:id="@+id/seatD2"
-            style="@style/SeatButtonVIP"
-            android:text="D2" />
-
-        <Button
-            android:id="@+id/seatD3"
-            style="@style/SeatButtonVIP"
-            android:text="D3" />
-
-        <Button
-            android:id="@+id/seatD4"
-            style="@style/SeatButtonVIP"
-            android:text="D4" />
-
-        <Button
-            android:id="@+id/seatD5"
-            style="@style/SeatButtonVIP"
-            android:text="D5" />
-
-        <Button
-            android:id="@+id/seatD6"
-            style="@style/SeatButtonVIP"
-            android:text="D6" />
-
-        <Button
-            android:id="@+id/seatE1"
-            style="@style/SeatButtonVIP"
-            android:text="E1" />
-
-        <Button
-            android:id="@+id/seatE2"
-            style="@style/SeatButtonVIP"
-            android:text="E2" />
-
-        <Button
-            android:id="@+id/seatE3"
-            style="@style/SeatButtonVIP"
-            android:text="E3" />
-
-        <Button
-            android:id="@+id/seatE4"
-            style="@style/SeatButtonVIP"
-            android:text="E4" />
-
-        <Button
-            android:id="@+id/seatE5"
-            style="@style/SeatButtonVIP"
-            android:text="E5" />
-
-        <Button
-            android:id="@+id/seatE6"
-            style="@style/SeatButtonVIP"
-            android:text="E6" />
-
-        <Button
-            android:id="@+id/seatF1"
-            style="@style/SeatButtonVIP"
-            android:text="F1" />
-
-        <Button
-            android:id="@+id/seatF2"
-            style="@style/SeatButtonVIP"
-            android:text="F2" />
-
-        <Button
-            android:id="@+id/seatF3"
-            style="@style/SeatButtonVIP"
-            android:text="F3" />
-
-        <Button
-            android:id="@+id/seatF4"
-            style="@style/SeatButtonVIP"
-            android:text="F4" />
-
-        <Button
-            android:id="@+id/seatF5"
-            style="@style/SeatButtonVIP"
-            android:text="F5" />
-
-        <Button
-            android:id="@+id/seatF6"
-            style="@style/SeatButtonVIP"
-            android:text="F6" />
-    </GridLayout>
-
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/btnContinue"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/glSeat"
-        app:layout_constraintVertical_bias="0.155">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_chevron_large_white"
+            android:layout_centerVertical="true"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:orientation="horizontal">
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
 
-            <View
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="#FFB6C1" />
-
-            <!-- Text "Standard seat" -->
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/txt_choose_seat_movie_name"
+                android:layout_width="280dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Standard seat"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold" />
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/inter_semibold"
+                android:gravity="center"
+                android:text="Movie name"
+                android:textColor="@color/white"
+                android:textSize="22dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txt_choose_seat_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="11:00 - 13:30"
+                    android:textColor="@color/white"
+                    android:textSize="13sp" />
+            </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:orientation="horizontal">
+    </RelativeLayout>
 
-            <View
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="#ADD8E6" />
-
-            <!-- Text "VIP seat" -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="VIP seat"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:orientation="horizontal">
-
-            <View
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="#FF0000" />
-
-            <!-- Text "Selected seat" -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Selected seat"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:orientation="horizontal">
-
-            <View
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="#2F4F4F" />
-
-            <!-- Text "Not available seat" -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Not available seat"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/btnContinue"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_list_seat"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="24dp"
-        android:backgroundTint="#FCC434"
-        android:text="Continue"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/red_theme"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_choose_seat_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="0 $"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_weight="0" />
+
+            <TextView
+                android:id="@+id/txt_choose_seat_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:fontFamily="@font/inter_medium"
+                android:text="0 seat"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_choose_seat_continue"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_weight="0"
+            android:background="@drawable/button_auth"
+            android:backgroundTint="@color/white"
+            android:text="Continue"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
