@@ -22,6 +22,7 @@ firebaseAuth = "23.0.0"
 gridlayout = "1.0.0"
 firebaseDatabase = "21.0.0"
 recyclerview = "1.3.0"
+playServicesWallet = "19.4.0"
 
 
 [libraries]
@@ -50,6 +51,7 @@ firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version
 androidx-gridlayout = { group = "androidx.gridlayout", name = "gridlayout", version.ref = "gridlayout" }
 firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
 androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
+play-services-wallet = { group = "com.google.android.gms", name = "play-services-wallet", version.ref = "playServicesWallet" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

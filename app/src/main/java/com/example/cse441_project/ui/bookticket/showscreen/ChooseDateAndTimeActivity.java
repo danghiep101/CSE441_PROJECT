@@ -87,8 +87,6 @@ public class ChooseDateAndTimeActivity extends AppCompatActivity {
 
 
     private void onDateClick(String date) {
-
-        Toast.makeText(this, "Ngày đã chọn: " + date, Toast.LENGTH_SHORT).show();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date selectedDate;
         try {
@@ -124,8 +122,8 @@ public class ChooseDateAndTimeActivity extends AppCompatActivity {
     private void onShowTimeClick(ShowTime showTime) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirm");
-        builder.setMessage("Are you sure want to choose this showtime? " + showTime.getStartTime() +
-                " - " + showTime.getEndTime() + " \nday " + showTime.getDate() + " \n " + showTime.getNameCinema());
+        builder.setMessage("Are you sure want to choose this showtime? \n" + showTime.getNameCinema()+ " \n" + showTime.getStartTime() +
+                " - " + showTime.getEndTime() + showTime.getDate() + " \n " );
         builder.setPositiveButton("Ok", (dialog, which) -> {
             Intent intent = new Intent(this, ChooseSeatActivity.class);
             intent.putExtra("SHOWTIME_ID", showTime.getId());
