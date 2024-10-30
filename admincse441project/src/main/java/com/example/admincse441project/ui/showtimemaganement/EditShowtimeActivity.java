@@ -143,7 +143,7 @@ public class EditShowtimeActivity extends AppCompatActivity {
 
     private void addTicket(String showtimeId) {
         for(int i = 0; i < Integer.parseInt(availableSeatEditText.getText().toString().trim()); i++) {
-            Ticket ticket = new Ticket(null, showtimeId, "", "Available");
+            Ticket ticket = new Ticket(null, showtimeId, "", "", "Available");
 
             if (i == 0) {
                 addTicketViewModel.addTicket(ticket).addOnSuccessListener(documentReference -> {

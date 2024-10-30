@@ -1,4 +1,4 @@
-package com.example.admincse441project.data.model.ticket;
+package com.example.cse441_project.data.model.ticket;
 
 public class Ticket {
     private String id;

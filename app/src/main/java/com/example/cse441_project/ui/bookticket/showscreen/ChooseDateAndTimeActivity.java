@@ -1,25 +1,21 @@
 package com.example.cse441_project.ui.bookticket.showscreen;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.cse441_project.R;
 import com.example.cse441_project.data.model.showtime.ShowTime;
 import com.example.cse441_project.databinding.ActivityChooseDateAndTimeBinding;
-import com.example.cse441_project.ui.bookticket.ChooseSeatActivity;
+import com.example.cse441_project.ui.bookticket.chooseseat.ChooseSeatActivity;
 import com.example.cse441_project.utils.FirebaseUtils;
 
 import java.text.ParseException;
@@ -120,7 +116,6 @@ public class ChooseDateAndTimeActivity extends AppCompatActivity {
         }
     }
 
-
     private void onShowTimeClick(ShowTime showTime) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirm");
@@ -128,7 +123,9 @@ public class ChooseDateAndTimeActivity extends AppCompatActivity {
                 " - " + showTime.getEndTime() + " \nday " + showTime.getDate() + " \n " + showTime.getNameCinema());
         builder.setPositiveButton("Ok", (dialog, which) -> {
             Intent intent = new Intent(this, ChooseSeatActivity.class);
-            //todo: truyền dữ liệu qua intent qua bước này, để phần choose seat lấy được dữ liệu
+            intent.putExtra("SHOWTIME_ID", showTime.getId());
+            intent.putExtra("SHOWTIME_AVAILABLE_SEAT", showTime.getAvailableSeat());
+
             startActivity(intent);
             setResult(RESULT_OK, intent);
 
@@ -136,6 +133,5 @@ public class ChooseDateAndTimeActivity extends AppCompatActivity {
         });
         builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
         builder.show();
-
     }
 }
