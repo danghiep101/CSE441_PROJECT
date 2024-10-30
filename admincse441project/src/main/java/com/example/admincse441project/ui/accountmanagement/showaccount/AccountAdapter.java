@@ -57,7 +57,7 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
     @Override
     public void onBindViewHolder(@NonNull AccountViewHolder holder, int position) {
         Account account = accountList.get(position);
-        holder.tvNo.setText(String.valueOf(position + 1)); // Hiển thị số thứ tự
+        holder.tvNo.setText(String.valueOf(position + 1));
         holder.tvEmail.setText(account.getEmail());
         holder.tvUsername.setText(account.getUsername());
         holder.tvRole.setText(account.getRole());
