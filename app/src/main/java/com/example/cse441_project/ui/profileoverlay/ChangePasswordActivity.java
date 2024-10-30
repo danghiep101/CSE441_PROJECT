@@ -38,7 +38,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
         btnChangePassword.setOnClickListener(v -> changePassword());
 
-        // Xử lý sự kiện khi nhấn nút quay lại
         btnBack.setOnClickListener(v -> onBackPressed());
     }
 
@@ -47,7 +46,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
         String newPassword = etNewPassword.getText().toString().trim();
         String confirmPassword = etConfirmPassword.getText().toString().trim();
 
-        // Kiểm tra nếu trường nhập trống
         if (TextUtils.isEmpty(currentPassword)) {
             etCurrentPassword.setError("Current password is required");
             return;
@@ -61,19 +59,16 @@ public class ChangePasswordActivity extends AppCompatActivity {
             return;
         }
 
-        // Kiểm tra độ dài của mật khẩu mới
         if (newPassword.length() < 8) {
             etNewPassword.setError("New password must be at least 8 characters");
             return;
         }
 
-        // Kiểm tra mật khẩu mới và mật khẩu xác nhận phải trùng nhau
         if (!newPassword.equals(confirmPassword)) {
             etConfirmPassword.setError("Passwords do not match");
             return;
         }
 
-        // Xác thực người dùng với mật khẩu hiện tại
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null && user.getEmail() != null) {
             AuthCredential credential = EmailAuthProvider.getCredential(user.getEmail(), currentPassword);
@@ -81,11 +76,10 @@ public class ChangePasswordActivity extends AppCompatActivity {
             user.reauthenticate(credential).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     Log.d("ChangePassword", "Reauthentication successful");
-                    // Cập nhật mật khẩu mới
                     user.updatePassword(newPassword).addOnCompleteListener(updateTask -> {
                         if (updateTask.isSuccessful()) {
                             Toast.makeText(ChangePasswordActivity.this, "Password changed successfully", Toast.LENGTH_SHORT).show();
-                            finish(); // Đóng activity và quay về màn hình trước
+                            finish();
                         } else {
                             Toast.makeText(ChangePasswordActivity.this, "Password change failed", Toast.LENGTH_SHORT).show();
                             Log.e("ChangePassword", "Password update failed", updateTask.getException());
