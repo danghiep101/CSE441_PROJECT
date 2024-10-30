@@ -59,6 +59,7 @@
         <activity
             android:name=".ui.MainActivity"
             android:exported="true" />
+        <activity android:name=".ui.profileoverlay.ProfileMenuActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
