@@ -28,7 +28,10 @@
             android:exported="false" />
         <activity
             android:name=".ui.bookticket.PaymentActivity"
-            android:exported="false" />
+            android:exported="true" />
+        <activity
+            android:name=".ui.bookticket.ChooseVoucherActivity"
+            android:exported="true" />
         <activity
             android:name=".ui.profileoverlay.DiscountsActivity"
             android:exported="false" />

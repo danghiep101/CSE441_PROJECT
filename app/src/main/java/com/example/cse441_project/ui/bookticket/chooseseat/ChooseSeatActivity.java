@@ -18,7 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.cse441_project.R;
 import com.example.cse441_project.data.model.seat.Seat;
 import com.example.cse441_project.data.model.ticket.Ticket;
-import com.example.cse441_project.ui.bookticket.ChooseVoucherActivity;
+
+import com.example.cse441_project.ui.bookticket.PaymentActivity;
 import com.example.cse441_project.utils.FirebaseUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -35,6 +36,7 @@ public class ChooseSeatActivity extends Activity {
     private Button btnContinue;
     private TextView txtNameMovie;
     private TextView txtTime;
+
 
     SeatAdapter adapter;
     private List<String> unavailableSeatList = new ArrayList<>();
@@ -109,13 +111,12 @@ public class ChooseSeatActivity extends Activity {
         String totalPrice = adapter.getTotalPrice();
 
         if (choosedSeats.size() > 0) {
-            Intent intent = new Intent(this, ChooseVoucherActivity.class);
-
+            Intent intent = new Intent(this, PaymentActivity.class);
             ArrayList<String> selectedSeatsList = new ArrayList<>(choosedSeats);
-            intent.putStringArrayListExtra("SELECTED_SEATS_LIST", selectedSeatsList);
+            String selectedSeatsString = String.join(",", selectedSeatsList);
+            intent.putExtra("SELECTED_SEATS_LIST", selectedSeatsString);
             intent.putExtra("TOTAL_PRICE", totalPrice);
             intent.putExtra("SHOWTIME_ID", showtimeId);
-
             startActivity(intent);
             setResult(RESULT_OK, intent);
         }
