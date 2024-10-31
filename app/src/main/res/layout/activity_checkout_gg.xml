@@ -15,50 +15,15 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/txt_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="Name Movie"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
             android:id="@+id/txt_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="Price: 20.000VND"
             android:textColor="?android:textColorSecondary" />
-
-        <TextView
-            android:id="@+id/txt_screen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="Screen 1"
-            android:textColor="?android:textColorPrimary"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/txt_showtime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="15dp"
-            android:text="1:30 - 3:00"
-            android:textColor="?android:textColorSecondary" />
-
-        <TextView
-            android:id="@+id/txt_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="15dp"
-            android:text="20/10/2024"
-            android:textColor="?android:textColorSecondary" />
-
+<Space
+    android:layout_width="0dp"
+    android:layout_height="20dp"></Space>
         <com.google.android.gms.wallet.button.PayButton
             android:id="@+id/googlePayButton"
             android:layout_width="match_parent"

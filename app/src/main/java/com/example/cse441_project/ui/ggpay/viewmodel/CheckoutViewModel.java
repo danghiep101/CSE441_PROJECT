@@ -83,7 +83,7 @@ public class CheckoutViewModel extends AndroidViewModel {
      * @param priceCents the price to show on the payment sheet.
      * @return a Task with the payment information.
      */
-    public Task<PaymentData> getLoadPaymentDataTask(final long priceCents) {
+    public Task<PaymentData> getLoadPaymentDataTask(final double priceCents) {
         JSONObject paymentDataRequestJson = PaymentsUtil.getPaymentDataRequest(priceCents);
         if (paymentDataRequestJson == null) {
             return null;
