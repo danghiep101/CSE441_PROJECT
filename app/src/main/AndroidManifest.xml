@@ -14,9 +14,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CSE441_PROJECT"
         tools:targetApi="31">
+        <meta-data
+            android:name="com.google.android.gms.wallet.api.enabled"
+            android:value="true" />
         <activity
             android:name=".ui.auth.SplashActivity"
             android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".ui.bookticket.chooseseat.ChooseSeatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.ggpay.activity.CheckoutActivity"
+            android:exported="true" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,8 +36,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.bookticket.chooseseat.ChooseSeatActivity"
-            android:exported="false" />
+            android:name=".ui.ggpay.activity.CheckoutSuccessActivity"
+            android:exported="false" >
+        </activity>
         <activity
             android:name=".ui.bookticket.PaymentActivity"
             android:exported="true" />
@@ -60,11 +73,14 @@
             android:name=".ui.auth.signup.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.profileoverlay.ChangePassword"
+            android:name=".ui.profileoverlay.ChangePasswordActivity"
             android:exported="false" />
         <activity
             android:name=".ui.MainActivity"
             android:exported="true" />
+        <activity android:name=".ui.profileoverlay.ProfileMenuActivity" />
+        <activity android:name=".ui.profileoverlay.DeleteAccountActivity" />
+        <activity android:name=".ui.profileoverlay.AcceptDeleteAccountActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

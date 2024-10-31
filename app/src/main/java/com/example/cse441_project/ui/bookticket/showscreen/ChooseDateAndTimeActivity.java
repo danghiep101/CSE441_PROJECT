@@ -1,18 +1,22 @@
 package com.example.cse441_project.ui.bookticket.showscreen;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cse441_project.R;
 import com.example.cse441_project.data.model.showtime.ShowTime;
 import com.example.cse441_project.databinding.ActivityChooseDateAndTimeBinding;
 import com.example.cse441_project.ui.bookticket.chooseseat.ChooseSeatActivity;
@@ -83,8 +87,6 @@ public class ChooseDateAndTimeActivity extends AppCompatActivity {
 
 
     private void onDateClick(String date) {
-
-        Toast.makeText(this, "Ngày đã chọn: " + date, Toast.LENGTH_SHORT).show();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date selectedDate;
         try {
@@ -116,11 +118,12 @@ public class ChooseDateAndTimeActivity extends AppCompatActivity {
         }
     }
 
+
     private void onShowTimeClick(ShowTime showTime) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirm");
-        builder.setMessage("Are you sure want to choose this showtime? " + showTime.getStartTime() +
-                " - " + showTime.getEndTime() + " \nday " + showTime.getDate() + " \n " + showTime.getNameCinema());
+        builder.setMessage("Are you sure want to choose this showtime? \n" + showTime.getNameCinema()+ " \n" + showTime.getStartTime() +
+                " - " + showTime.getEndTime() + showTime.getDate() + " \n " );
         builder.setPositiveButton("Ok", (dialog, which) -> {
             Intent intent = new Intent(this, ChooseSeatActivity.class);
             intent.putExtra("SHOWTIME_ID", showTime.getId());
@@ -136,5 +139,6 @@ public class ChooseDateAndTimeActivity extends AppCompatActivity {
         });
         builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
         builder.show();
+
     }
 }

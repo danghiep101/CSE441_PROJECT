@@ -65,6 +65,7 @@ public class PaymentActivity extends AppCompatActivity {
             Seat.setText(selectedSeatsString);
             Total.setText(totalPrice); // Hiển thị tổng tiền ban đầu
         });
+
     }
 
     private void updateTotalPrice(String voucherValue) {
