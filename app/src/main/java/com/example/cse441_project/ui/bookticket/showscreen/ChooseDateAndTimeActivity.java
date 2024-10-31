@@ -79,9 +79,15 @@ public class ChooseDateAndTimeActivity extends AppCompatActivity {
 
     private void observeViewModel() {
         viewModel.showTimeList.observe(this, showTimeList -> {
-            Log.d("ChooseDateAndTimeActivity", "Showtime List Observed: " + showTimeList);
-            chooseScreenTimeAdapter.submitList(showTimeList);
-            chooseDateAdapter.submitList(showTimeList);
+            if (showTimeList == null || showTimeList.isEmpty()) {
+                Toast.makeText(this, "No showtimes available for this movie", Toast.LENGTH_SHORT).show();
+                chooseDateAdapter.submitList(new ArrayList<>());
+                chooseScreenTimeAdapter.submitList(new ArrayList<>());
+            } else {
+                Log.d("ChooseDateAndTimeActivity", "Showtime List Observed: " + showTimeList);
+                chooseScreenTimeAdapter.submitList(showTimeList);
+                chooseDateAdapter.submitList(showTimeList);
+            }
         });
     }
 

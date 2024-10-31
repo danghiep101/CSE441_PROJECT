@@ -40,6 +40,7 @@ public class ChooseSeatActivity extends Activity {
 
     SeatAdapter adapter;
     private List<String> unavailableSeatList = new ArrayList<>();
+    private List<Ticket> listTickets = new ArrayList<>();
     private String showtimeId;
 
     @Override
@@ -77,9 +78,27 @@ public class ChooseSeatActivity extends Activity {
                                 unavailableSeatList.add(seat);
                             }
 
-                            // Xử lý RecyclerView
-                            adapter = new SeatAdapter(list, unavailableSeatList, ChooseSeatActivity.this, txtPrice, txtNumberSeats);
-                            rcvListSeat.setAdapter(adapter);
+                            FirebaseUtils.getTicketsByShowtime(showtimeId)
+                                    .get()
+                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(Task<QuerySnapshot> task) {
+                                            if (task.isSuccessful()) {
+                                                for (DocumentSnapshot document : task.getResult()) {
+                                                    Ticket ticket = document.toObject(Ticket.class);
+                                                    if (ticket != null) {
+                                                        listTickets.add(ticket);
+                                                    }
+                                                }
+
+                                                // Xử lý RecyclerView
+                                                adapter = new SeatAdapter(list, unavailableSeatList, ChooseSeatActivity.this, txtPrice, txtNumberSeats, listTickets);
+                                                rcvListSeat.setAdapter(adapter);
+                                            } else {
+                                                System.err.println("Error getting tickets: " + task.getException());
+                                            }
+                                        }
+                                    });
                         } else {
                             System.err.println("Error getting tickets: " + task.getException());
                         }

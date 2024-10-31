@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cse441_project.databinding.ActivityMainBinding;
 import com.example.cse441_project.ui.profileoverlay.ProfileActivity;
+import com.example.cse441_project.ui.profileoverlay.ProfileMenuActivity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -17,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+        Intent intent = new Intent(MainActivity.this, ProfileMenuActivity.class);
         startActivity(intent);
         finish();
     }

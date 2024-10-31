@@ -15,7 +15,7 @@ import com.example.cse441_project.R;
 import com.example.cse441_project.ui.home.HomeActivity;
 import com.example.cse441_project.ui.profileoverlay.ProfileActivity;
 import com.example.cse441_project.ui.auth.login.LoginActivity;
-import com.example.cse441_project.ui.profileoverlay.myticket.MyTicketActivity;
+import com.example.cse441_project.ui.profileoverlay.MyTicketActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;

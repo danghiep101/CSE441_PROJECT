@@ -59,7 +59,7 @@
             android:name=".ui.profileoverlay.ProfileActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.profileoverlay.myticket.MyTicketActivity"
+            android:name=".ui.profileoverlay.MyTicketActivity"
             android:exported="false">
         </activity>
         <activity
