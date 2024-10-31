@@ -18,6 +18,7 @@ package com.example.cse441_project.ui.ggpay.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -39,11 +40,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.gms.wallet.PaymentData;
 import com.google.android.gms.wallet.button.ButtonOptions;
 import com.google.android.gms.wallet.button.PayButton;
-import com.google.android.gms.wallet.contract.TaskResultContracts.GetPaymentDataResult;
+import com.google.android.gms.wallet.contract.TaskResultContracts;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -51,13 +58,16 @@ import java.util.Locale;
  */
 public class CheckoutActivity extends AppCompatActivity {
 
-  private long priceInVND;
+  private double priceInVND;
+  private String selectedSeatsString;
   private CheckoutViewModel model;
 
   private PayButton googlePayButton;
+  private String userId;
+  private int numberOfSeats;
 
   private final ActivityResultLauncher<Task<PaymentData>> paymentDataLauncher =
-      registerForActivityResult(new GetPaymentDataResult(), result -> {
+      registerForActivityResult(new TaskResultContracts.GetPaymentDataResult(), result -> {
         int statusCode = result.getStatus().getStatusCode();
         switch (statusCode) {
           case CommonStatusCodes.SUCCESS:
@@ -82,17 +92,26 @@ public class CheckoutActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    initializeUi();
+
 
     model = new ViewModelProvider(this).get(CheckoutViewModel.class);
 //todo: 2 layout thanh toán là activity_checkout và activity_checkout_success
     model.canUseGooglePay.observe(this, this::setGooglePayAvailable);
     //todo: Nhận giá trị từ Intent gửi sang, ví dự như ở dưới
     //
-    priceInVND = getIntent().getLongExtra("price", 10000); // Mặc định là 0 nếu không có giá
+    userId = getUserId();
+    selectedSeatsString=getIntent().getStringExtra("SELECTED_SEATS_LIST");
 
+    priceInVND = getIntent().getDoubleExtra("TOTAL_PRICE", 10000); // Mặc định là 0 nếu không có giá
+    Log.e("CheckoutActivity", "bookTicket: " +priceInVND );
     // Sử dụng giá để hiển thị hoặc thực hiện thanh toán
     requestPayment(priceInVND);
+    initializeUi();
+  }
+  private String getUserId() {
+    // Lấy ID người dùng từ SharedPreferences
+    SharedPreferences sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+    return sharedPreferences.getString("USER_ID", null); // Trả về null nếu không có ID
   }
 
   private void initializeUi() {
@@ -100,7 +119,7 @@ public class CheckoutActivity extends AppCompatActivity {
     ActivityCheckoutGgBinding layoutBinding = ActivityCheckoutGgBinding.inflate(getLayoutInflater());
     setContentView(layoutBinding.getRoot());
     //todo: dùng cấu trúc nh bên dưới để set giá trị cho các trường
-    layoutBinding.txtDate.setText(String.format(Locale.getDefault(), "20/10/2024"));
+    layoutBinding.txtPrice.setText(String.valueOf(priceInVND));
 
     // The Google Pay button is a layout file – take the root view
     googlePayButton = layoutBinding.googlePayButton;
@@ -133,7 +152,7 @@ public class CheckoutActivity extends AppCompatActivity {
     }
   }
 
-  public void requestPayment(long priceInVND) {
+  public void requestPayment(double priceInVND) {
     // Sử dụng giá tiền đã truyền vào
     final Task<PaymentData> task = model.getLoadPaymentDataTask(priceInVND);
     task.addOnCompleteListener(paymentDataLauncher::launch);
@@ -160,13 +179,62 @@ public class CheckoutActivity extends AppCompatActivity {
       Log.d("Google Pay token", paymentMethodData
           .getJSONObject("tokenizationData")
           .getString("token"));
-
+      updateTicketsInFirestore(userId, selectedSeatsString);
       startActivity(new Intent(this, CheckoutSuccessActivity.class));
       //todo: Nếu thành công, Truyền activity muốn đến ở đây
 
     } catch (JSONException e) {
       Log.e("handlePaymentSuccess", "Error: " + e);
     }
+  }
+  private void updateTicketsInFirestore(String userId, String selectedSeatsString) {
+    // Khởi tạo Firestore
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    String currentShowtimeId = getIntent().getStringExtra("SHOWTIME_ID");
+
+// Chia tách danh sách ghế từ chuỗi
+    String[] selectedSeatsArray = selectedSeatsString.split(",");
+
+// Chuyển đổi mảng thành danh sách để dễ dàng xử lý
+    List<String> selectedSeatsList = Arrays.asList(selectedSeatsArray);
+
+// Giả sử bạn có một collection 'tickets' và mỗi ticket có các trường 'seat' và 'showtimeId'
+    CollectionReference ticketsRef = db.collection("tickets");
+
+// Cập nhật từng ticket có điều kiện seat = "" và showtimeId = currentShowtimeId
+    ticketsRef.whereEqualTo("seat", "")
+            .whereEqualTo("showtimeId", currentShowtimeId)
+            .get()
+            .addOnCompleteListener(task -> {
+              if (task.isSuccessful()) {
+                int index = 0; // Biến để theo dõi ghế
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                  if (index < selectedSeatsList.size()) {
+                    // Gán ghế từ danh sách vào tài liệu
+                    String newSeatValue = selectedSeatsList.get(index);
+
+                    // Cập nhật tài liệu
+                    ticketsRef.document(document.getId()).update("seat", newSeatValue, "userId", userId)
+                            .addOnSuccessListener(aVoid -> {
+                              // Cập nhật thành công
+                              Log.d("Firestore", "Seat and UserId updated successfully: " + newSeatValue + ", UserId: " + userId);
+                            })
+                            .addOnFailureListener(e -> {
+                              // Xử lý lỗi
+                              Log.w("Firestore", "Error updating seat and UserId", e);
+                            });
+
+                    index++; // Tăng chỉ số để chuyển sang ghế tiếp theo
+                  } else {
+                    break; // Nếu không còn ghế nào, thoát vòng lặp
+                  }
+                }
+              } else {
+                Log.w("Firestore", "Error getting documents.", task.getException());
+              }
+            });
+
+
   }
 
   /**

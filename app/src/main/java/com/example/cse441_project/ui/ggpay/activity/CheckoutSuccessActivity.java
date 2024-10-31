@@ -16,11 +16,13 @@
 
 package com.example.cse441_project.ui.ggpay.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cse441_project.databinding.ActivityCheckoutSuccessBinding;
+import com.example.cse441_project.ui.profileoverlay.MyTicketActivity;
 
 
 public class CheckoutSuccessActivity extends AppCompatActivity {
@@ -31,5 +33,7 @@ public class CheckoutSuccessActivity extends AppCompatActivity {
 
     ActivityCheckoutSuccessBinding layoutBinding = ActivityCheckoutSuccessBinding.inflate(getLayoutInflater());
     setContentView(layoutBinding.getRoot());
+    startActivity(new Intent(this, MyTicketActivity.class));
+    finish(); // Đóng CheckoutSuccessActivity để không quay lại
   }
 }

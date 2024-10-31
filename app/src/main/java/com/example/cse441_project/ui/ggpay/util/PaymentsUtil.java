@@ -233,7 +233,7 @@ public class PaymentsUtil {
    * @see <a
    * href="https://developers.google.com/pay/api/android/reference/object#PaymentDataRequest">PaymentDataRequest</a>
    */
-  public static JSONObject getPaymentDataRequest(long priceCents) {
+  public static JSONObject getPaymentDataRequest(double priceCents) {
     try {
       final String price = PaymentsUtil.centsToString(priceCents);
       return PaymentsUtil.getBaseRequest()
@@ -256,7 +256,7 @@ public class PaymentsUtil {
    *
    * @param cents value of the price in cents.
    */
-  public static String centsToString(long cents) {
+  public static String centsToString(double cents) {
     return new BigDecimal(cents)
         .divide(CENTS_IN_A_UNIT, RoundingMode.HALF_EVEN)
         .setScale(2, RoundingMode.HALF_EVEN)
