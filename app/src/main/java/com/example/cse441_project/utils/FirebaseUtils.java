@@ -1,5 +1,7 @@
 package com.example.cse441_project.utils;
 
+import com.example.cse441_project.data.model.discount.Discount;
+import com.example.cse441_project.data.model.showtime.ShowTime;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;

@@ -67,24 +67,24 @@ public class ChooseSeatActivity extends Activity {
 
         // Query vé đã mua => biết được chỗ ngồi đã bị chiếm dụng
         FirebaseUtils.getTicketsByShowtimeAndSeat(showtimeId)
-            .get()
-            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                @Override
-                public void onComplete(Task<QuerySnapshot> task) {
-                    if (task.isSuccessful()) {
-                        for (DocumentSnapshot document : task.getResult()) {
-                            String seat = document.getString("seat");
-                            unavailableSeatList.add(seat);
-                        }
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot document : task.getResult()) {
+                                String seat = document.getString("seat");
+                                unavailableSeatList.add(seat);
+                            }
 
-                        // Xử lý RecyclerView
-                        adapter = new SeatAdapter(list, unavailableSeatList, ChooseSeatActivity.this, txtPrice, txtNumberSeats);
-                        rcvListSeat.setAdapter(adapter);
-                    } else {
-                        System.err.println("Error getting tickets: " + task.getException());
+                            // Xử lý RecyclerView
+                            adapter = new SeatAdapter(list, unavailableSeatList, ChooseSeatActivity.this, txtPrice, txtNumberSeats);
+                            rcvListSeat.setAdapter(adapter);
+                        } else {
+                            System.err.println("Error getting tickets: " + task.getException());
+                        }
                     }
-                }
-            });
+                });
 
         rcvListSeat.setLayoutManager(new GridLayoutManager(this, 7));
         int spaceInDp = (int) TypedValue.applyDimension(

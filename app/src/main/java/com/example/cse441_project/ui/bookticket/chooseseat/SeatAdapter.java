@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cse441_project.R;
 import com.example.cse441_project.data.model.seat.Seat;
-import com.example.cse441_project.data.model.ticket.Ticket;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,21 +21,19 @@ public class SeatAdapter extends RecyclerView.Adapter<SeatAdapter.ViewHolder> {
     private List<Seat> list;
     private List<String> unavailableSeatList;
     private List<String> selectedSeatList;
-    private List<Ticket> listTickets;
     private Context context;
     private String totalPrice;
 
     private TextView txtPrice;
     private TextView txtNumberSeats;
 
-    public SeatAdapter(List<Seat> list, List<String> unavailableSeatList, Context context, TextView txtPrice, TextView txtNumberSeats, List<Ticket> listTickets) {
+    public SeatAdapter(List<Seat> list, List<String> unavailableSeatList, Context context, TextView txtPrice, TextView txtNumberSeats) {
         this.list = list;
         this.unavailableSeatList = unavailableSeatList;
         this.selectedSeatList = new ArrayList<>();
         this.context = context;
         this.txtPrice = txtPrice;
         this.txtNumberSeats = txtNumberSeats;
-        this.listTickets = listTickets;
     }
 
     public List<String> getSelectedSeatList() {
@@ -71,12 +68,6 @@ public class SeatAdapter extends RecyclerView.Adapter<SeatAdapter.ViewHolder> {
         }
 
         holder.itemView.setOnClickListener(view -> {
-            // Kiểm tra nếu listTickets có kích thước bằng 0
-            if (listTickets.size() == 0 || selectedSeatList.size() >= listTickets.size()) {
-                Toast.makeText(context, "Cannot select seats because no tickets are available", Toast.LENGTH_SHORT).show();
-                return; // Dừng lại không cho chọn thêm ghế
-            }
-
             if (unavailableSeatList.contains(seat.getName())) {
                 Toast.makeText(context, "This seat is already occupied", Toast.LENGTH_SHORT).show();
             } else {
