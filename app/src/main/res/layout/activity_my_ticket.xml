@@ -5,7 +5,7 @@
     android:id="@+id/btn_switch_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.profileoverlay.myticket.MyTicketActivity">
+    tools:context=".ui.profileoverlay.MyTicketActivity">
 
     <View
         android:id="@+id/view5"
