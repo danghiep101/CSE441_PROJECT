@@ -20,7 +20,11 @@
         <activity
             android:name=".ui.auth.SplashActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".ui.bookticket.chooseseat.ChooseSeatActivity"
@@ -29,11 +33,7 @@
             android:name=".ui.ggpay.activity.CheckoutActivity"
             android:exported="true" >
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.ggpay.activity.CheckoutSuccessActivity"
