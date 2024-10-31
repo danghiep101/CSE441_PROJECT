@@ -25,6 +25,34 @@ public class FirebaseUtils {
         }
     }
 
+
+    public static Query getShowtimeIdmovie(String idMovie) {
+        return FirebaseFirestore.getInstance().collection("showtimes").whereEqualTo("idMovie", idMovie);
+    }
+
+    public static DocumentReference getShowtimeById(String showtimeId) {
+        return firestore.collection("showtimes").document(showtimeId);
+    }
+
+    public static Query getTicketsByShowtime(String showtimeId) {
+        return FirebaseFirestore.getInstance()
+                .collection("tickets")
+                .whereEqualTo("showtimeId", showtimeId)
+                .whereEqualTo("seat", "");
+    }
+    public static Query getTicketsByShowtimeAndSeat(String showtimeId) {
+        return FirebaseFirestore.getInstance()
+                .collection("tickets")
+                .whereEqualTo("showtimeId", showtimeId)
+                .whereNotEqualTo("seat", "");
+    }
+
+    public static Query getTicketByUserId(String user_id) {
+        return FirebaseFirestore.getInstance()
+                .collection("tickets")
+                .whereEqualTo("userId", user_id);
+    }
+
     public static DocumentReference currentUserDetail() {
         String userId = currentUserId();
         if (userId != null) {
@@ -38,16 +66,9 @@ public class FirebaseUtils {
         return FirebaseFirestore.getInstance().collection("showtimes");
     }
 
-    public static Query getShowtimeIdmovie(String idMovie) {
-        return FirebaseFirestore.getInstance().collection("showtimes").whereEqualTo("idMovie", idMovie);
-    }
 
-    public static Query getTicketsByShowtimeAndSeat(String showtimeId) {
-        return FirebaseFirestore.getInstance()
-                .collection("tickets")
-                .whereEqualTo("showtimeId", showtimeId)
-                .whereNotEqualTo("seat", "");
-    }
+
+
     public static CollectionReference getShowtimesCollection() {
         return FirebaseFirestore.getInstance().collection("showtimes");
     }
