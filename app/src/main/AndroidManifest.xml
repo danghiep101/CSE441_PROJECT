@@ -20,6 +20,7 @@
         <activity
             android:name=".ui.auth.SplashActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -49,8 +50,9 @@
             android:name=".ui.profileoverlay.ProfileActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.profileoverlay.MyTicketActivity"
-            android:exported="false" />
+            android:name=".ui.profileoverlay.myticket.MyTicketActivity"
+            android:exported="false">
+        </activity>
         <activity
             android:name=".ui.bookticket.showscreen.ChooseDateAndTimeActivity"
             android:exported="false" />

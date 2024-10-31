@@ -27,10 +27,8 @@ public class SplashActivity extends AppCompatActivity {
             return insets;
         });
         if (FirebaseUtils.currentUserId() != null) {
-
             startActivity(new Intent(SplashActivity.this, HomeActivity.class));
         } else {
-
             startActivity(new Intent(SplashActivity.this, LoginActivity.class));
         }
         finish();

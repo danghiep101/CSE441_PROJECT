@@ -8,52 +8,69 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#2A2E31"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/linear_layout_border_radius"
+        android:backgroundTint="#2A2E31"
+        android:gravity="center"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:gravity="center">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/txt_ticket_id"
-            android:layout_width="140dp"
+            android:id="@+id/txt_my_ticket_screen"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0"
             android:fontFamily="@font/inter_medium"
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
             android:paddingRight="10dp"
             android:paddingBottom="10dp"
-            android:text="E3"
+            android:text="Screen 1"
             android:textColor="#ADADAD"
             android:textSize="10dp" />
 
         <TextView
-            android:id="@+id/txt_ticket_seat"
-            android:layout_width="140dp"
+            android:id="@+id/txt_my_ticket_seat"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0"
             android:fontFamily="@font/inter_medium"
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
             android:paddingRight="10dp"
             android:paddingBottom="10dp"
-            android:text="Joker"
+            android:text="A1"
             android:textColor="#ADADAD"
             android:textSize="10dp" />
 
         <TextView
-            android:id="@+id/txt_ticket_status"
-            android:layout_width="match_parent"
+            android:id="@+id/txt_my_ticket_movie"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:fontFamily="@font/inter_medium"
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
             android:paddingRight="10dp"
             android:paddingBottom="10dp"
-            android:text="Active"
-            android:textColor="@color/green_theme"
+            android:text="Movie name"
+            android:textColor="#ADADAD"
+            android:textSize="10dp" />
+
+        <TextView
+            android:id="@+id/txt_my_ticket_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/inter_medium"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:text="Date and time"
+            android:textColor="#ADADAD"
             android:textSize="10dp" />
 
     </LinearLayout>
