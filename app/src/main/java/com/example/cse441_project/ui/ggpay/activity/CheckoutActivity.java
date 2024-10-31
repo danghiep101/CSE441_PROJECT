@@ -85,7 +85,7 @@ public class CheckoutActivity extends AppCompatActivity {
     initializeUi();
 
     model = new ViewModelProvider(this).get(CheckoutViewModel.class);
-
+//todo: 2 layout thanh toán là activity_checkout và activity_checkout_success
     model.canUseGooglePay.observe(this, this::setGooglePayAvailable);
     //todo: Nhận giá trị từ Intent gửi sang, ví dự như ở dưới
     //
