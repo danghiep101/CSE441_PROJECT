@@ -35,13 +35,6 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
         Ticket ticket = ticketList.get(position);
         holder.bind(ticket);
         holder.itemView.setOnClickListener(v -> listener.onTicketClick(ticket));
-
-        TextView txtStatus = holder.itemView.findViewById(R.id.txt_ticket_status);
-
-        if (txtStatus.getText().toString().equals("Booked") || txtStatus.getText().toString().equals("Used"))
-            txtStatus.setTextColor(holder.itemView.getContext().getColor(R.color.yellow_theme));
-        else if (txtStatus.getText().toString().equals("Expired"))
-            txtStatus.setTextColor(holder.itemView.getContext().getColor(R.color.red_theme));
     }
 
     @Override

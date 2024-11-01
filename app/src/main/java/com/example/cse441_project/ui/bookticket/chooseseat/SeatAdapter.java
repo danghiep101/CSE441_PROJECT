@@ -60,6 +60,7 @@ public class SeatAdapter extends RecyclerView.Adapter<SeatAdapter.ViewHolder> {
         Seat seat = list.get(position);
         holder.name.setText(seat.getName());
 
+        // Thực hiện thay đổi màu của các seat item theo điều kiện
         if (unavailableSeatList.contains(seat.getName())) {
             holder.name.setTextColor(Color.WHITE);
             holder.name.setBackgroundColor(Color.argb(50, 200, 44, 50));
@@ -71,21 +72,26 @@ public class SeatAdapter extends RecyclerView.Adapter<SeatAdapter.ViewHolder> {
             holder.name.setBackgroundColor(Color.argb(50, 152, 120, 81));
         }
 
+        // Thực hiện hành động ấn vào các seat item
         holder.itemView.setOnClickListener(view -> {
-            // Kiểm tra nếu listTickets có kích thước bằng 0
+            // Kiểm tra nếu listTickets có kích thước bằng 0 hoặc số lượng ghế được chọn lớn hơn số lượng vé hiện có thì sẽ không cho chọn ghế nữa
             if (listTickets.size() == 0 || selectedSeatList.size() >= listTickets.size()) {
                 Toast.makeText(context, "Cannot select seats because no tickets are available", Toast.LENGTH_SHORT).show();
-                return; // Dừng lại không cho chọn thêm ghế
+                return;
             }
 
+            // Kiểm tra nếu chọn vào ghế đã mua thì không cho chọn.
             if (unavailableSeatList.contains(seat.getName())) {
                 Toast.makeText(context, "This seat is already occupied", Toast.LENGTH_SHORT).show();
-            } else {
+                return;
+            }
+            else {
                 if (!selectedSeatList.contains(seat.getName())) {
                     selectedSeatList.add(seat.getName());
                 } else {
                     selectedSeatList.remove(seat.getName());
                 }
+
                 notifyItemChanged(position);
             }
 

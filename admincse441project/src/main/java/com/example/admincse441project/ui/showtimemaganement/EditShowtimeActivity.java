@@ -61,8 +61,10 @@ public class EditShowtimeActivity extends AppCompatActivity {
         fetchShowTime(showTimeId);
 
         saveButton.setOnClickListener(v -> saveShowtime(showTimeId));
-        addTicketButton.setOnClickListener(v -> addTicket(showTimeId));
         setupClickListeners();
+
+        // Thực hiện hành động ấn vào nút add ticket
+        addTicketButton.setOnClickListener(v -> addTicket(showTimeId));
 
         // Khởi tạo ViewModel cho Movie
         NowPlayingViewModelFactory factory = new NowPlayingViewModelFactory(new MovieRepositoryImp());
@@ -141,8 +143,11 @@ public class EditShowtimeActivity extends AppCompatActivity {
         });
     }
 
+    // Hàm xử lý hành động ấn vào nút add ticket
     private void addTicket(String showtimeId) {
-        for(int i = 0; i < 42; i++) {
+
+        // Thêm số vé tương ứng với số chỗ ngồi khả dụng.
+        for(int i = 0; i < Integer.parseInt(availableSeatEditText.getText().toString()); i++) {
             Ticket ticket = new Ticket(null, showtimeId, "", "", "Available");
 
             if (i == 0) {
@@ -153,7 +158,7 @@ public class EditShowtimeActivity extends AppCompatActivity {
                     Toast.makeText(this, "Add ticket failed!", Toast.LENGTH_SHORT).show();
                 });
             }
-            else if (i == 41) {
+            else if (i == Integer.parseInt(availableSeatEditText.getText().toString()) - 1) {
                 addTicketViewModel.addTicket(ticket).addOnSuccessListener(documentReference -> {
                     Toast.makeText(this, "Successfully added ticket!", Toast.LENGTH_SHORT).show();
                 }).addOnFailureListener(e -> {

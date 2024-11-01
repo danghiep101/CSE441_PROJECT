@@ -25,6 +25,8 @@ public class TicketListFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(TicketViewModel.class);
 
         setupRecyclerView();
+
+        // Thiết lập các Observer để theo dõi sự thay đổi dữ liệu trong ViewModel.
         setupObservers();
 
         return binding.getRoot();
@@ -47,12 +49,14 @@ public class TicketListFragment extends Fragment {
         binding.rcvTicketList.setAdapter(adapter);
     }
 
+    // Thiết lập các Observer để theo dõi sự thay đổi dữ liệu trong ViewModel.
     private void setupObservers() {
         viewModel.tickets.observe(getViewLifecycleOwner(), tickets -> {
             adapter.setTicketList(tickets);
         });
     }
 
+    // Gọi lại dữ liệu khi fragment trở lại giao diện.
     @Override
     public void onResume() {
         super.onResume();

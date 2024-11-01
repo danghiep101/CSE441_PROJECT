@@ -24,6 +24,8 @@ import com.example.cse441_project.utils.FirebaseUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -55,7 +57,11 @@ public class ChooseSeatActivity extends Activity {
         txtNameMovie = findViewById(R.id.txt_choose_seat_movie_name);
         txtTime = findViewById(R.id.txt_choose_seat_time);
 
-        // Lấy dữ liệu bên Activity khác
+        // Lấy ra dữ liệu được gửi qua intent từ ShowtimeActivity và đưa dữ liệu đó vào txtNameMovie và txtTime
+        txtNameMovie.setText(getIntent().getStringExtra("SHOWTIME_MOVIE"));
+        txtTime.setText(getIntent().getStringExtra("SHOWTIME_START") + " - " + getIntent().getStringExtra("SHOWTIME_END"));
+
+        // Lấy ra showtimeId được gửi qua intent từ ShowtimeActivity
         showtimeId = getIntent().getStringExtra("SHOWTIME_ID");
 
         // Tạo danh sách ghế
@@ -67,48 +73,60 @@ public class ChooseSeatActivity extends Activity {
         }
 
         // Query vé đã mua => biết được chỗ ngồi đã bị chiếm dụng
+        // Mỗi khi 1 trong các vé có showtimeId == showtimeId được chuyền vào cho getTicketsByShowtimeAndSeat. Khi dữ liệu của ticket đó thay đổi sẽ chạy lại đoạn code trong addSnapshotListener
         FirebaseUtils.getTicketsByShowtimeAndSeat(showtimeId)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
-                    public void onComplete(Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (DocumentSnapshot document : task.getResult()) {
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            System.err.println("Error getting tickets: " + e);
+                            return;
+                        }
+
+                        // Làm mới lại List unavailableSeatList - Thêm những ghế đã được người khác đặt vào trong unavailableSeatList
+                        unavailableSeatList.clear();
+                        if (value != null) {
+                            for (DocumentSnapshot document : value.getDocuments()) {
                                 String seat = document.getString("seat");
                                 unavailableSeatList.add(seat);
                             }
+                        }
 
-                            FirebaseUtils.getTicketsByShowtime(showtimeId)
-                                    .get()
-                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                        @Override
-                                        public void onComplete(Task<QuerySnapshot> task) {
-                                            if (task.isSuccessful()) {
-                                                for (DocumentSnapshot document : task.getResult()) {
-                                                    Ticket ticket = document.toObject(Ticket.class);
-                                                    if (ticket != null) {
-                                                        listTickets.add(ticket);
-                                                    }
+                        // Sau khi lấy được chỗ ngồi không khả dụng - tiếp tục lấy vé theo showtime
+                        FirebaseUtils.getTicketsByShowtime(showtimeId)
+                                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException e) {
+                                        if (e != null) {
+                                            System.err.println("Error getting tickets: " + e);
+                                            return;
+                                        }
+
+                                        // Làm mới List listTickets - Lấy ra số lượng vé còn lại và đưa vào trong listTickets
+                                        listTickets.clear();
+                                        if (value != null) {
+                                            for (DocumentSnapshot document : value.getDocuments()) {
+                                                Ticket ticket = document.toObject(Ticket.class);
+                                                if (ticket != null) {
+                                                    listTickets.add(ticket);
                                                 }
-
-                                                // Xử lý RecyclerView
-                                                adapter = new SeatAdapter(list, unavailableSeatList, ChooseSeatActivity.this, txtPrice, txtNumberSeats, listTickets);
-                                                rcvListSeat.setAdapter(adapter);
-                                            } else {
-                                                System.err.println("Error getting tickets: " + task.getException());
                                             }
                                         }
-                                    });
-                        } else {
-                            System.err.println("Error getting tickets: " + task.getException());
-                        }
+
+                                        // Xử lý RecyclerView
+                                        adapter = new SeatAdapter(list, unavailableSeatList, ChooseSeatActivity.this, txtPrice, txtNumberSeats, listTickets);
+                                        rcvListSeat.setAdapter(adapter);
+                                    }
+                                });
                     }
                 });
 
+        // Xử lý layout cho recycler view
         rcvListSeat.setLayoutManager(new GridLayoutManager(this, 7));
         int spaceInDp = (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP, 3, getResources().getDisplayMetrics()
         );
+
         rcvListSeat.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
             public void getItemOffsets(@NonNull Rect outRect, @NonNull View view,
@@ -120,22 +138,24 @@ public class ChooseSeatActivity extends Activity {
             }
         });
 
+        // Thực hiện hành động ấn vào nút continue
         btnContinue.setOnClickListener(v -> continueProcess());
-        txtNameMovie.setText(getIntent().getStringExtra("SHOWTIME_MOVIE"));
-        txtTime.setText(getIntent().getStringExtra("SHOWTIME_START") + " - " + getIntent().getStringExtra("SHOWTIME_END"));
     }
 
+    // Hàm xử lý hành động khi ấn vào nút continue
     private void continueProcess() {
         List<String> choosedSeats = adapter.getSelectedSeatList();
         String totalPrice = adapter.getTotalPrice();
 
         if (choosedSeats.size() > 0) {
             Intent intent = new Intent(this, PaymentActivity.class);
+
             ArrayList<String> selectedSeatsList = new ArrayList<>(choosedSeats);
             String selectedSeatsString = String.join(",", selectedSeatsList);
             intent.putExtra("SELECTED_SEATS_LIST", selectedSeatsString);
             intent.putExtra("TOTAL_PRICE", totalPrice);
             intent.putExtra("SHOWTIME_ID", showtimeId);
+
             startActivity(intent);
             setResult(RESULT_OK, intent);
         }

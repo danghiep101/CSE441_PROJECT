@@ -44,12 +44,22 @@ public class TicketEditFragment extends Fragment {
         edtSeat = view.findViewById(R.id.edt_edit_seat);
         edtStatus = view.findViewById(R.id.edt_edit_status);
 
+        // Tắt các EditText - không cho người dùng thay đổi dữ liệu
+        edtTicketId.setEnabled(false);
+        edtShowtimeId.setEnabled(false);
+        edtSeat.setEnabled(false);
+        edtStatus.setEnabled(false);
+
+        // Lấy ra dữ liệu được gửi từ bundle bên phía TicketListFragment
         ticketId = getArguments().getString("TICKET_ID");
+
+        // Truy vấn lấy ra dữ liệu của ticket có id xác định
         FirebaseUtils.getTicketById(ticketId)
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
                         Ticket ticket = documentSnapshot.toObject(Ticket.class);
 
+                        // Gán dữ liệu đã lấy được vào các trường dữ liệu
                         edtTicketId.setText(ticket.getId());
                         edtShowtimeId.setText(ticket.getShowtimeId());
                         edtSeat.setText(ticket.getSeat());
@@ -62,11 +72,13 @@ public class TicketEditFragment extends Fragment {
                     Log.d("Lỗi khi lấy ticket: ", "Lỗi khi lấy ticket: ");
                 });
 
+        // Hàm xử lý các nút ấn có trên Fragment
         onViewClickListeners();
 
         return view;
     }
 
+    // Hàm xử lý các nút ấn có trên Fragment
     private void onViewClickListeners() {
         btnBack.setOnClickListener(v -> {
             Fragment newFragment = new TicketListFragment();
@@ -75,6 +87,7 @@ public class TicketEditFragment extends Fragment {
             transaction.addToBackStack(null);
             transaction.commit();
         });
+
         imgDeleteTicket.setOnClickListener(v -> {
             new AlertDialog.Builder(requireContext())
                     .setTitle("Confirm delete")
