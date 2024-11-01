@@ -66,9 +66,6 @@ public class FirebaseUtils {
         return FirebaseFirestore.getInstance().collection("showtimes");
     }
 
-
-
-
     public static CollectionReference getShowtimesCollection() {
         return FirebaseFirestore.getInstance().collection("showtimes");
     }

@@ -42,7 +42,7 @@ public class ChooseDateAndTimeViewModel extends ViewModel {
 
                 if (querySnapshot != null) {
                     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-                    Date currentDate = new Date(); // Lấy ngày hiện tại
+                    Date currentDate = new Date();
 
                     for (DocumentSnapshot document : querySnapshot.getDocuments()) {
                         ShowTime showTime = document.toObject(ShowTime.class);
@@ -65,7 +65,7 @@ public class ChooseDateAndTimeViewModel extends ViewModel {
                             Log.e("ChooseDateAndTimeViewModel", "Showtime is null for document: " + document.getId());
                         }
                     }
-                    // Cập nhật danh sách đã lọc vào LiveData
+
                     _showTimeList.setValue(showtimeList);
                 }
             } else {

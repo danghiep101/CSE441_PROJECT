@@ -14,8 +14,7 @@ public class LoginViewModel extends ViewModel {
     void login(String email, String password){
         FirebaseUtils.firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                // Lấy userId từ Firebase Auth
-                userId = FirebaseUtils.firebaseAuth.getCurrentUser().getUid(); // Cập nhật userId
+                userId = FirebaseUtils.firebaseAuth.getCurrentUser().getUid();
                 _loginStatus.postValue(true);
             } else {
                 _loginStatus.postValue(false);

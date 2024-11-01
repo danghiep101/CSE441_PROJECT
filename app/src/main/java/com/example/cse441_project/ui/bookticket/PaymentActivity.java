@@ -91,8 +91,7 @@ public class PaymentActivity extends AppCompatActivity {
         // Lấy giá trị voucher
         double discountValue = Double.parseDouble(voucherValue);
 
-        // Tính toán lại tổng tiền sau khi trừ đi voucher
-        newTotalPrice = totalPrice - discountValue;
+        newTotalPrice = totalPrice * (1 - discountValue / 100.0);
 
         // Cập nhật giao diện
         Total.setText(String.valueOf(newTotalPrice)); // Cập nhật lại tổng tiền

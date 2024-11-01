@@ -47,7 +47,6 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
     }
 
     public void addMovies(List<ResultsItem> newMovies){
-        int startPosition = movieList.size();
         movieList.addAll(newMovies);
         notifyDataSetChanged();
     }
