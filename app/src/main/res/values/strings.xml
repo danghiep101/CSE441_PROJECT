@@ -6,6 +6,17 @@
     <string name="text_username">Username</string>
     <string name="text_email">Email</string>
     <string name="text_already_sign_up">Already Sign Up?</string>
+    <string name="text_create_a_new_account"><u>Create a new account</u></string>
+    <string name="text_forgot_password"><u>Forgot password</u></string>
+    <string name="text_sign_in"><u>Sign in</u></string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_search_movie">Search Movie</string>
+    <string name="store_name" translatable="false">Auto T-Shirt Shop</string>
+
+    <!-- Checkout -->
+    <string name="google_pay_status_unavailable">Unfortunately, Google Pay is not available on this device.</string>
+    <string name="payments_show_name">Successfully received payment data for %s!</string>
+    <string name="gateway_replace_name_example">"Gateway name set to \"example\" - please modify Constants.java and replace it with your own gateway."</string>
+    <string name="checkout_item_description">Description</string>
 </resources>
