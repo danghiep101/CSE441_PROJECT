@@ -74,12 +74,6 @@ public class SeatAdapter extends RecyclerView.Adapter<SeatAdapter.ViewHolder> {
 
         // Thực hiện hành động ấn vào các seat item
         holder.itemView.setOnClickListener(view -> {
-            // Kiểm tra nếu listTickets có kích thước bằng 0 hoặc số lượng ghế được chọn lớn hơn số lượng vé hiện có thì sẽ không cho chọn ghế nữa
-            if (listTickets.size() == 0 || selectedSeatList.size() >= listTickets.size()) {
-                Toast.makeText(context, "Cannot select seats because no tickets are available", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
             // Kiểm tra nếu chọn vào ghế đã mua thì không cho chọn.
             if (unavailableSeatList.contains(seat.getName())) {
                 Toast.makeText(context, "This seat is already occupied", Toast.LENGTH_SHORT).show();
@@ -87,6 +81,12 @@ public class SeatAdapter extends RecyclerView.Adapter<SeatAdapter.ViewHolder> {
             }
             else {
                 if (!selectedSeatList.contains(seat.getName())) {
+                    // Kiểm tra nếu listTickets có kích thước bằng 0 hoặc số lượng ghế được chọn lớn hơn số lượng vé hiện có thì sẽ không cho chọn ghế nữa
+                    if (listTickets.size() == 0 || selectedSeatList.size() >= listTickets.size()) {
+                        Toast.makeText(context, "Cannot select seats because no tickets are available", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
                     selectedSeatList.add(seat.getName());
                 } else {
                     selectedSeatList.remove(seat.getName());
